@@ -21,17 +21,26 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField]
     private GameObject _laserPrefab;
 
+    [SerializeField]
+    private int lives = 3;
+
     Coroutine _fireRate;
     
     
     [SerializeField]
     private float _fireSpeed = .5f;
+
+    private SpawnManager spawnManager;
     
     
     // Start is called before the first frame update
     void Start()
     {
-
+        spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        if(spawnManager == null)
+        {
+            Debug.LogError("No manager");
+        }
     }
 
     // Update is called once per frame
@@ -94,6 +103,17 @@ public class PlayerBehaviour : MonoBehaviour
         FireLaser();
         yield return new WaitForSeconds(rateOfFire);
         _fireRate = null;
+    }
+
+    public void OnDamage()
+    {
+        lives--;
+
+        if(lives < 1)
+        {
+            spawnManager.OnPlayerDeath();
+            Destroy(this.gameObject);
+        }
     }
 
     
