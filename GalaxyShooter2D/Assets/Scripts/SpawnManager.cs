@@ -8,8 +8,11 @@ public class SpawnManager : MonoBehaviour
     private GameObject _enemyPrefab;
     [SerializeField]
     private GameObject _enemyContainer;
+    
     [SerializeField]
     private bool _stopSpawning = false;
+    [SerializeField]
+    private float _spawnTime = 5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +35,7 @@ public class SpawnManager : MonoBehaviour
             spawnPos.y = 6;
             GameObject _clone = Instantiate(_enemyPrefab, spawnPos, Quaternion.identity);
             _clone.transform.parent = _enemyContainer.transform;
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(_spawnTime);
         }
     }
 
