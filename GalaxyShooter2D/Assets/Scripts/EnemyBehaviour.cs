@@ -7,12 +7,7 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField]
     float moveSpeed = 5f;
     Vector2 topPos = new Vector2(0, 6);
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
+      
     // Update is called once per frame
     void Update()
     {
@@ -37,10 +32,13 @@ public class EnemyBehaviour : MonoBehaviour
 
         if (other.tag == "Laser")
         {
+            if (other.transform.parent != null)
+            {
+                Destroy(other.transform.parent.gameObject);
+            }
             Destroy(other.gameObject);
 
             Destroy(this.gameObject);
         }
-
     }
 }

@@ -5,39 +5,48 @@ using UnityEngine;
 public class PlayerBehaviour : MonoBehaviour
 {
     [SerializeField]
-    private float speed = 5f;
+    private float _speed = 5f;
     [SerializeField]
-    private float upperBound = 0f;
+    private float _upperBound = 0f;
     [SerializeField]
-    private float lowerBound = -3.8f;
+    private float _lowerBound = -3.8f;
     [SerializeField]
-    private float LeftBound = -11.3f;
+    private float _leftBound = -11.3f;
     [SerializeField]
-    private float RightBound = 11.3f;
+    private float _rightBound = 11.3f;
 
     [SerializeField]
-    private Vector3 _offset = new Vector3(0, 1.05f, 0);
-    
+    private Transform _offset;
+
     [SerializeField]
     private GameObject _laserPrefab;
+    
+    [SerializeField]
+    private GameObject _tripleShotPrefab;
+    
+    [SerializeField]
+    private bool _tripleShotActive = false;
+    
+    [SerializeField]
+    private float _powerUpTime = 5f;
 
     [SerializeField]
-    private int lives = 3;
+    private int _lives = 3;
 
     Coroutine _fireRate;
-    
-    
+
+
     [SerializeField]
     private float _fireSpeed = .5f;
 
-    private SpawnManager spawnManager;
-    
-    
+    private SpawnManager _spawnManager;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
-        if(spawnManager == null)
+        _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        if (_spawnManager == null)
         {
             Debug.LogError("No manager");
         }
@@ -46,7 +55,7 @@ public class PlayerBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        calculateMovement();
+        CalculateMovement();
 
         //if (Input.GetKey(KeyCode.Space))
         //{
@@ -57,48 +66,61 @@ public class PlayerBehaviour : MonoBehaviour
         {
             if (_fireRate == null)
             {
-                _fireRate = StartCoroutine(fireRate(_fireSpeed));
+                _fireRate = StartCoroutine(FireRate(_fireSpeed));
             }
         }
     }
 
 
 
-    void calculateMovement()
+    void CalculateMovement()
     {
         Vector3 movement = new Vector3();
         movement.x = Input.GetAxis("Horizontal");
         movement.y = Input.GetAxis("Vertical");
 
-        transform.Translate(movement * speed * Time.deltaTime);
+        transform.Translate(movement * _speed * Time.deltaTime);
 
-        if (transform.position.y >= upperBound)
+        if (transform.position.y >= _upperBound)
         {
-            transform.position = new Vector3(transform.position.x, upperBound, 0);
+            transform.position = new Vector3(transform.position.x, _upperBound, 0);
         }
-        else if (transform.position.y <= lowerBound)
+        else if (transform.position.y <= _lowerBound)
         {
-            transform.position = new Vector3(transform.position.x, lowerBound, 0);
+            transform.position = new Vector3(transform.position.x, _lowerBound, 0);
         }
 
-        if (transform.position.x < LeftBound)
+        if (transform.position.x < _leftBound)
         {
-            transform.position = new Vector3(RightBound - 0.5f, transform.position.y, 0);
+            transform.position = new Vector3(_rightBound - 0.5f, transform.position.y, 0);
         }
-        else if (transform.position.x > RightBound)
+        else if (transform.position.x > _rightBound)
         {
-            transform.position = new Vector3(LeftBound + 0.5f, transform.position.y, 0);
+            transform.position = new Vector3(_leftBound + 0.5f, transform.position.y, 0);
         }
     }
 
     void FireLaser()
     {
-        GameObject laser;
-        laser = Instantiate(_laserPrefab, transform.position + _offset, Quaternion.identity);
+        if (_offset != null)
+        {
+            switch (_tripleShotActive)
+            {
+                case false:
+                    GameObject laser;
+                    laser = Instantiate(_laserPrefab, _offset.position, Quaternion.identity);
+                    break;
+                case true:
+                    GameObject tripleShot;
+                    tripleShot = Instantiate(_tripleShotPrefab, _offset.position, Quaternion.identity);
+                    break;
+
+            }
+        }
 
     }
 
-    IEnumerator fireRate(float rateOfFire)
+    IEnumerator FireRate(float rateOfFire)
     {
         FireLaser();
         yield return new WaitForSeconds(rateOfFire);
@@ -107,14 +129,25 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void OnDamage()
     {
-        lives--;
+        _lives--;
 
-        if(lives < 1)
+        if (_lives < 1)
         {
-            spawnManager.OnPlayerDeath();
+            _spawnManager.OnPlayerDeath();
             Destroy(this.gameObject);
         }
     }
 
-    
+    public void ActivateTripleShot()
+    {
+        _tripleShotActive = true;
+        StartCoroutine(PowerUpTime(_powerUpTime));
+    }
+
+    IEnumerator PowerUpTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+        _tripleShotActive = false;
+    }
+
 }

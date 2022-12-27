@@ -10,17 +10,16 @@ public class LaserBehaviour : MonoBehaviour
 
     void Start()
     {
+        if(transform.parent != null)
+        {
+            Destroy(transform.parent.gameObject,1f);
+        }
         Destroy(this.gameObject, 1f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector2.up * speed * Time.deltaTime);
-
-       
-    }
-        
-    
-    
+        transform.Translate(Vector2.up * speed * Time.deltaTime);       
+    }    
 }
