@@ -434,6 +434,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
+  _speedDefault: 5
+  _boost: 2
   _upperBound: 0
   _lowerBound: -3.8
   _leftBound: -11.3
@@ -442,6 +444,7 @@ MonoBehaviour:
   _laserPrefab: {fileID: 7917737143948429990, guid: 2abc9b17cb330b44d970579cf74665be, type: 3}
   _tripleShotPrefab: {fileID: 2272999607087158603, guid: 538bdec72c12b6a498bca2c6e12c8fe6, type: 3}
   _tripleShotActive: 0
+  _speedBoostActive: 0
   _powerUpTime: 5
   _lives: 3
   _fireSpeed: 0.1

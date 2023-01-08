@@ -7,6 +7,12 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField]
     private float _speed = 5f;
     [SerializeField]
+    private float _speedDefault = 5f;
+    [SerializeField]
+    private float _boost = 1.5f;    
+    
+    
+    [SerializeField]
     private float _upperBound = 0f;
     [SerializeField]
     private float _lowerBound = -3.8f;
@@ -26,7 +32,10 @@ public class PlayerBehaviour : MonoBehaviour
     
     [SerializeField]
     private bool _tripleShotActive = false;
-    
+
+    [SerializeField]
+    private bool _speedBoostActive = false;
+
     [SerializeField]
     private float _powerUpTime = 5f;
 
@@ -55,6 +64,7 @@ public class PlayerBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
         CalculateMovement();
 
         //if (Input.GetKey(KeyCode.Space))
@@ -77,7 +87,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         Vector3 movement = new Vector3();
         movement.x = Input.GetAxis("Horizontal");
-        movement.y = Input.GetAxis("Vertical");
+        movement.y = Input.GetAxis("Vertical");        
 
         transform.Translate(movement * _speed * Time.deltaTime);
 
@@ -144,10 +154,23 @@ public class PlayerBehaviour : MonoBehaviour
         StartCoroutine(PowerUpTime(_powerUpTime));
     }
 
+    public void ActivateSpeedBoost()
+    {
+        _speedBoostActive = true;        
+        _speed *= _boost;
+        StartCoroutine(SpeedCoolDown(_powerUpTime));
+    }
+
     IEnumerator PowerUpTime(float time)
     {
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(time);        
         _tripleShotActive = false;
     }
 
+    IEnumerator SpeedCoolDown(float time)
+    {
+        yield return new WaitForSeconds(time);
+        _speedBoostActive = false;
+        _speed = _speedDefault;
+    }
 }
