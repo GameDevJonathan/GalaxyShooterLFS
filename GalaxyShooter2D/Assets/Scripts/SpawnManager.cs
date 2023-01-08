@@ -14,8 +14,12 @@ public class SpawnManager : MonoBehaviour
     
     [SerializeField]
     private bool _stopSpawning = false;
+    
     [SerializeField]
     private float _spawnTime = 5f;
+
+    [SerializeField]
+    public GameObject[] _powerUps;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +50,8 @@ public class SpawnManager : MonoBehaviour
             Vector2 spawnPos;
             spawnPos.x = Random.Range(-8f, 8f);
             spawnPos.y = 7;
-            GameObject _clone = Instantiate(_tripleShotPrefab, spawnPos, Quaternion.identity);
+            int randomPowerUp = Random.Range(0,2);
+            Instantiate(_powerUps[randomPowerUp], spawnPos, Quaternion.identity);
             yield return new WaitForSeconds(randomTime);
         }
     }
