@@ -35,6 +35,12 @@ public class PlayerBehaviour : MonoBehaviour
 
     [SerializeField]
     private bool _speedBoostActive = false;
+    
+    [SerializeField]
+    private bool _shieldsActive = false;
+
+    [SerializeField]
+    private GameObject _shieldVisualizer;
 
     [SerializeField]
     private float _powerUpTime = 5f;
@@ -139,6 +145,15 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void OnDamage()
     {
+        if (_shieldsActive)
+        {
+            _shieldsActive = false;
+            _shieldVisualizer.SetActive(false);
+            return;
+
+        }
+        
+        
         _lives--;
 
         if (_lives < 1)
@@ -159,6 +174,12 @@ public class PlayerBehaviour : MonoBehaviour
         _speedBoostActive = true;        
         _speed *= _boost;
         StartCoroutine(SpeedCoolDown(_powerUpTime));
+    }
+
+    public void ActivateShields()
+    {
+        _shieldsActive = true;
+        _shieldVisualizer.SetActive(true);
     }
 
     IEnumerator PowerUpTime(float time)
