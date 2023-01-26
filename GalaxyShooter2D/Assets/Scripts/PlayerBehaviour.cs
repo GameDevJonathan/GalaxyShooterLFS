@@ -34,7 +34,7 @@ public class PlayerBehaviour : MonoBehaviour
     private bool _tripleShotActive = false;
 
     [SerializeField]
-    private bool _speedBoostActive = false;
+    private bool _speedBoostActive;
     
     [SerializeField]
     private bool _shieldsActive = false;
@@ -47,6 +47,12 @@ public class PlayerBehaviour : MonoBehaviour
 
     [SerializeField]
     private int _lives = 3;
+
+    [SerializeField]
+    private int _score;
+
+    [SerializeField]
+    private UIManager _uiManager;
 
     Coroutine _fireRate;
 
@@ -63,7 +69,12 @@ public class PlayerBehaviour : MonoBehaviour
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         if (_spawnManager == null)
         {
-            Debug.LogError("No manager");
+            Debug.LogError("No Spawn Manager");
+        }
+
+        if(_uiManager == null)
+        {
+            Debug.LogError("No UI Manager");
         }
     }
 
@@ -136,6 +147,14 @@ public class PlayerBehaviour : MonoBehaviour
 
     }
 
+    //method to add 10 to the score
+    public void AddScore(int score)
+    {
+        _score += score;
+        _uiManager.UpdateScore(_score);
+    }
+    //communicate with the ui to update the score
+
     IEnumerator FireRate(float rateOfFire)
     {
         FireLaser();
@@ -155,6 +174,8 @@ public class PlayerBehaviour : MonoBehaviour
         
         
         _lives--;
+
+        _uiManager.UpdateLives(_lives);
 
         if (_lives < 1)
         {

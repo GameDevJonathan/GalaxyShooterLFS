@@ -22,7 +22,7 @@ public class SpawnManager : MonoBehaviour
     {
         StartCoroutine(SpawnEnemies());
         StartCoroutine(SpawnPowerUp());
-        Debug.Log(_powerUps.Length);
+        
     }
 
    
@@ -30,6 +30,8 @@ public class SpawnManager : MonoBehaviour
     {
         while (_stopSpawning == false)
         {
+            float randomTime = Random.Range(1f, 3f);
+            yield return new WaitForSeconds(randomTime);
             Vector2 spawnPos;
             spawnPos.x = Random.Range(-8f, 8f);
             spawnPos.y = 6;
