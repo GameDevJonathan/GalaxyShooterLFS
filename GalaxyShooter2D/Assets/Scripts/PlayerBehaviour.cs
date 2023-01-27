@@ -34,7 +34,7 @@ public class PlayerBehaviour : MonoBehaviour
     private bool _tripleShotActive = false;
 
     [SerializeField]
-    private bool _speedBoostActive;
+    private bool _speedBoostActive = false;
     
     [SerializeField]
     private bool _shieldsActive = false;
@@ -169,9 +169,7 @@ public class PlayerBehaviour : MonoBehaviour
             _shieldsActive = false;
             _shieldVisualizer.SetActive(false);
             return;
-
-        }
-        
+        }        
         
         _lives--;
 
