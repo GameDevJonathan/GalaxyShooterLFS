@@ -8,11 +8,18 @@ public class EnemyBehaviour : MonoBehaviour
     float moveSpeed = 5f;
     Vector2 topPos = new Vector2(0, 6);
 
+    [SerializeField]
+    private Animator _anim;
+    [SerializeField]
+    private BoxCollider2D _boxCollider;
+
     private PlayerBehaviour _player;
 
     private void Start()
     {
         _player = GameObject.Find("Player").GetComponent<PlayerBehaviour>();
+        _anim = GetComponent<Animator>();
+        _boxCollider = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -33,8 +40,9 @@ public class EnemyBehaviour : MonoBehaviour
         if (other.tag == "Player")
         {
             PlayerBehaviour player = other.GetComponent<PlayerBehaviour>();
-            player.OnDamage();
-            Destroy(this.gameObject);
+            player?.OnDamage();
+            DeathSequence();
+            //Destroy(this.gameObject);
         }
 
         if (other.tag == "Laser")
@@ -44,9 +52,21 @@ public class EnemyBehaviour : MonoBehaviour
                 Destroy(other.transform.parent.gameObject);
             }
             Destroy(other.gameObject);
-            
+            DeathSequence();
             _player?.AddScore(10);
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
         }
+    }
+
+    private void DeathSequence()
+    {        
+        _anim.Play("Explode");
+        _boxCollider.enabled = false;
+        moveSpeed = 0f;
+    }
+
+    public void Destroyed()
+    {
+        Destroy(this.gameObject);
     }
 }
