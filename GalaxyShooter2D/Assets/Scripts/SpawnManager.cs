@@ -18,14 +18,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     public GameObject[] _powerUps;
     // Start is called before the first frame update
-    void Start()
-    {
-        StartCoroutine(SpawnEnemies());
-        StartCoroutine(SpawnPowerUp());
-        
-    }
-
-   
+      
     IEnumerator SpawnEnemies()
     {
         while (_stopSpawning == false)
@@ -59,5 +52,12 @@ public class SpawnManager : MonoBehaviour
     public void OnPlayerDeath()
     {
         _stopSpawning = true;
+    }
+
+    public void StartSpawning()
+    {
+        Debug.Log("SpawnManager::StartSpawing() Called");
+        StartCoroutine(SpawnEnemies());
+        StartCoroutine(SpawnPowerUp());
     }
 }

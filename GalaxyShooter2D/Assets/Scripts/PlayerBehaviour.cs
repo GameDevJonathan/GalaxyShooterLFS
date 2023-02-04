@@ -40,7 +40,7 @@ public class PlayerBehaviour : MonoBehaviour
     private bool _shieldsActive = false;
 
     [SerializeField]
-    private GameObject _shieldVisualizer;
+    private GameObject _shieldVisualizer, _leftThruster, _rightThruster;
 
     [SerializeField]
     private float _powerUpTime = 5f;
@@ -104,7 +104,15 @@ public class PlayerBehaviour : MonoBehaviour
     {
         Vector3 movement = new Vector3();
         movement.x = Input.GetAxis("Horizontal");
-        movement.y = Input.GetAxis("Vertical");        
+        movement.y = Input.GetAxis("Vertical");
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            if(_lives > 0)
+            {
+                OnDamage();
+            }
+        }
 
         transform.Translate(movement * _speed * Time.deltaTime);
 
@@ -174,6 +182,16 @@ public class PlayerBehaviour : MonoBehaviour
         _lives--;
 
         _uiManager.UpdateLives(_lives);
+
+        switch (_lives)
+        {
+            case 2:
+                _leftThruster.SetActive(true);
+                break;
+            case 1:
+                _rightThruster.SetActive(true);
+                break;
+        }
 
         if (_lives < 1)
         {

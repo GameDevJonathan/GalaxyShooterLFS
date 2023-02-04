@@ -17,7 +17,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void Start()
     {
-        _player = GameObject.Find("Player").GetComponent<PlayerBehaviour>();
+        _player = GameObject.Find("Player")?.GetComponent<PlayerBehaviour>();
         _anim = GetComponent<Animator>();
         _boxCollider = GetComponent<BoxCollider2D>();
     }
@@ -52,8 +52,8 @@ public class EnemyBehaviour : MonoBehaviour
                 Destroy(other.transform.parent.gameObject);
             }
             Destroy(other.gameObject);
+            _player?.AddScore(10);           
             DeathSequence();
-            _player?.AddScore(10);
             //Destroy(this.gameObject);
         }
     }

@@ -9,6 +9,8 @@ public class AstroidBehavior : MonoBehaviour
 
     [SerializeField]
     private Animator _anim;
+
+    private SpawnManager _spawnManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +19,13 @@ public class AstroidBehavior : MonoBehaviour
             Debug.LogError("Animator is Null");
         else
             Debug.Log("Animator Found");
+
+        _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        if (!_anim)
+            Debug.LogError("Manager is Null");
+        else
+            Debug.Log("Manager Found");
+
     }
 
     // Update is called once per frame
@@ -27,17 +36,16 @@ public class AstroidBehavior : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        other.TryGetComponent<Transform>(out Transform _laser);
-
-        if(_laser?.gameObject.tag == "Laser")
+        if(other.gameObject.tag == "Laser")
         {
             _anim.SetTrigger("Explode");
-            Destroy(_laser.gameObject);
+            Destroy(other.gameObject);
         }
     }
 
     public void Destroyed()
     {
+        _spawnManager?.StartSpawning();
         Destroy(this.gameObject);
     }
 }
