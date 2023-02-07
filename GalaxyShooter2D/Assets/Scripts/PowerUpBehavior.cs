@@ -7,7 +7,11 @@ public class PowerUpBehavior : MonoBehaviour
     [SerializeField]
     private float _speed = 2f;
     [SerializeField] // 0 = triple shot / 1 = speed boost / 2 = shields 
-    private int _powerUpID; 
+    private int _powerUpID;
+    
+    [SerializeField]
+    private AudioClip _audioClip;
+    
 
     // Update is called once per frame
     void Update()
@@ -24,9 +28,9 @@ public class PowerUpBehavior : MonoBehaviour
     {
 
 
-
         if (other.tag == "Player")
         {
+            AudioSource.PlayClipAtPoint(_audioClip, transform.position);
             PlayerBehaviour player = other.GetComponent<PlayerBehaviour>();
             if(player != null)
             {
