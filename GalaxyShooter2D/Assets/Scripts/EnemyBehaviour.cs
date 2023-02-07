@@ -15,8 +15,11 @@ public class EnemyBehaviour : MonoBehaviour
 
     private PlayerBehaviour _player;
 
+    private AudioSource _audioSource;
+
     private void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         _player = GameObject.Find("Player")?.GetComponent<PlayerBehaviour>();
         _anim = GetComponent<Animator>();
         _boxCollider = GetComponent<BoxCollider2D>();
@@ -42,13 +45,14 @@ public class EnemyBehaviour : MonoBehaviour
             PlayerBehaviour player = other.GetComponent<PlayerBehaviour>();
             player?.OnDamage();
             DeathSequence();
-            //Destroy(this.gameObject);
+            
         }
 
         if (other.tag == "Laser")
         {
             if (other.transform.parent != null)
             {
+                _audioSource.Play();
                 Destroy(other.transform.parent.gameObject);
             }
             Destroy(other.gameObject);
@@ -59,7 +63,8 @@ public class EnemyBehaviour : MonoBehaviour
     }
 
     private void DeathSequence()
-    {        
+    {
+        _audioSource.Play();
         _anim.Play("Explode");
         _boxCollider.enabled = false;
         moveSpeed = 0f;

@@ -11,9 +11,12 @@ public class AstroidBehavior : MonoBehaviour
     private Animator _anim;
 
     private SpawnManager _spawnManager;
+
+    private AudioSource _audioSource;
     // Start is called before the first frame update
     void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         _anim = GetComponent<Animator>();
         if (!_anim)
             Debug.LogError("Animator is Null");
@@ -39,6 +42,7 @@ public class AstroidBehavior : MonoBehaviour
         if(other.gameObject.tag == "Laser")
         {
             _anim.SetTrigger("Explode");
+            _audioSource.Play();
             Destroy(other.gameObject);
         }
     }

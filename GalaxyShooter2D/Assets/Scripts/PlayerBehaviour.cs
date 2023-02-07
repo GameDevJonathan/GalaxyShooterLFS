@@ -60,12 +60,17 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField]
     private float _fireSpeed = .5f;
 
+    [SerializeField]
+    private AudioClip[] _audioClip;
+    private AudioSource _audioSource;
+
     private SpawnManager _spawnManager;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         if (_spawnManager == null)
         {
@@ -144,10 +149,12 @@ public class PlayerBehaviour : MonoBehaviour
                 case false:
                     GameObject laser;
                     laser = Instantiate(_laserPrefab, _offset.position, Quaternion.identity);
+                    _audioSource.PlayOneShot(_audioClip[0]);
                     break;
                 case true:
                     GameObject tripleShot;
                     tripleShot = Instantiate(_tripleShotPrefab, _offset.position, Quaternion.identity);
+                    _audioSource.PlayOneShot(_audioClip[0]);
                     break;
 
             }
