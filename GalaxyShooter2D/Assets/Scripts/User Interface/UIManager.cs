@@ -23,11 +23,15 @@ public class UIManager : MonoBehaviour
     private TMP_Text _restartText;
 
     [SerializeField]
+    private TMP_Text _shieldsText;
+
+    [SerializeField]
     private GameManager _gameManger;
     
     void Start()
     {
         _scoreText.text = $"Score: {0}";
+        _shieldsText.text = $"Shield Health: {0}";
         _gameOverText.gameObject.SetActive(false);
         _gameManger = GameObject.Find("Game_Manager").GetComponent<GameManager>();
 
@@ -54,6 +58,12 @@ public class UIManager : MonoBehaviour
             GameOverSequence();
         }
     }
+
+    public void UpdateShields(int _shields)
+    {
+        _shieldsText.text = $"Shield Health: {_shields}";
+    }
+  
 
     void GameOverSequence()
     {

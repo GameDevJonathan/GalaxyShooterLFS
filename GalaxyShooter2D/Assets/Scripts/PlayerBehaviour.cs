@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
 {
+    [Header("Movement Variables")]
     [SerializeField]
     private float _speed = 5f;
     [SerializeField]
     private float _speedDefault = 5f;
     [SerializeField]
-    private float _boost = 1.5f;    
-    
+    private float _boost = 1.5f;   
+    [SerializeField]
+    private float _thrusterBoost = 1.25f;
+    [Space]
     
     [SerializeField]
     private float _upperBound = 0f;
@@ -35,9 +38,15 @@ public class PlayerBehaviour : MonoBehaviour
 
     [SerializeField]
     private bool _speedBoostActive = false;
-    
+
+    [SerializeField]
+    private SpriteRenderer _shieldSprite;
+
     [SerializeField]
     private bool _shieldsActive = false;
+    
+    [SerializeField]
+    private int _shieldHp = 0;
 
     [SerializeField]
     private GameObject _shieldVisualizer, _leftThruster, _rightThruster;
@@ -71,6 +80,8 @@ public class PlayerBehaviour : MonoBehaviour
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
+
+        
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         if (_spawnManager == null)
         {
@@ -81,11 +92,17 @@ public class PlayerBehaviour : MonoBehaviour
         {
             Debug.LogError("No UI Manager");
         }
+
+        if (!_shieldSprite)
+        {
+            Debug.LogError("Shield Sprite Not Found");
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debuging();
        
         CalculateMovement();
 
@@ -101,6 +118,21 @@ public class PlayerBehaviour : MonoBehaviour
                 _fireRate = StartCoroutine(FireRate(_fireSpeed));
             }
         }
+
+        Thrusters();
+
+        switch (_shieldHp)
+        {
+            case 3:
+                _shieldSprite.color = Color.white;
+                break;
+            case 2:
+                _shieldSprite.color = Color.magenta;
+                break;
+            case 1:
+                _shieldSprite.color = Color.red;
+                break;
+        }
     }
 
 
@@ -111,16 +143,11 @@ public class PlayerBehaviour : MonoBehaviour
         movement.x = Input.GetAxis("Horizontal");
         movement.y = Input.GetAxis("Vertical");
 
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            if(_lives > 0)
-            {
-                OnDamage();
-            }
-        }
+        
 
         transform.Translate(movement * _speed * Time.deltaTime);
 
+        #region bounds
         if (transform.position.y >= _upperBound)
         {
             transform.position = new Vector3(transform.position.x, _upperBound, 0);
@@ -138,6 +165,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             transform.position = new Vector3(_leftBound + 0.5f, transform.position.y, 0);
         }
+        #endregion
     }
 
     void FireLaser()
@@ -156,10 +184,83 @@ public class PlayerBehaviour : MonoBehaviour
                     tripleShot = Instantiate(_tripleShotPrefab, _offset.position, Quaternion.identity);
                     _audioSource.PlayOneShot(_audioClip[0]);
                     break;
-
             }
         }
 
+    }
+
+    void Thrusters()
+    {
+        /*
+         * For thrusters i want to check if key is pressed down.
+         * If key is pressed down then Add to the speed boost.
+         * if key is released return speed to normal;
+         */
+
+        if (!_speedBoostActive)
+        {
+            #region code block
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                _speed *= _thrusterBoost;
+            }
+
+            if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                _speed = _speedDefault;
+            }
+        #endregion
+        }
+    }
+
+    void Shields()
+    {
+        /*
+         * Shields needs 3 hits
+         * Reduce Shield HP PerHit
+         * [toDo] Change Sprite color
+
+         */
+
+        #region shield coode block
+        if (_shieldsActive && _shieldHp > 0)
+        {
+            _shieldHp--;
+            _uiManager.UpdateShields(_shieldHp);
+        }
+        
+        if( _shieldHp == 0)
+        {
+            _shieldsActive = false;
+            _shieldVisualizer.SetActive(false);
+            _uiManager.UpdateShields(_shieldHp);
+        }
+        #endregion
+    }
+
+    void Debuging()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            if (_lives > 0)
+            {
+                OnDamage();
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            if (!_shieldsActive && _shieldHp == 0)
+            {
+                _shieldHp = 3;
+                _uiManager.UpdateShields(_shieldHp);
+                ActivateShields();
+            }
+            else
+            {
+                Shields();
+            }
+        }
     }
 
     //method to add 10 to the score
@@ -179,12 +280,11 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void OnDamage()
     {
-        if (_shieldsActive)
+        if(_shieldHp > 0)
         {
-            _shieldsActive = false;
-            _shieldVisualizer.SetActive(false);
+            Shields();
             return;
-        }        
+        }
         
         _lives--;
 
