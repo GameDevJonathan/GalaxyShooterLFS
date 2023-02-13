@@ -28,6 +28,13 @@ public class PlayerBehaviour : MonoBehaviour
     private Transform _offset;
 
     [SerializeField]
+    private  int _maxAmmo = 15;
+
+    [SerializeField]
+    private int _ammo;
+
+
+    [SerializeField]
     private GameObject _laserPrefab;
     
     [SerializeField]
