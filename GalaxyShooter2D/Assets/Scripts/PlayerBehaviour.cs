@@ -87,9 +87,9 @@ public class PlayerBehaviour : MonoBehaviour
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
-
         
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+       
         if (_spawnManager == null)
         {
             Debug.LogError("No Spawn Manager");
@@ -104,6 +104,9 @@ public class PlayerBehaviour : MonoBehaviour
         {
             Debug.LogError("Shield Sprite Not Found");
         }
+        
+        _ammo = _maxAmmo;
+        _uiManager.UpdateAmmo(_ammo, _maxAmmo);
     }
 
     // Update is called once per frame
@@ -148,9 +151,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         Vector3 movement = new Vector3();
         movement.x = Input.GetAxis("Horizontal");
-        movement.y = Input.GetAxis("Vertical");
-
-        
+        movement.y = Input.GetAxis("Vertical");        
 
         transform.Translate(movement * _speed * Time.deltaTime);
 
@@ -182,9 +183,19 @@ public class PlayerBehaviour : MonoBehaviour
             switch (_tripleShotActive)
             {
                 case false:
-                    GameObject laser;
-                    laser = Instantiate(_laserPrefab, _offset.position, Quaternion.identity);
-                    _audioSource.PlayOneShot(_audioClip[0]);
+                    if(_ammo > 0)
+                    {
+                        _ammo--;
+                        _uiManager.UpdateAmmo(_ammo);
+                        GameObject laser;
+                        laser = Instantiate(_laserPrefab, _offset.position, Quaternion.identity);
+                        _audioSource.PlayOneShot(_audioClip[0]);
+                    }
+                    else
+                    {
+                        //PlaySound
+                        _audioSource.PlayOneShot(_audioClip[1]);
+                    }
                     break;
                 case true:
                     GameObject tripleShot;
@@ -198,12 +209,6 @@ public class PlayerBehaviour : MonoBehaviour
 
     void Thrusters()
     {
-        /*
-         * For thrusters i want to check if key is pressed down.
-         * If key is pressed down then Add to the speed boost.
-         * if key is released return speed to normal;
-         */
-
         if (!_speedBoostActive)
         {
             #region code block
@@ -222,13 +227,6 @@ public class PlayerBehaviour : MonoBehaviour
 
     void Shields()
     {
-        /*
-         * Shields needs 3 hits
-         * Reduce Shield HP PerHit
-         * [toDo] Change Sprite color
-
-         */
-
         #region shield coode block
         if (_shieldsActive && _shieldHp > 0)
         {

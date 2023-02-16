@@ -9,6 +9,9 @@ public class UIManager : MonoBehaviour
     //handle to text
     [SerializeField]
     private TMP_Text _scoreText;
+
+    [SerializeField]
+    private TMP_Text _ammoText;
     
     [SerializeField]
     private Image _livesImage;
@@ -30,16 +33,40 @@ public class UIManager : MonoBehaviour
     
     void Start()
     {
+        _gameManger = GameObject.Find("Game_Manager").GetComponent<GameManager>();
+        NullChecks();
         _scoreText.text = $"Score: {0}";
         _shieldsText.text = $"Shield Health: {0}";
         _gameOverText.gameObject.SetActive(false);
-        _gameManger = GameObject.Find("Game_Manager").GetComponent<GameManager>();
+        _ammoText.text = $"Ammo: {0}/{0}";
+              
+    }
 
+    private void NullChecks()
+    {
         if (!_gameManger)
         {
             Debug.LogError("GameManager is NULL");
         }
-        
+
+        if (!_shieldsText)
+        {
+            Debug.LogError("Shield Text is NULL");
+        }
+
+        if (!_scoreText)
+        {
+            Debug.LogError("Score Text is NULL");
+        }
+        if (!_gameOverText)
+        {
+            Debug.LogError("Game Over Text is NULL");
+        }
+
+        if (!_ammoText)
+        {
+            Debug.LogError("Ammo Text is NULL");
+        }
     }
 
     public void UpdateScore(int score)
@@ -63,7 +90,11 @@ public class UIManager : MonoBehaviour
     {
         _shieldsText.text = $"Shield Health: {_shields}";
     }
-  
+
+    public void UpdateAmmo(int curAmmo, int maxAmmo = 15)
+    {
+        _ammoText.text = $"Ammo: {curAmmo}/{maxAmmo}";
+    }
 
     void GameOverSequence()
     {
