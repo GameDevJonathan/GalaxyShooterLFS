@@ -116,10 +116,7 @@ public class PlayerBehaviour : MonoBehaviour
        
         CalculateMovement();
 
-        //if (Input.GetKey(KeyCode.Space))
-        //{
-        //    FireLaser();
-        //}
+        
 
         if (Input.GetKey(KeyCode.Space))
         {
@@ -127,7 +124,26 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 _fireRate = StartCoroutine(FireRate(_fireSpeed));
             }
+
         }
+        #region laser code unused
+        //if (Input.GetKeyDown(KeyCode.X))
+        //{
+        //    EnableLaser();
+        //}
+
+
+        //if (Input.GetKey(KeyCode.X))
+        //{
+        //    UpdateLaser();
+        //}
+
+        //if (Input.GetKeyUp(KeyCode.X))
+        //{
+        //    DisableLaser();
+        //}
+        #endregion
+
 
         Thrusters();
 
@@ -312,6 +328,18 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
+    public void RefillAmmo()
+    {
+        _ammo = _maxAmmo;
+        _uiManager.UpdateAmmo(_ammo);
+    }
+
+    public void HealthUp()
+    {
+        _lives++;
+        _uiManager.UpdateLives(_lives);
+    }
+
     public void ActivateTripleShot()
     {
         _tripleShotActive = true;
@@ -343,4 +371,17 @@ public class PlayerBehaviour : MonoBehaviour
         _speedBoostActive = false;
         _speed = _speedDefault;
     }
+
+    #region laser enable code
+    private void EnableLaser()
+    {
+
+    }
+
+    private void UpdateLaser()
+    {
+
+    }
+    #endregion
+
 }

@@ -6,13 +6,18 @@ public class PowerUpBehavior : MonoBehaviour
 {
     [SerializeField]
     private float _speed = 2f;
-    [SerializeField] // 0 = triple shot / 1 = speed boost / 2 = shields 
-    private int _powerUpID;
+    [SerializeField] // 0 = triple shot / 1 = speed boost / 2 = shields /3 = ammo refill / 4 = health up
+    private enum PowerUp { TripleShot, SpeedBoost, Shields, AmmoRefill, HealthUp};
+    
+    [SerializeField]
+    private PowerUp _playerPowerUp;
+
+
     
     [SerializeField]
     private AudioClip _audioClip;
-    
 
+    
     // Update is called once per frame
     void Update()
     {
@@ -34,16 +39,22 @@ public class PowerUpBehavior : MonoBehaviour
             PlayerBehaviour player = other.GetComponent<PlayerBehaviour>();
             if(player != null)
             {
-                switch (_powerUpID)
+                switch (_playerPowerUp)
                 {
-                    case 0:
+                    case PowerUp.TripleShot:
                         player.ActivateTripleShot();
                         break;
-                    case 1:
+                    case PowerUp.SpeedBoost:
                         player.ActivateSpeedBoost();
                         break;
-                    case 2:
+                    case PowerUp.Shields:
                         player.ActivateShields();
+                        break;
+                    case PowerUp.AmmoRefill:
+                        player.RefillAmmo();
+                        break;
+                    case PowerUp.HealthUp:
+                        player.HealthUp();
                         break;
                 }
             }
