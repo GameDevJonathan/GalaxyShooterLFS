@@ -15,6 +15,7 @@ public class PlayerBehaviour : MonoBehaviour
     private float _thrusterBoost = 1.25f;
     [Space]
     
+    [Header("Movement Bounds")]
     [SerializeField]
     private float _upperBound = 0f;
     [SerializeField]
@@ -24,33 +25,50 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField]
     private float _rightBound = 11.3f;
 
+    [Header("Spawn Points and Ammo")]
     [SerializeField]
     private Transform _offset;
-
+    
     [SerializeField]
     private  int _maxAmmo = 15;
-
+    
     [SerializeField]
-    private int _ammo;
-
-
+    private int _ammo;    
+    
     [SerializeField]
     private GameObject _laserPrefab;
+
+    Coroutine _fireRate;
+
+    [SerializeField]
+    private float _fireSpeed = .5f;
+
+
+    [Header("Special Meter")]
+    [SerializeField]
+    GameObject _rocketPrefab;
+    [SerializeField]
+    private Transform[] _missleFirePoint;    
+    [SerializeField]
+    private float _specialMeter = 100f;
+    Coroutine missleBarageCoroutine;
+    
+    
+    [Header("Flags and Prefabs")]
+    [SerializeField]
+    private bool _tripleShotActive = false;
     
     [SerializeField]
     private GameObject _tripleShotPrefab;
-    
-    [SerializeField]
-    private bool _tripleShotActive = false;
 
     [SerializeField]
     private bool _speedBoostActive = false;
 
     [SerializeField]
-    private SpriteRenderer _shieldSprite;
+    private bool _shieldsActive = false;
 
     [SerializeField]
-    private bool _shieldsActive = false;
+    private SpriteRenderer _shieldSprite;
     
     [SerializeField]
     private int _shieldHp = 0;
@@ -61,6 +79,8 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField]
     private float _powerUpTime = 5f;
 
+    
+    [Header("Score and Lives")]
     [SerializeField]
     private int _lives = 3;
 
@@ -70,22 +90,19 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField]
     private UIManager _uiManager;
 
-    Coroutine _fireRate;
-
-
-    [SerializeField]
-    private float _fireSpeed = .5f;
-
+    
+    [Header("Audio")]
     [SerializeField]
     private AudioClip[] _audioClip;
     private AudioSource _audioSource;
-
     private SpawnManager _spawnManager;
 
 
     // Start is called before the first frame update
     void Start()
     {
+
+       
         _audioSource = GetComponent<AudioSource>();
         
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
@@ -113,10 +130,11 @@ public class PlayerBehaviour : MonoBehaviour
     void Update()
     {
         Debuging();
+        _specialMeter = Mathf.Clamp(_specialMeter, 0, 100);
        
+        
         CalculateMovement();
 
-        
 
         if (Input.GetKey(KeyCode.Space))
         {
@@ -125,6 +143,15 @@ public class PlayerBehaviour : MonoBehaviour
                 _fireRate = StartCoroutine(FireRate(_fireSpeed));
             }
 
+        }
+
+        if(Input.GetKeyDown(KeyCode.X) && _specialMeter == 100)
+        {
+            if(missleBarageCoroutine == null)
+            {
+                _specialMeter = 0;
+                missleBarageCoroutine = StartCoroutine(MissleBarrage());
+            }
         }
         #region laser code unused
         //if (Input.GetKeyDown(KeyCode.X))
@@ -161,6 +188,47 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
+    IEnumerator MissleBarrage()
+    {
+        int prevIndex = 0;
+        int currIndex;
+        int barrageCount = 10;
+
+       for(int i = barrageCount; i > 0; i--)
+       {
+            currIndex = Random.Range(0, _missleFirePoint.Length);
+            Debug.Log($"Current Index: {currIndex}");
+            Debug.Log($"Previous Index: {prevIndex}");
+            
+            if(currIndex != prevIndex)
+            {
+                //GameObject missle;
+                //missle = Instantiate(_rocketPrefab, _missleFirePoint[currIndex].position, _missleFirePoint[currIndex].rotation);
+                Debug.Log($"Hit 'if' statement current index = {currIndex}");
+                prevIndex = currIndex;
+                Debug.Log($"PrevIndex if Statement: {prevIndex}");
+                yield return new WaitForSeconds(0.2f);
+            }
+            else if(currIndex == prevIndex)
+            {
+                //while(currIndex == prevIndex)
+                //{
+                    currIndex = Random.Range(0, _missleFirePoint.Length);
+                //}
+                Debug.Log($"Hit 'else' statement current index = {currIndex}");
+                prevIndex = currIndex;
+                Debug.Log($"PrevIndex else Statement: {prevIndex}");
+                yield return new WaitForSeconds(0.2f);
+            }
+            Debug.Log($"Barrage Count: {barrageCount}");
+            barrageCount--;
+            Debug.Log("Inside loop: " + missleBarageCoroutine);
+       }
+        
+        yield return new WaitForSeconds(0.2f);
+        //missleBarageCoroutine = null;
+
+    }
 
 
     void CalculateMovement()

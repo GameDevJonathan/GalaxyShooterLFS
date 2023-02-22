@@ -20,14 +20,14 @@ public class AstroidBehavior : MonoBehaviour
         _anim = GetComponent<Animator>();
         if (!_anim)
             Debug.LogError("Animator is Null");
-        else
-            Debug.Log("Animator Found");
+        //else
+        //    Debug.Log("Animator Found");
 
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         if (!_anim)
             Debug.LogError("Manager is Null");
-        else
-            Debug.Log("Manager Found");
+        //else
+        //    Debug.Log("Manager Found");
 
     }
 
