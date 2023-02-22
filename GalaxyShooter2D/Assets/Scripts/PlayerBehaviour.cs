@@ -190,44 +190,34 @@ public class PlayerBehaviour : MonoBehaviour
 
     IEnumerator MissleBarrage()
     {
-        int prevIndex = 0;
-        int currIndex;
-        int barrageCount = 10;
+        int[] firePoints = { 1, 2, 3, 2, 1, 3, 2, 3, 1 };
+       // int prevIndex = 0;
+       // int currIndex;
+       // int barrageCount = 10;
 
-       for(int i = barrageCount; i > 0; i--)
-       {
-            currIndex = Random.Range(0, _missleFirePoint.Length);
-            Debug.Log($"Current Index: {currIndex}");
-            Debug.Log($"Previous Index: {prevIndex}");
-            
-            if(currIndex != prevIndex)
-            {
-                //GameObject missle;
-                //missle = Instantiate(_rocketPrefab, _missleFirePoint[currIndex].position, _missleFirePoint[currIndex].rotation);
-                Debug.Log($"Hit 'if' statement current index = {currIndex}");
-                prevIndex = currIndex;
-                Debug.Log($"PrevIndex if Statement: {prevIndex}");
-                yield return new WaitForSeconds(0.2f);
-            }
-            else if(currIndex == prevIndex)
-            {
-                //while(currIndex == prevIndex)
-                //{
-                    currIndex = Random.Range(0, _missleFirePoint.Length);
-                //}
-                Debug.Log($"Hit 'else' statement current index = {currIndex}");
-                prevIndex = currIndex;
-                Debug.Log($"PrevIndex else Statement: {prevIndex}");
-                yield return new WaitForSeconds(0.2f);
-            }
-            Debug.Log($"Barrage Count: {barrageCount}");
-            barrageCount--;
-            Debug.Log("Inside loop: " + missleBarageCoroutine);
-       }
+       
         
+       //while(barrageCount > 0)
+       //{
+       //     currIndex = Random.Range(0, _missleFirePoint.Length);
+       //     Debug.Log($"Current Index: {currIndex}");
+       //     Debug.Log($"Previous Index: {prevIndex}");
+            
+       //     if(currIndex != prevIndex)
+       //     {
+       //         GameObject missle;
+       //         missle = Instantiate(_rocketPrefab, _missleFirePoint[currIndex].position, _missleFirePoint[currIndex].rotation);
+       //         Debug.Log($"Hit 'if' statement current index = {currIndex}");
+       //         prevIndex = currIndex;
+       //         Debug.Log($"PrevIndex if Statement: {prevIndex}");
+       //         barrageCount--;
+       //         yield return new WaitForSeconds(0.2f);
+       //     }           
+       //     Debug.Log($"Barrage Count: {barrageCount}");
+       //     Debug.Log("Inside loop: " + missleBarageCoroutine);
+       //}        
         yield return new WaitForSeconds(0.2f);
         //missleBarageCoroutine = null;
-
     }
 
 
