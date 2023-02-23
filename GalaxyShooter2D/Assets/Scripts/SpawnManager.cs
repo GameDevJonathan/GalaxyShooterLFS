@@ -29,6 +29,7 @@ public class SpawnManager : MonoBehaviour
             spawnPos.x = Random.Range(-8f, 8f);
             spawnPos.y = 6;
             GameObject _clone = Instantiate(_enemyPrefab, spawnPos, Quaternion.identity);
+            _clone.transform.name = "Enemy";
             _clone.transform.parent = _enemyContainer.transform;
             yield return new WaitForSeconds(_spawnTime);
         }

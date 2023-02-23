@@ -10,11 +10,11 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField]
     private float _speedDefault = 5f;
     [SerializeField]
-    private float _boost = 1.5f;   
+    private float _boost = 1.5f;
     [SerializeField]
     private float _thrusterBoost = 1.25f;
     [Space]
-    
+
     [Header("Movement Bounds")]
     [SerializeField]
     private float _upperBound = 0f;
@@ -28,13 +28,13 @@ public class PlayerBehaviour : MonoBehaviour
     [Header("Spawn Points and Ammo")]
     [SerializeField]
     private Transform _offset;
-    
+
     [SerializeField]
-    private  int _maxAmmo = 15;
-    
+    private int _maxAmmo = 15;
+
     [SerializeField]
-    private int _ammo;    
-    
+    private int _ammo;
+
     [SerializeField]
     private GameObject _laserPrefab;
 
@@ -51,19 +51,24 @@ public class PlayerBehaviour : MonoBehaviour
     [Header("Hyper Beam")]
     [SerializeField]
     private Transform _hyperBeamSpawnPoint;
+    [SerializeField]
+    private float _beamDistance = 100f, _beamDuration = 4f;
+    [SerializeField]
+    private LineRenderer _lineRenderer;
+    Coroutine HyperBeamCoroutine;
 
     [Header("Missile Barrage")]
     [SerializeField]
     GameObject _rocketPrefab;
     [SerializeField]
-    private Transform[] _missleFirePoint;    
+    private Transform[] _missleFirePoint;
     Coroutine missleBarageCoroutine;
-    
-    
+
+
     [Header("Flags and Prefabs")]
     [SerializeField]
     private bool _tripleShotActive = false;
-    
+
     [SerializeField]
     private GameObject _tripleShotPrefab;
 
@@ -75,7 +80,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     [SerializeField]
     private SpriteRenderer _shieldSprite;
-    
+
     [SerializeField]
     private int _shieldHp = 0;
 
@@ -85,7 +90,7 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField]
     private float _powerUpTime = 5f;
 
-    
+
     [Header("Score and Lives")]
     [SerializeField]
     private int _lives = 3;
@@ -96,7 +101,7 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField]
     private UIManager _uiManager;
 
-    
+
     [Header("Audio")]
     [SerializeField]
     private AudioClip[] _audioClip;
@@ -108,17 +113,17 @@ public class PlayerBehaviour : MonoBehaviour
     void Start()
     {
 
-       
+
         _audioSource = GetComponent<AudioSource>();
-        
+
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
-       
+
         if (_spawnManager == null)
         {
             Debug.LogError("No Spawn Manager");
         }
 
-        if(_uiManager == null)
+        if (_uiManager == null)
         {
             Debug.LogError("No UI Manager");
         }
@@ -127,7 +132,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             Debug.LogError("Shield Sprite Not Found");
         }
-        
+
         _ammo = _maxAmmo;
         _uiManager.UpdateAmmo(_ammo, _maxAmmo);
     }
@@ -137,8 +142,8 @@ public class PlayerBehaviour : MonoBehaviour
     {
         Debuging();
         _specialMeter = Mathf.Clamp(_specialMeter, 0, 100);
-       
-        
+
+
         CalculateMovement();
 
 
@@ -151,9 +156,13 @@ public class PlayerBehaviour : MonoBehaviour
 
         }
 
-        if(Input.GetKey(KeyCode.X) /*&& _specialMeter == 100*/)
+        if (Input.GetKey(KeyCode.X) /*&& _specialMeter == 100*/)
         {
-            LaserBeam();
+            if (HyperBeamCoroutine == null)
+            {
+                HyperBeamCoroutine = StartCoroutine(LaserBeam());
+            }
+            //LaserBeamDebug();
             //if(missleBarageCoroutine == null)
             //{
             //    _specialMeter = 0;
@@ -195,47 +204,75 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
-    void LaserBeam()
+    IEnumerator LaserBeam()
     {
-        RaycastHit2D hitInfo =  Physics2D.Raycast(_hyperBeamSpawnPoint.position, _hyperBeamSpawnPoint.up);
-        Debug.DrawRay(_hyperBeamSpawnPoint.position, _hyperBeamSpawnPoint.up, Color.white);
+        _lineRenderer.enabled = true;
 
-        if (hitInfo)
+        RaycastHit2D hitInfo = Physics2D.Raycast(_hyperBeamSpawnPoint.position, _hyperBeamSpawnPoint.up * _beamDistance);
+        Debug.DrawRay(_hyperBeamSpawnPoint.position, _hyperBeamSpawnPoint.up * _beamDistance, Color.white);
+
+        if (hitInfo && hitInfo.transform.name == "Enemy")
         {
             EnemyBehaviour enemy = hitInfo.transform.GetComponent<EnemyBehaviour>();
+            enemy?.BeamHit();
         }
 
-
+        _lineRenderer.SetPosition(0, _hyperBeamSpawnPoint.position);
+        _lineRenderer.SetPosition(1, _hyperBeamSpawnPoint.position + _hyperBeamSpawnPoint.up * _beamDistance);
+        yield return new WaitForSeconds(_beamDuration);
+        _lineRenderer.enabled = false;
+        HyperBeamCoroutine = null;
     }
+    //void LaserBeamDebug()
+    //{
+    //    //_lineRenderer.enabled = true;
+
+    //    RaycastHit2D hitInfo = Physics2D.Raycast(_hyperBeamSpawnPoint.position, _hyperBeamSpawnPoint.up * _beamDistance);
+    //    Debug.DrawRay(_hyperBeamSpawnPoint.position, _hyperBeamSpawnPoint.up * _beamDistance, Color.red);
+    //    //Debug.Log(hitInfo.transform.name);
+
+    //    if (hitInfo && hitInfo.transform.name == "Enemy")
+    //    {
+    //        Debug.Log("hit enemy");
+    //        EnemyBehaviour enemy = hitInfo.transform.GetComponent<EnemyBehaviour>();
+    //        enemy?.BeamHit();
+    //    }
+
+    //    //_lineRenderer.SetPosition(0, _hyperBeamSpawnPoint.position);
+    //    //_lineRenderer.SetPosition(1, _hyperBeamSpawnPoint.position + _hyperBeamSpawnPoint.up * _beamDistance);
+    //    //yield return new WaitForSeconds(_beamDuration);
+    //    //_lineRenderer.enabled = false;
+    //    //HyperBeamCoroutine = null;
+    //}
     #region missile barrage feature
     IEnumerator MissleBarrage()
     {
         //int[] firePoints = { 1, 2, 3, 2, 1, 3, 2, 3, 1 };
-       // int prevIndex = 0;
-       // int currIndex;
-       // int barrageCount = 10;
+        // int prevIndex = 0;
+        // int currIndex;
+        // int barrageCount = 10;
 
-       
-        
-       //while(barrageCount > 0)
-       //{
-       //     currIndex = Random.Range(0, _missleFirePoint.Length);
-       //     Debug.Log($"Current Index: {currIndex}");
-       //     Debug.Log($"Previous Index: {prevIndex}");
-            
-       //     if(currIndex != prevIndex)
-       //     {
-       //         GameObject missle;
-       //         missle = Instantiate(_rocketPrefab, _missleFirePoint[currIndex].position, _missleFirePoint[currIndex].rotation);
-       //         Debug.Log($"Hit 'if' statement current index = {currIndex}");
-       //         prevIndex = currIndex;
-       //         Debug.Log($"PrevIndex if Statement: {prevIndex}");
-       //         barrageCount--;
-       //         yield return new WaitForSeconds(0.2f);
-       //     }           
-       //     Debug.Log($"Barrage Count: {barrageCount}");
-       //     Debug.Log("Inside loop: " + missleBarageCoroutine);
-       //}        
+
+
+        //while(barrageCount > 0)
+        //{
+        //     currIndex = Random.Range(0, _missleFirePoint.Length);
+        //     Debug.Log($"Current Index: {currIndex}");
+        //     Debug.Log($"Previous Index: {prevIndex}");
+
+        //     if(currIndex != prevIndex)
+        //     {
+        //         GameObject missle;
+        //         missle = Instantiate(_rocketPrefab, _missleFirePoint[currIndex].position, _missleFirePoint[currIndex].rotation);
+        //         Debug.Log($"Hit 'if' statement current index = {currIndex}");
+        //         prevIndex = currIndex;
+        //         Debug.Log($"PrevIndex if Statement: {prevIndex}");
+        //         barrageCount--;
+        //         yield return new WaitForSeconds(0.2f);
+        //     }           
+        //     Debug.Log($"Barrage Count: {barrageCount}");
+        //     Debug.Log("Inside loop: " + missleBarageCoroutine);
+        //}        
         yield return new WaitForSeconds(0.2f);
         //missleBarageCoroutine = null;
     }
@@ -243,9 +280,12 @@ public class PlayerBehaviour : MonoBehaviour
 
     void CalculateMovement()
     {
+        if (HyperBeamCoroutine != null)
+            return;
+
         Vector3 movement = new Vector3();
         movement.x = Input.GetAxis("Horizontal");
-        movement.y = Input.GetAxis("Vertical");        
+        movement.y = Input.GetAxis("Vertical");
 
         transform.Translate(movement * _speed * Time.deltaTime);
 
@@ -277,7 +317,7 @@ public class PlayerBehaviour : MonoBehaviour
             switch (_tripleShotActive)
             {
                 case false:
-                    if(_ammo > 0)
+                    if (_ammo > 0)
                     {
                         _ammo--;
                         _uiManager.UpdateAmmo(_ammo);
@@ -315,7 +355,7 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 _speed = _speedDefault;
             }
-        #endregion
+            #endregion
         }
     }
 
@@ -327,8 +367,8 @@ public class PlayerBehaviour : MonoBehaviour
             _shieldHp--;
             _uiManager.UpdateShields(_shieldHp);
         }
-        
-        if( _shieldHp == 0)
+
+        if (_shieldHp == 0)
         {
             _shieldsActive = false;
             _shieldVisualizer.SetActive(false);
@@ -379,12 +419,12 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void OnDamage()
     {
-        if(_shieldHp > 0)
+        if (_shieldHp > 0)
         {
             Shields();
             return;
         }
-        
+
         _lives--;
 
         _uiManager.UpdateLives(_lives);
@@ -426,7 +466,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void ActivateSpeedBoost()
     {
-        _speedBoostActive = true;        
+        _speedBoostActive = true;
         _speed *= _boost;
         StartCoroutine(SpeedCoolDown(_powerUpTime));
     }
@@ -439,7 +479,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     IEnumerator PowerUpTime(float time)
     {
-        yield return new WaitForSeconds(time);        
+        yield return new WaitForSeconds(time);
         _tripleShotActive = false;
     }
 

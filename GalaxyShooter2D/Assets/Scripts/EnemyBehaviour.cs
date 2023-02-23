@@ -52,7 +52,7 @@ public class EnemyBehaviour : MonoBehaviour
         {
             if (other.transform.parent != null)
             {
-                _audioSource.Play();
+                //_audioSource.Play();
                 Destroy(other.transform.parent.gameObject);
             }
             Destroy(other.gameObject);
@@ -60,6 +60,12 @@ public class EnemyBehaviour : MonoBehaviour
             DeathSequence();
             //Destroy(this.gameObject);
         }
+    }
+
+    public void BeamHit()
+    {
+        _player?.AddScore(10);
+        DeathSequence();
     }
 
     private void DeathSequence()
