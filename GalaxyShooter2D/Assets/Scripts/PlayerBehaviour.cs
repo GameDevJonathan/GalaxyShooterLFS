@@ -46,11 +46,17 @@ public class PlayerBehaviour : MonoBehaviour
 
     [Header("Special Meter")]
     [SerializeField]
+    private float _specialMeter = 100f;
+
+    [Header("Hyper Beam")]
+    [SerializeField]
+    private Transform _hyperBeamSpawnPoint;
+
+    [Header("Missile Barrage")]
+    [SerializeField]
     GameObject _rocketPrefab;
     [SerializeField]
     private Transform[] _missleFirePoint;    
-    [SerializeField]
-    private float _specialMeter = 100f;
     Coroutine missleBarageCoroutine;
     
     
@@ -145,13 +151,14 @@ public class PlayerBehaviour : MonoBehaviour
 
         }
 
-        if(Input.GetKeyDown(KeyCode.X) && _specialMeter == 100)
+        if(Input.GetKey(KeyCode.X) /*&& _specialMeter == 100*/)
         {
-            if(missleBarageCoroutine == null)
-            {
-                _specialMeter = 0;
-                missleBarageCoroutine = StartCoroutine(MissleBarrage());
-            }
+            LaserBeam();
+            //if(missleBarageCoroutine == null)
+            //{
+            //    _specialMeter = 0;
+            //    missleBarageCoroutine = StartCoroutine(MissleBarrage());
+            //}
         }
         #region laser code unused
         //if (Input.GetKeyDown(KeyCode.X))
@@ -188,9 +195,22 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
+    void LaserBeam()
+    {
+        RaycastHit2D hitInfo =  Physics2D.Raycast(_hyperBeamSpawnPoint.position, _hyperBeamSpawnPoint.up);
+        Debug.DrawRay(_hyperBeamSpawnPoint.position, _hyperBeamSpawnPoint.up, Color.white);
+
+        if (hitInfo)
+        {
+            EnemyBehaviour enemy = hitInfo.transform.GetComponent<EnemyBehaviour>();
+        }
+
+
+    }
+    #region missile barrage feature
     IEnumerator MissleBarrage()
     {
-        int[] firePoints = { 1, 2, 3, 2, 1, 3, 2, 3, 1 };
+        //int[] firePoints = { 1, 2, 3, 2, 1, 3, 2, 3, 1 };
        // int prevIndex = 0;
        // int currIndex;
        // int barrageCount = 10;
@@ -219,7 +239,7 @@ public class PlayerBehaviour : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         //missleBarageCoroutine = null;
     }
-
+    #endregion
 
     void CalculateMovement()
     {
