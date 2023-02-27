@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
 {
+    #region movement variables
     [Header("Movement Variables")]
     [SerializeField]
     private float _speed = 5f;
@@ -14,7 +15,9 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField]
     private float _thrusterBoost = 1.25f;
     [Space]
+    #endregion
 
+    #region Movement Bounds
     [Header("Movement Bounds")]
     [SerializeField]
     private float _upperBound = 0f;
@@ -24,7 +27,10 @@ public class PlayerBehaviour : MonoBehaviour
     private float _leftBound = -11.3f;
     [SerializeField]
     private float _rightBound = 11.3f;
+    #endregion
 
+
+    #region Spawn Points and Ammo
     [Header("Spawn Points and Ammo")]
     [SerializeField]
     private Transform _offset;
@@ -42,12 +48,13 @@ public class PlayerBehaviour : MonoBehaviour
 
     [SerializeField]
     private float _fireSpeed = .5f;
-
+    #endregion
 
     [Header("Special Meter")]
     [SerializeField]
     private float _specialMeter = 100f;
 
+    #region Hyper Beam
     [Header("Hyper Beam")]
     [SerializeField]
     private Transform _hyperBeamSpawnPoint;
@@ -66,15 +73,18 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField]
     private LineRenderer _lineRenderer;
     Coroutine HyperBeamCoroutine;
+    #endregion
 
+    #region Missage Barrage
     [Header("Missile Barrage")]
     [SerializeField]
     GameObject _rocketPrefab;
     [SerializeField]
     private Transform[] _missleFirePoint;
     Coroutine missleBarageCoroutine;
+    #endregion
 
-
+    #region Flags and Prefabs
     [Header("Flags and Prefabs")]
     [SerializeField]
     private bool _tripleShotActive = false;
@@ -99,7 +109,23 @@ public class PlayerBehaviour : MonoBehaviour
 
     [SerializeField]
     private float _powerUpTime = 5f;
+    #endregion
 
+    [Header("Thruster")]
+    [SerializeField]
+    private bool _boosting = false;
+    [SerializeField]
+    private float _maxThrusterAmount = 100f;
+    [SerializeField]
+    private float _thrusterAmount = 50f;
+    [SerializeField]
+    private float _thrusterDecayRate = 0.2f;
+    [SerializeField]
+    private float _thrusterRechargeRate = 0.3f;
+    [SerializeField]
+    private float _canRecharge = -1f;
+    [SerializeField]
+    private float _thrusterRechargeAmount = 2f;
 
     [Header("Score and Lives")]
     [SerializeField]
@@ -149,6 +175,7 @@ public class PlayerBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        _thrusterAmount = Mathf.Clamp(_thrusterAmount, 0, _maxThrusterAmount);
         Debuging();
         _specialMeter = Mathf.Clamp(_specialMeter, 0, 100);
 
@@ -374,16 +401,39 @@ public class PlayerBehaviour : MonoBehaviour
 
     void Thrusters()
     {
+        
+        switch (_boosting)
+        {           
+            case false:
+                if ((_thrusterAmount < _maxThrusterAmount) && Time.time >_canRecharge)
+                {
+                    _canRecharge = Time.time + _thrusterRechargeRate;
+                    _thrusterAmount += _thrusterDecayRate + Time.deltaTime;
+                    _uiManager.UpdateThrusterBar(_thrusterAmount / _maxThrusterAmount);
+                }
+                break;
+
+            case true:                
+                    _thrusterAmount -= _thrusterDecayRate + Time.deltaTime;
+                _uiManager.UpdateThrusterBar(_thrusterAmount / _maxThrusterAmount);
+                break;
+        }
+        _thrusterAmount = Mathf.Clamp(_thrusterAmount, 0, _maxThrusterAmount);
+       
+        
+        
         if (!_speedBoostActive)
         {
             #region code block
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
+                _boosting = true;
                 _speed *= _thrusterBoost;
             }
 
-            if (Input.GetKeyUp(KeyCode.LeftShift))
+            if (Input.GetKeyUp(KeyCode.LeftShift) || _thrusterAmount == 0)
             {
+                _boosting = false;
                 _speed = _speedDefault;
             }
             #endregion
@@ -396,14 +446,13 @@ public class PlayerBehaviour : MonoBehaviour
         if (_shieldsActive && _shieldHp > 0)
         {
             _shieldHp--;
-            _uiManager.UpdateShields(_shieldHp);
+            
         }
 
         if (_shieldHp == 0)
         {
             _shieldsActive = false;
-            _shieldVisualizer.SetActive(false);
-            _uiManager.UpdateShields(_shieldHp);
+            _shieldVisualizer.SetActive(false);            
         }
         #endregion
     }
@@ -422,8 +471,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             if (!_shieldsActive && _shieldHp == 0)
             {
-                _shieldHp = 3;
-                _uiManager.UpdateShields(_shieldHp);
+                _shieldHp = 3;                
                 ActivateShields();
             }
             else

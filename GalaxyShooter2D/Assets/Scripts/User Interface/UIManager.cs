@@ -26,19 +26,19 @@ public class UIManager : MonoBehaviour
     private TMP_Text _restartText;
 
     [SerializeField]
-    private TMP_Text _shieldsText;
+    private GameManager _gameManger;
 
     [SerializeField]
-    private GameManager _gameManger;
+    private Image _thrusterBarFill;
     
     void Start()
     {
         _gameManger = GameObject.Find("Game_Manager").GetComponent<GameManager>();
         NullChecks();
-        _scoreText.text = $"Score: {0}";
-        _shieldsText.text = $"Shield Health: {0}";
+        _scoreText.text = $"Score: {0}";       
         _gameOverText.gameObject.SetActive(false);
         _ammoText.text = $"Ammo: {0}/{0}";
+        _thrusterBarFill.fillAmount = 0f;
               
     }
 
@@ -49,9 +49,9 @@ public class UIManager : MonoBehaviour
             Debug.LogError("GameManager is NULL");
         }
 
-        if (!_shieldsText)
+        if (!_thrusterBarFill)
         {
-            Debug.LogError("Shield Text is NULL");
+            Debug.LogError("Thruster Bar is null");
         }
 
         if (!_scoreText)
@@ -86,9 +86,9 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void UpdateShields(int _shields)
+    public void UpdateThrusterBar(float bar)
     {
-        _shieldsText.text = $"Shield Health: {_shields}";
+        _thrusterBarFill.fillAmount = bar;
     }
 
     public void UpdateAmmo(int curAmmo, int maxAmmo = 15)

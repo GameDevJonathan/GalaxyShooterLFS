@@ -1,0 +1,1609 @@
+fileFormatVersion: 2
+guid: d0b55b6ae97a2b94f99c5ae234548ca0
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_0
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 308
+        width: 65
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb9747d106c80074188965924c5d46a0
+      internalID: 646755101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_1
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 348
+        width: 209
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8dc8ac56aa6dacf4fa4a0076e025216f
+      internalID: -1271372977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_2
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 361
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 987567eb911f5024187427ef679b4dc2
+      internalID: 2134254383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_3
+      rect:
+        serializedVersion: 2
+        x: 301
+        y: 361
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 880d954e02ff72f4f87e1dce00ded931
+      internalID: -1008515077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_4
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 361
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97d7726fc096a9a479fca922a7fa46f9
+      internalID: -1459439904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_5
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 361
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06bb20353eea65840a5c72d069f45bad
+      internalID: -1099510451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_6
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 361
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f267b288e89ff9b4d9f505c9c8ac9229
+      internalID: 854377992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_7
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 361
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0fc3120d5f3b2f4499c9b92a8a5268a
+      internalID: -1064074827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_8
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 361
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e18a65cbea4e45428c21b0ee07bb98a
+      internalID: -1350854105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_9
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 361
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 460b2275aa080fc45806b7dc64a9c3c0
+      internalID: -1319461631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_10
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 364
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d91cdd37996f8c4696822f58b524b63
+      internalID: 1935653883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_11
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 335
+        width: 17
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73a8527140942fc42b0ffa523243d3f2
+      internalID: -1749397538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_12
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 335
+        width: 17
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 183951870fd47dc4dbbdec4690b85ac6
+      internalID: -637608547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_13
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 315
+        width: 137
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d9db274d99ded94ba401494506a7c46
+      internalID: -1101097900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_14
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 287
+        width: 195
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dcb75bb644158544d976787da8eebb1a
+      internalID: -1627177906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_15
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 320
+        width: 19
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e1f303b27810264c86f9e233a97bbca
+      internalID: -1179002704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_16
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 320
+        width: 19
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7723c99068fef1c4398635e680bc3e05
+      internalID: 1805294202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_17
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 303
+        width: 21
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3dfbced768fd0dc4b98a693b169d73da
+      internalID: -360817969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_18
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 303
+        width: 21
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e947bfa48d6ee34cab706f1b36730cb
+      internalID: 459553438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_19
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 288
+        width: 132
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e83ba034344cf8f418102b79be65d16e
+      internalID: -1020799013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_20
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 290
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd4e236cef4cf2142acf1bbef5732230
+      internalID: 2093262000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_21
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 282
+        width: 7
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43f9c7277eef55f429485a64058a2226
+      internalID: 35250465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_22
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 290
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5f96e162eb358f448494a8d0aba279b
+      internalID: 925337860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_23
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 290
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 707e5295d4984554d9872b06b4ac058b
+      internalID: -478422292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_24
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 290
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a4671045f6c408469c5be210a61effd
+      internalID: 609083413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_25
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 290
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df8f43e296dfcd14e88edfc155a314fe
+      internalID: 1720763059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_26
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 290
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37ad3dae4bca9364888616df3ef20103
+      internalID: 437367328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_27
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 282
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d808823bd3629fb4f935051fc2a6ca0f
+      internalID: -1999156749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_28
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 282
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b5eb5e501ff28543bf8222b70c98e68
+      internalID: -20325160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_29
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 282
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e4c8463977a7304fa614603a26033ed
+      internalID: -1686481505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_30
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 282
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41e1b4079fc6d7d4fade7495fc624964
+      internalID: -1052890191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_31
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 282
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 334bd8d9505edeb418e307cea6a8cc85
+      internalID: -2049734011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_32
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 282
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1dabee5fb2d1b6d42a478e1627aa71b5
+      internalID: 513868574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_33
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 276
+        width: 47
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 695b11d181a53fc42b2883f11357df1c
+      internalID: 692228477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_34
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 274
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39759a71d9e193942b5adf8e53549f53
+      internalID: -1147250011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_35
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 274
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c65d9898a92c5574dad158822cca11d0
+      internalID: -1528955035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_36
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 273
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49181eec95c43ba429729d740987cedc
+      internalID: -1176266433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_37
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 274
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 438bec9e758bd4446b448b4a296fcea3
+      internalID: 1458029823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_38
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 274
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 743c0af320d238d4a9013ef978283d3b
+      internalID: -574362668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_39
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 274
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0de3f39ca2562154e84ccf845a57c78a
+      internalID: 504584809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_40
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 257
+        width: 137
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7dc146451b08b8a42baf9641571b1dbe
+      internalID: 915722325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_41
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 221
+        width: 195
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0512c6c9ebc3ef149a50e033c79c3d16
+      internalID: -680891761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_42
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 265
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b45298e84a543b842ad12ac5bd34d503
+      internalID: 1860479282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_43
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 265
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea8a5b9a1cb87fe4582ce0c6141c8b1b
+      internalID: 892335895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_44
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 265
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95154775fd615c34a83fe54e81600c40
+      internalID: -159223392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_45
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 265
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2f81b9d1ff7bbd4b8c61be39e6367d7
+      internalID: -2087925229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_46
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 265
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a91ba333785d6874db21fd424242c398
+      internalID: -284884392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_47
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 265
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 306e2da2ca419544dbf1e78c41113e04
+      internalID: -635640546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_48
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 245
+        width: 132
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3fbc67a644753a74a9e3b6e5e3bfd4e2
+      internalID: 1161931063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_49
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 234
+        width: 137
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3febc7966cfbe2c44888a7d2f888b913
+      internalID: 1017338634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_50
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 226
+        width: 132
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab3b26a5def72b14d992d6ae0f9b46e6
+      internalID: 564517190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_51
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 211
+        width: 137
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41d2e821012abd9418ee08859b14d316
+      internalID: 1111445752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_52
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 207
+        width: 132
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2cd8be806d28d8247ab4c05e76ba9fe2
+      internalID: -1457901032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_53
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 188
+        width: 137
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 094caf995351efc488c00a14e28967b6
+      internalID: -171821637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_54
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 155
+        width: 195
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83a0a7b997518cd4ea10cacced3561ab
+      internalID: 1835358329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_55
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 188
+        width: 132
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 617f422486df73b4cb7119d25db49cc3
+      internalID: 608520335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_56
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 169
+        width: 132
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bee4bf53bb935a47a0b50e4cdab6a90
+      internalID: 1404529052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_57
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 165
+        width: 137
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17fe5671eff5ed14fbf54418be933212
+      internalID: -1666740461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_58
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 150
+        width: 132
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49455b535bba5df4fa8268c554c14471
+      internalID: -1293257617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_59
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 142
+        width: 137
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ba474c433fbc9949b94e910e1451ca3
+      internalID: -1026409166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_60
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 131
+        width: 132
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b50e528ae24230343acd64d7785da287
+      internalID: -298555327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_61
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 119
+        width: 137
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ad4cbbd18ee7a8429d077bd7075aeb4
+      internalID: 1929331153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_62
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 89
+        width: 195
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e86713b03672354dbf2082c863188cf
+      internalID: 704404541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_63
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 112
+        width: 132
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c318c460d8d3dc14d9300ee74b9d0da2
+      internalID: -598927644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_64
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 96
+        width: 137
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa6260447a806e24ab4607811f4f1848
+      internalID: -282851762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_65
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 20
+        width: 195
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea8c312eeb2917045a473f5f35e28207
+      internalID: 1172445658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: My Health and Magic Bars by ChenanaArts on DeviantArt_66
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 24
+        width: 195
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5fa43c0654a2a248abba409b34d1925
+      internalID: 551907566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      My Health and Magic Bars by ChenanaArts on DeviantArt_2: 2134254383
+      My Health and Magic Bars by ChenanaArts on DeviantArt_6: 854377992
+      My Health and Magic Bars by ChenanaArts on DeviantArt_31: -2049734011
+      My Health and Magic Bars by ChenanaArts on DeviantArt_64: -282851762
+      My Health and Magic Bars by ChenanaArts on DeviantArt_12: -637608547
+      My Health and Magic Bars by ChenanaArts on DeviantArt_39: 504584809
+      My Health and Magic Bars by ChenanaArts on DeviantArt_62: 704404541
+      My Health and Magic Bars by ChenanaArts on DeviantArt_27: -1999156749
+      My Health and Magic Bars by ChenanaArts on DeviantArt_50: 564517190
+      My Health and Magic Bars by ChenanaArts on DeviantArt_48: 1161931063
+      My Health and Magic Bars by ChenanaArts on DeviantArt_21: 35250465
+      My Health and Magic Bars by ChenanaArts on DeviantArt_58: -1293257617
+      My Health and Magic Bars by ChenanaArts on DeviantArt_22: 925337860
+      My Health and Magic Bars by ChenanaArts on DeviantArt_23: -478422292
+      My Health and Magic Bars by ChenanaArts on DeviantArt_33: 692228477
+      My Health and Magic Bars by ChenanaArts on DeviantArt_57: -1666740461
+      My Health and Magic Bars by ChenanaArts on DeviantArt_34: -1147250011
+      My Health and Magic Bars by ChenanaArts on DeviantArt_59: -1026409166
+      My Health and Magic Bars by ChenanaArts on DeviantArt_37: 1458029823
+      My Health and Magic Bars by ChenanaArts on DeviantArt_14: -1627177906
+      My Health and Magic Bars by ChenanaArts on DeviantArt_4: -1459439904
+      My Health and Magic Bars by ChenanaArts on DeviantArt_41: -680891761
+      My Health and Magic Bars by ChenanaArts on DeviantArt_61: 1929331153
+      My Health and Magic Bars by ChenanaArts on DeviantArt_44: -159223392
+      My Health and Magic Bars by ChenanaArts on DeviantArt_53: -171821637
+      My Health and Magic Bars by ChenanaArts on DeviantArt_46: -284884392
+      My Health and Magic Bars by ChenanaArts on DeviantArt_56: 1404529052
+      My Health and Magic Bars by ChenanaArts on DeviantArt_60: -298555327
+      My Health and Magic Bars by ChenanaArts on DeviantArt_11: -1749397538
+      My Health and Magic Bars by ChenanaArts on DeviantArt_24: 609083413
+      My Health and Magic Bars by ChenanaArts on DeviantArt_9: -1319461631
+      My Health and Magic Bars by ChenanaArts on DeviantArt_29: -1686481505
+      My Health and Magic Bars by ChenanaArts on DeviantArt_0: 646755101
+      My Health and Magic Bars by ChenanaArts on DeviantArt_5: -1099510451
+      My Health and Magic Bars by ChenanaArts on DeviantArt_20: 2093262000
+      My Health and Magic Bars by ChenanaArts on DeviantArt_49: 1017338634
+      My Health and Magic Bars by ChenanaArts on DeviantArt_40: 915722325
+      My Health and Magic Bars by ChenanaArts on DeviantArt_7: -1064074827
+      My Health and Magic Bars by ChenanaArts on DeviantArt_17: -360817969
+      My Health and Magic Bars by ChenanaArts on DeviantArt_54: 1835358329
+      My Health and Magic Bars by ChenanaArts on DeviantArt_19: -1020799013
+      My Health and Magic Bars by ChenanaArts on DeviantArt_18: 459553438
+      My Health and Magic Bars by ChenanaArts on DeviantArt_32: 513868574
+      My Health and Magic Bars by ChenanaArts on DeviantArt_3: -1008515077
+      My Health and Magic Bars by ChenanaArts on DeviantArt_30: -1052890191
+      My Health and Magic Bars by ChenanaArts on DeviantArt_42: 1860479282
+      My Health and Magic Bars by ChenanaArts on DeviantArt_8: -1350854105
+      My Health and Magic Bars by ChenanaArts on DeviantArt_45: -2087925229
+      My Health and Magic Bars by ChenanaArts on DeviantArt_13: -1101097900
+      My Health and Magic Bars by ChenanaArts on DeviantArt_15: -1179002704
+      My Health and Magic Bars by ChenanaArts on DeviantArt_16: 1805294202
+      My Health and Magic Bars by ChenanaArts on DeviantArt_38: -574362668
+      My Health and Magic Bars by ChenanaArts on DeviantArt_26: 437367328
+      My Health and Magic Bars by ChenanaArts on DeviantArt_65: 1172445658
+      My Health and Magic Bars by ChenanaArts on DeviantArt_52: -1457901032
+      My Health and Magic Bars by ChenanaArts on DeviantArt_1: -1271372977
+      My Health and Magic Bars by ChenanaArts on DeviantArt_51: 1111445752
+      My Health and Magic Bars by ChenanaArts on DeviantArt_25: 1720763059
+      My Health and Magic Bars by ChenanaArts on DeviantArt_43: 892335895
+      My Health and Magic Bars by ChenanaArts on DeviantArt_55: 608520335
+      My Health and Magic Bars by ChenanaArts on DeviantArt_63: -598927644
+      My Health and Magic Bars by ChenanaArts on DeviantArt_36: -1176266433
+      My Health and Magic Bars by ChenanaArts on DeviantArt_35: -1528955035
+      My Health and Magic Bars by ChenanaArts on DeviantArt_10: 1935653883
+      My Health and Magic Bars by ChenanaArts on DeviantArt_47: -635640546
+      My Health and Magic Bars by ChenanaArts on DeviantArt_28: -20325160
+      My Health and Magic Bars by ChenanaArts on DeviantArt_66: 551907566
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
