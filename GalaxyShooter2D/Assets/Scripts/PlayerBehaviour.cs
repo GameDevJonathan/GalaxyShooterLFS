@@ -52,7 +52,17 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField]
     private Transform _hyperBeamSpawnPoint;
     [SerializeField]
+    private Vector3 _beamOffset;
+    [SerializeField]
     private float _beamDistance = 100f, _beamDuration = 4f;
+    [SerializeField]
+    private BoxCollider2D _boxCollider;
+    [SerializeField]
+    private float _boxWidth = 1f;
+    [SerializeField]
+    private float _boxSideWitdh = 1f;
+    [SerializeField]
+    private LayerMask enemyLayer;
     [SerializeField]
     private LineRenderer _lineRenderer;
     Coroutine HyperBeamCoroutine;
@@ -113,7 +123,6 @@ public class PlayerBehaviour : MonoBehaviour
     void Start()
     {
 
-
         _audioSource = GetComponent<AudioSource>();
 
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
@@ -143,7 +152,7 @@ public class PlayerBehaviour : MonoBehaviour
         Debuging();
         _specialMeter = Mathf.Clamp(_specialMeter, 0, 100);
 
-
+       
         CalculateMovement();
 
 
@@ -156,14 +165,18 @@ public class PlayerBehaviour : MonoBehaviour
 
         }
 
-        if (Input.GetKey(KeyCode.X) /*&& _specialMeter == 100*/)
+        if (Input.GetKeyDown(KeyCode.X) /*&& _specialMeter == 100*/)
         {
+
+            //LaserBeamDebug();
+
             if (HyperBeamCoroutine == null)
             {
                 HyperBeamCoroutine = StartCoroutine(LaserBeam());
             }
+
             //LaserBeamDebug();
-            //if(missleBarageCoroutine == null)
+            //if (missleBarageCoroutine == null)
             //{
             //    _specialMeter = 0;
             //    missleBarageCoroutine = StartCoroutine(MissleBarrage());
@@ -207,42 +220,60 @@ public class PlayerBehaviour : MonoBehaviour
     IEnumerator LaserBeam()
     {
         _lineRenderer.enabled = true;
+        _boxCollider.enabled = true;
 
-        RaycastHit2D hitInfo = Physics2D.Raycast(_hyperBeamSpawnPoint.position, _hyperBeamSpawnPoint.up * _beamDistance);
-        Debug.DrawRay(_hyperBeamSpawnPoint.position, _hyperBeamSpawnPoint.up * _beamDistance, Color.white);
+        //RaycastHit2D hitInfo = Physics2D.Raycast(_hyperBeamSpawnPoint.position, _hyperBeamSpawnPoint.up * _beamDistance);
+        //Debug.DrawRay(_hyperBeamSpawnPoint.position, _hyperBeamSpawnPoint.up * _beamDistance, Color.white);
 
-        if (hitInfo && hitInfo.transform.name == "Enemy")
-        {
-            EnemyBehaviour enemy = hitInfo.transform.GetComponent<EnemyBehaviour>();
-            enemy?.BeamHit();
-        }
+        //RaycastHit2D[] hitInfo = Physics2D.BoxCastAll(_boxCollider.bounds.center, _boxCollider.bounds.size + new Vector3(0,_boxSideWitdh), 0f, Vector2.up, _beamDistance, enemyLayer);
+        //Debug.DrawRay(_boxCollider.bounds.center + new Vector3(_boxCollider.bounds.extents.x + _boxSideWitdh, 0), Vector2.up * (_boxCollider.bounds.extents.y + _beamDistance), Color.red);
+        //Debug.DrawRay(_boxCollider.bounds.center - new Vector3(_boxCollider.bounds.extents.x + _boxSideWitdh, 0), Vector2.up * (_boxCollider.bounds.extents.y + _beamDistance), Color.red);
+        //Debug.DrawRay(_boxCollider.bounds.center + new Vector3(_boxCollider.bounds.extents.x + _boxSideWitdh, _boxCollider.bounds.extents.y + _beamDistance), Vector2.left * (_boxCollider.bounds.extents.y + _boxWidth), Color.blue);
+
+
+        //foreach(RaycastHit2D enemy in hitInfo)
+        //{
+        //    if (enemy.transform.tag == "Enemy")
+        //    {
+        //        Debug.Log(enemy.transform.name);
+        //    }
+        //}
+
+
+        //if (hitInfo && hitInfo.transform.tag == "Enemy")
+        //{
+        //    EnemyBehaviour enemy = hitInfo.transform.GetComponent<EnemyBehaviour>();
+        //    enemy?.BeamHit();
+        //}
 
         _lineRenderer.SetPosition(0, _hyperBeamSpawnPoint.position);
         _lineRenderer.SetPosition(1, _hyperBeamSpawnPoint.position + _hyperBeamSpawnPoint.up * _beamDistance);
         yield return new WaitForSeconds(_beamDuration);
         _lineRenderer.enabled = false;
+        _boxCollider.enabled = false;
         HyperBeamCoroutine = null;
     }
     //void LaserBeamDebug()
     //{
-    //    //_lineRenderer.enabled = true;
+    ////    //_lineRenderer.enabled = true;
 
-    //    RaycastHit2D hitInfo = Physics2D.Raycast(_hyperBeamSpawnPoint.position, _hyperBeamSpawnPoint.up * _beamDistance);
-    //    Debug.DrawRay(_hyperBeamSpawnPoint.position, _hyperBeamSpawnPoint.up * _beamDistance, Color.red);
-    //    //Debug.Log(hitInfo.transform.name);
+    //    RaycastHit2D hitInfo = Physics2D.BoxCast(_boxCollider.bounds.center, _boxCollider.bounds.size, 0f, Vector2.up, _beamDistance, enemyLayer);
+    //    Debug.DrawRay(_boxCollider.bounds.center + new Vector3(_boxCollider.bounds.extents.x + _boxSideWitdh, 0), Vector2.up* (_boxCollider.bounds.extents.y + _beamDistance), Color.red);
+    //    Debug.DrawRay(_boxCollider.bounds.center - new Vector3(_boxCollider.bounds.extents.x + _boxSideWitdh, 0), Vector2.up* (_boxCollider.bounds.extents.y + _beamDistance), Color.red);
+    //    Debug.DrawRay(_boxCollider.bounds.center + new Vector3(_boxCollider.bounds.extents.x + _boxSideWitdh, _boxCollider.bounds.extents.y + _beamDistance), Vector2.left* (_boxCollider.bounds.extents.y +_boxWidth), Color.blue);
 
-    //    if (hitInfo && hitInfo.transform.name == "Enemy")
-    //    {
-    //        Debug.Log("hit enemy");
-    //        EnemyBehaviour enemy = hitInfo.transform.GetComponent<EnemyBehaviour>();
-    //        enemy?.BeamHit();
-    //    }
+    ////    if (hitInfo && hitInfo.transform.name == "Enemy")
+    ////    {
+    ////        Debug.Log("hit enemy");
+    ////        EnemyBehaviour enemy = hitInfo.transform.GetComponent<EnemyBehaviour>();
+    ////        enemy?.BeamHit();
+    ////    }
 
-    //    //_lineRenderer.SetPosition(0, _hyperBeamSpawnPoint.position);
-    //    //_lineRenderer.SetPosition(1, _hyperBeamSpawnPoint.position + _hyperBeamSpawnPoint.up * _beamDistance);
-    //    //yield return new WaitForSeconds(_beamDuration);
-    //    //_lineRenderer.enabled = false;
-    //    //HyperBeamCoroutine = null;
+    ////    //_lineRenderer.SetPosition(0, _hyperBeamSpawnPoint.position);
+    ////    //_lineRenderer.SetPosition(1, _hyperBeamSpawnPoint.position + _hyperBeamSpawnPoint.up * _beamDistance);
+    ////    //yield return new WaitForSeconds(_beamDuration);
+    ////    //_lineRenderer.enabled = false;
+    ////    //HyperBeamCoroutine = null;
     //}
     #region missile barrage feature
     IEnumerator MissleBarrage()
@@ -502,4 +533,12 @@ public class PlayerBehaviour : MonoBehaviour
     }
     #endregion
 
+    private void OnDrawGizmos()
+    {
+        
+        //Debug.DrawRay(_boxCollider.bounds.center + new Vector3(_boxCollider.bounds.extents.x + _boxSideWitdh,0), Vector2.up * (_boxCollider.bounds.extents.y + _beamDistance), Color.green);
+        //Debug.DrawRay(_boxCollider.bounds.center - new Vector3(_boxCollider.bounds.extents.x + _boxSideWitdh,0), Vector2.up * (_boxCollider.bounds.extents.y + _beamDistance), Color.green);
+        //Debug.DrawRay(_boxCollider.bounds.center + new Vector3(_boxCollider.bounds.extents.x + _boxSideWitdh,_boxCollider.bounds.extents.y + _beamDistance), Vector2.left  * (_boxCollider.bounds.extents.y +_boxWidth), Color.green);
+
+    }
 }
