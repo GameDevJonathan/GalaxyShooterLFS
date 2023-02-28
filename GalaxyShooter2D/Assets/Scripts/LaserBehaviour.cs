@@ -24,11 +24,12 @@ public class LaserBehaviour : MonoBehaviour
      * after the number to indicate it's a float or the compiler will complain.
      */
     [SerializeField]
-    private float speed = 5f;
+    private float speed = 5f;    
 
     //Start function is call at the very first frame when the game starts
     void Start()
     {
+        
         //this condition checks if the transform component of this object has a parent
         //component and if it's null. If if does then call the Destroy method on the parent
         //gameobject after 1second. It the parent is null then just destory this object.

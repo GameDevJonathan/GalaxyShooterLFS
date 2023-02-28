@@ -42,6 +42,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+
             PlayerBehaviour player = other.GetComponent<PlayerBehaviour>();
             player?.OnDamage();
             DeathSequence();
@@ -50,11 +51,13 @@ public class EnemyBehaviour : MonoBehaviour
 
         if (other.tag == "Laser")
         {
+            GameObject.Find("Main Camera").TryGetComponent<CameraBehaviour>(out CameraBehaviour cam);
             if (other.transform.parent != null)
             {
                 //_audioSource.Play();
                 Destroy(other.transform.parent.gameObject);
             }
+            cam.ScreenShake();
             Destroy(other.gameObject);
             _player?.AddScore(10);           
             DeathSequence();
@@ -64,7 +67,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void BeamHit()
     {
-        _player?.AddScore(10);
+        _player?.AddScore(10, 0);
         DeathSequence();
     }
 

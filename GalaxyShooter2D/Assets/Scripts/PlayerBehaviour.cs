@@ -125,7 +125,7 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField]
     private float _canRecharge = -1f;
     [SerializeField]
-    private float _thrusterRechargeAmount = 2f;
+    private float _thrusterRechargeAmount;
 
     [Header("Score and Lives")]
     [SerializeField]
@@ -176,8 +176,8 @@ public class PlayerBehaviour : MonoBehaviour
     void Update()
     {
         _thrusterAmount = Mathf.Clamp(_thrusterAmount, 0, _maxThrusterAmount);
-        Debuging();
         _specialMeter = Mathf.Clamp(_specialMeter, 0, 100);
+        Debuging();
 
        
         CalculateMovement();
@@ -192,13 +192,16 @@ public class PlayerBehaviour : MonoBehaviour
 
         }
 
-        if (Input.GetKeyDown(KeyCode.X) /*&& _specialMeter == 100*/)
+        if (Input.GetKeyDown(KeyCode.X) && _specialMeter == 100)
         {
+            GameObject.Find("Main Camera").TryGetComponent<CameraBehaviour>(out CameraBehaviour cam);
 
             //LaserBeamDebug();
 
             if (HyperBeamCoroutine == null)
             {
+                _specialMeter = 0;
+                cam.ScreenShake(0.3f, _beamDuration);
                 HyperBeamCoroutine = StartCoroutine(LaserBeam());
             }
 
@@ -482,9 +485,10 @@ public class PlayerBehaviour : MonoBehaviour
     }
 
     //method to add 10 to the score
-    public void AddScore(int score)
+    public void AddScore(int score, int powerAdd = 25)
     {
         _score += score;
+        _specialMeter += powerAdd;
         _uiManager.UpdateScore(_score);
     }
     //communicate with the ui to update the score
