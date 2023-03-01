@@ -57,19 +57,11 @@ public class PlayerBehaviour : MonoBehaviour
     #region Hyper Beam
     [Header("Hyper Beam")]
     [SerializeField]
-    private Transform _hyperBeamSpawnPoint;
-    [SerializeField]
-    private Vector3 _beamOffset;
+    private Transform _hyperBeamSpawnPoint;   
     [SerializeField]
     private float _beamDistance = 100f, _beamDuration = 4f;
     [SerializeField]
-    private BoxCollider2D _boxCollider;
-    [SerializeField]
-    private float _boxWidth = 1f;
-    [SerializeField]
-    private float _boxSideWitdh = 1f;
-    [SerializeField]
-    private LayerMask enemyLayer;
+    private BoxCollider2D _boxCollider;   
     [SerializeField]
     private LineRenderer _lineRenderer;
     Coroutine HyperBeamCoroutine;
@@ -194,16 +186,16 @@ public class PlayerBehaviour : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.X) && _specialMeter == 100)
         {
-            GameObject.Find("Main Camera").TryGetComponent<CameraBehaviour>(out CameraBehaviour cam);
 
             //LaserBeamDebug();
 
             if (HyperBeamCoroutine == null)
             {
                 _specialMeter = 0;
-                cam.ScreenShake(0.3f, _beamDuration);
                 HyperBeamCoroutine = StartCoroutine(LaserBeam());
             }
+            //GameObject.Find("Main Camera").TryGetComponent<CameraBehaviour>(out CameraBehaviour cam);
+                //cam.ScreenShake(0.3f, _beamDuration);
 
             //LaserBeamDebug();
             //if (missleBarageCoroutine == null)
@@ -251,30 +243,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         _lineRenderer.enabled = true;
         _boxCollider.enabled = true;
-
-        //RaycastHit2D hitInfo = Physics2D.Raycast(_hyperBeamSpawnPoint.position, _hyperBeamSpawnPoint.up * _beamDistance);
-        //Debug.DrawRay(_hyperBeamSpawnPoint.position, _hyperBeamSpawnPoint.up * _beamDistance, Color.white);
-
-        //RaycastHit2D[] hitInfo = Physics2D.BoxCastAll(_boxCollider.bounds.center, _boxCollider.bounds.size + new Vector3(0,_boxSideWitdh), 0f, Vector2.up, _beamDistance, enemyLayer);
-        //Debug.DrawRay(_boxCollider.bounds.center + new Vector3(_boxCollider.bounds.extents.x + _boxSideWitdh, 0), Vector2.up * (_boxCollider.bounds.extents.y + _beamDistance), Color.red);
-        //Debug.DrawRay(_boxCollider.bounds.center - new Vector3(_boxCollider.bounds.extents.x + _boxSideWitdh, 0), Vector2.up * (_boxCollider.bounds.extents.y + _beamDistance), Color.red);
-        //Debug.DrawRay(_boxCollider.bounds.center + new Vector3(_boxCollider.bounds.extents.x + _boxSideWitdh, _boxCollider.bounds.extents.y + _beamDistance), Vector2.left * (_boxCollider.bounds.extents.y + _boxWidth), Color.blue);
-
-
-        //foreach(RaycastHit2D enemy in hitInfo)
-        //{
-        //    if (enemy.transform.tag == "Enemy")
-        //    {
-        //        Debug.Log(enemy.transform.name);
-        //    }
-        //}
-
-
-        //if (hitInfo && hitInfo.transform.tag == "Enemy")
-        //{
-        //    EnemyBehaviour enemy = hitInfo.transform.GetComponent<EnemyBehaviour>();
-        //    enemy?.BeamHit();
-        //}
+     
 
         _lineRenderer.SetPosition(0, _hyperBeamSpawnPoint.position);
         _lineRenderer.SetPosition(1, _hyperBeamSpawnPoint.position + _hyperBeamSpawnPoint.up * _beamDistance);

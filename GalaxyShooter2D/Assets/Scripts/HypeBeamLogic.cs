@@ -12,9 +12,9 @@ public class HypeBeamLogic : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        Debug.Log("trigger enter: " + other.transform.name);
+    //    private void OnTriggerEnter2D(Collider2D other)
+    //    {
+    //        Debug.Log("trigger enter: " + other.transform.name);
 
-    }
+    //    }
 }

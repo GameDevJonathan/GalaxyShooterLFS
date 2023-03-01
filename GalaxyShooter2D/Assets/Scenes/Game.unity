@@ -3339,15 +3339,9 @@ MonoBehaviour:
   _fireSpeed: 0.35
   _specialMeter: 100
   _hyperBeamSpawnPoint: {fileID: 670785230}
-  _beamOffset: {x: 0, y: 1.5, z: 0}
   _beamDistance: 19
   _beamDuration: 5
   _boxCollider: {fileID: 670785231}
-  _boxWidth: 2.5
-  _boxSideWitdh: 1
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 128
   _lineRenderer: {fileID: 16818905}
   _rocketPrefab: {fileID: 6842079542844123412, guid: a9bdb15e9da009444bf93a6e78762ac5, type: 3}
   _missleFirePoint:
