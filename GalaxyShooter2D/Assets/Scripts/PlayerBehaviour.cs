@@ -29,6 +29,17 @@ public class PlayerBehaviour : MonoBehaviour
     private float _rightBound = 11.3f;
     #endregion
 
+    [Header("Sprite Reneder")]
+    [SerializeField]
+    private SpriteRenderer _spriteRenderer, _afterImage;
+    [SerializeField]
+    private float _afterImageLifeTime, _timeBetweenAfterImages;
+    [SerializeField]
+    private float _afterImageCounter;
+    public Color afterImageColor;
+
+
+
 
     #region Spawn Points and Ammo
     [Header("Spawn Points and Ammo")]
@@ -57,11 +68,11 @@ public class PlayerBehaviour : MonoBehaviour
     #region Hyper Beam
     [Header("Hyper Beam")]
     [SerializeField]
-    private Transform _hyperBeamSpawnPoint;   
+    private Transform _hyperBeamSpawnPoint;
     [SerializeField]
     private float _beamDistance = 100f, _beamDuration = 4f;
     [SerializeField]
-    private BoxCollider2D _boxCollider;   
+    private BoxCollider2D _boxCollider;
     [SerializeField]
     private LineRenderer _lineRenderer;
     Coroutine HyperBeamCoroutine;
@@ -169,9 +180,14 @@ public class PlayerBehaviour : MonoBehaviour
     {
         _thrusterAmount = Mathf.Clamp(_thrusterAmount, 0, _maxThrusterAmount);
         _specialMeter = Mathf.Clamp(_specialMeter, 0, 100);
+        _afterImageCounter = Mathf.Clamp(_afterImageCounter, 0f, 100f);
+        if(_afterImageCounter > 0)
+        {
+            _afterImageCounter -= Time.deltaTime;
+        }
         Debuging();
 
-       
+
         CalculateMovement();
 
 
@@ -195,7 +211,7 @@ public class PlayerBehaviour : MonoBehaviour
                 HyperBeamCoroutine = StartCoroutine(LaserBeam());
             }
             //GameObject.Find("Main Camera").TryGetComponent<CameraBehaviour>(out CameraBehaviour cam);
-                //cam.ScreenShake(0.3f, _beamDuration);
+            //cam.ScreenShake(0.3f, _beamDuration);
 
             //LaserBeamDebug();
             //if (missleBarageCoroutine == null)
@@ -243,7 +259,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         _lineRenderer.enabled = true;
         _boxCollider.enabled = true;
-     
+
 
         _lineRenderer.SetPosition(0, _hyperBeamSpawnPoint.position);
         _lineRenderer.SetPosition(1, _hyperBeamSpawnPoint.position + _hyperBeamSpawnPoint.up * _beamDistance);
@@ -373,27 +389,32 @@ public class PlayerBehaviour : MonoBehaviour
 
     void Thrusters()
     {
-        
+
         switch (_boosting)
-        {           
+        {
             case false:
-                if ((_thrusterAmount < _maxThrusterAmount) && Time.time >_canRecharge)
+                if ((_thrusterAmount < _maxThrusterAmount) && Time.time > _canRecharge)
                 {
                     _canRecharge = Time.time + _thrusterRechargeRate;
                     _thrusterAmount += _thrusterDecayRate + Time.deltaTime;
-                    _uiManager.UpdateThrusterBar(_thrusterAmount / _maxThrusterAmount);
+                    //_uiManager.UpdateThrusterBar(_thrusterAmount / _maxThrusterAmount);
                 }
                 break;
 
-            case true:                
-                    _thrusterAmount -= _thrusterDecayRate + Time.deltaTime;
-                _uiManager.UpdateThrusterBar(_thrusterAmount / _maxThrusterAmount);
+            case true:
+                //_thrusterAmount -= _thrusterDecayRate + Time.deltaTime;
+                //_uiManager.UpdateThrusterBar(_thrusterAmount / _maxThrusterAmount);
+                if(_afterImageCounter <= 0)
+                {
+                    AfterImageEffect();
+                }
+
                 break;
         }
         _thrusterAmount = Mathf.Clamp(_thrusterAmount, 0, _maxThrusterAmount);
-       
-        
-        
+
+
+
         if (!_speedBoostActive)
         {
             #region code block
@@ -418,13 +439,13 @@ public class PlayerBehaviour : MonoBehaviour
         if (_shieldsActive && _shieldHp > 0)
         {
             _shieldHp--;
-            
+
         }
 
         if (_shieldHp == 0)
         {
             _shieldsActive = false;
-            _shieldVisualizer.SetActive(false);            
+            _shieldVisualizer.SetActive(false);
         }
         #endregion
     }
@@ -443,7 +464,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             if (!_shieldsActive && _shieldHp == 0)
             {
-                _shieldHp = 3;                
+                _shieldHp = 3;
                 ActivateShields();
             }
             else
@@ -554,12 +575,13 @@ public class PlayerBehaviour : MonoBehaviour
     }
     #endregion
 
-    private void OnDrawGizmos()
+    public void AfterImageEffect()
     {
-        
-        //Debug.DrawRay(_boxCollider.bounds.center + new Vector3(_boxCollider.bounds.extents.x + _boxSideWitdh,0), Vector2.up * (_boxCollider.bounds.extents.y + _beamDistance), Color.green);
-        //Debug.DrawRay(_boxCollider.bounds.center - new Vector3(_boxCollider.bounds.extents.x + _boxSideWitdh,0), Vector2.up * (_boxCollider.bounds.extents.y + _beamDistance), Color.green);
-        //Debug.DrawRay(_boxCollider.bounds.center + new Vector3(_boxCollider.bounds.extents.x + _boxSideWitdh,_boxCollider.bounds.extents.y + _beamDistance), Vector2.left  * (_boxCollider.bounds.extents.y +_boxWidth), Color.green);
+        SpriteRenderer image = Instantiate(_afterImage, transform.position, transform.rotation);
+        image.sprite = _spriteRenderer.sprite;
+        image.color = afterImageColor;
+        _afterImageCounter = _timeBetweenAfterImages;
+        Destroy(image.gameObject, _afterImageLifeTime);
 
     }
 }
