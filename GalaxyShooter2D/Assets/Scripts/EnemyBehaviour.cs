@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider2D),typeof(Animator),typeof(Rigidbody2D))]
 public class EnemyBehaviour : MonoBehaviour
 {
     [SerializeField]
@@ -17,6 +18,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     private AudioSource _audioSource;
 
+    
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
@@ -26,7 +28,7 @@ public class EnemyBehaviour : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         transform.Translate(Vector2.down * moveSpeed * Time.deltaTime);
 
@@ -38,8 +40,9 @@ public class EnemyBehaviour : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log(other.transform.name);
         if (other.tag == "Player")
         {
 

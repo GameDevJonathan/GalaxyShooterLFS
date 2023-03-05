@@ -31,9 +31,12 @@ public class PlayerBehaviour : MonoBehaviour
 
     [Header("Sprite Reneder")]
     [SerializeField]
+    
     private SpriteRenderer _spriteRenderer, _afterImage;
+
     [SerializeField]
     private float _afterImageLifeTime, _timeBetweenAfterImages;
+    
     [SerializeField]
     private float _afterImageCounter;
     public Color afterImageColor;
@@ -180,8 +183,10 @@ public class PlayerBehaviour : MonoBehaviour
     {
         _thrusterAmount = Mathf.Clamp(_thrusterAmount, 0, _maxThrusterAmount);
         _specialMeter = Mathf.Clamp(_specialMeter, 0, 100);
+        
         _afterImageCounter = Mathf.Clamp(_afterImageCounter, 0f, 100f);
-        if(_afterImageCounter > 0)
+        
+        if (_afterImageCounter > 0)
         {
             _afterImageCounter -= Time.deltaTime;
         }
@@ -404,13 +409,14 @@ public class PlayerBehaviour : MonoBehaviour
             case true:
                 //_thrusterAmount -= _thrusterDecayRate + Time.deltaTime;
                 //_uiManager.UpdateThrusterBar(_thrusterAmount / _maxThrusterAmount);
-                if(_afterImageCounter <= 0)
+                if (_afterImageCounter <= 0)
                 {
                     AfterImageEffect();
                 }
 
                 break;
         }
+
         _thrusterAmount = Mathf.Clamp(_thrusterAmount, 0, _maxThrusterAmount);
 
 
@@ -577,11 +583,14 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void AfterImageEffect()
     {
+
+        #region code block
         SpriteRenderer image = Instantiate(_afterImage, transform.position, transform.rotation);
         image.sprite = _spriteRenderer.sprite;
         image.color = afterImageColor;
         _afterImageCounter = _timeBetweenAfterImages;
         Destroy(image.gameObject, _afterImageLifeTime);
+        #endregion
 
     }
 }
