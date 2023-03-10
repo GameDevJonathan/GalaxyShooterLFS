@@ -5,11 +5,11 @@ using UnityEngine;
 public class EnemyBehaviour2 : EnemyBehaviour
 {
     [SerializeField]
-    private float _hSpeed = 4;
+    private float _hSpeed = 4; //horizontal speed
     [SerializeField]
-    private bool _movingRight = false;
+    private bool _movingRight = false; // flag to see if i'm moving left or right
     [SerializeField]
-    private float _min, _max, _randomMove;
+    private float _min, _max, _randomMove; // floats for random move counter, min and max values
     
     protected override void Update()
     {
@@ -26,15 +26,15 @@ public class EnemyBehaviour2 : EnemyBehaviour
     {
         if (!hit)
         {
-            if (_randomMove > 0f) _randomMove -= Time.deltaTime;
+            if (_randomMove > 0f) _randomMove -= Time.deltaTime; // check to see if the random move counter is greater then zero
 
-            if (_randomMove <= 0f)
+            if (_randomMove <= 0f) // if it's less then or equal to zero set bool to the opposite of itself and reset the counter
             {
                 _movingRight = !_movingRight;
                 _randomMove = Random.Range(_min, _max);
             }
         }
-        else
+        else //if hit is true set bool to opposite of itself and reset the counter. 
         {
             _movingRight = !_movingRight;
             _randomMove = Random.Range(_min, _max);
