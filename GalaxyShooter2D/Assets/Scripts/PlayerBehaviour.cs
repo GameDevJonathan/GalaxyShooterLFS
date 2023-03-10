@@ -273,28 +273,6 @@ public class PlayerBehaviour : MonoBehaviour
         _boxCollider.enabled = false;
         HyperBeamCoroutine = null;
     }
-    //void LaserBeamDebug()
-    //{
-    ////    //_lineRenderer.enabled = true;
-
-    //    RaycastHit2D hitInfo = Physics2D.BoxCast(_boxCollider.bounds.center, _boxCollider.bounds.size, 0f, Vector2.up, _beamDistance, enemyLayer);
-    //    Debug.DrawRay(_boxCollider.bounds.center + new Vector3(_boxCollider.bounds.extents.x + _boxSideWitdh, 0), Vector2.up* (_boxCollider.bounds.extents.y + _beamDistance), Color.red);
-    //    Debug.DrawRay(_boxCollider.bounds.center - new Vector3(_boxCollider.bounds.extents.x + _boxSideWitdh, 0), Vector2.up* (_boxCollider.bounds.extents.y + _beamDistance), Color.red);
-    //    Debug.DrawRay(_boxCollider.bounds.center + new Vector3(_boxCollider.bounds.extents.x + _boxSideWitdh, _boxCollider.bounds.extents.y + _beamDistance), Vector2.left* (_boxCollider.bounds.extents.y +_boxWidth), Color.blue);
-
-    ////    if (hitInfo && hitInfo.transform.name == "Enemy")
-    ////    {
-    ////        Debug.Log("hit enemy");
-    ////        EnemyBehaviour enemy = hitInfo.transform.GetComponent<EnemyBehaviour>();
-    ////        enemy?.BeamHit();
-    ////    }
-
-    ////    //_lineRenderer.SetPosition(0, _hyperBeamSpawnPoint.position);
-    ////    //_lineRenderer.SetPosition(1, _hyperBeamSpawnPoint.position + _hyperBeamSpawnPoint.up * _beamDistance);
-    ////    //yield return new WaitForSeconds(_beamDuration);
-    ////    //_lineRenderer.enabled = false;
-    ////    //HyperBeamCoroutine = null;
-    //}
     #region missile barrage feature
     IEnumerator MissleBarrage()
     {
@@ -407,8 +385,6 @@ public class PlayerBehaviour : MonoBehaviour
                 break;
 
             case true:
-                //_thrusterAmount -= _thrusterDecayRate + Time.deltaTime;
-                //_uiManager.UpdateThrusterBar(_thrusterAmount / _maxThrusterAmount);
                 if (_afterImageCounter <= 0)
                 {
                     AfterImageEffect();

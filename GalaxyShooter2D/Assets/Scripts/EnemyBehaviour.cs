@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D),typeof(Animator),typeof(Rigidbody2D))]
+[RequireComponent(typeof(AudioSource))]
 public class EnemyBehaviour : MonoBehaviour
 {
     [SerializeField]
@@ -47,8 +48,8 @@ public class EnemyBehaviour : MonoBehaviour
         {
 
             PlayerBehaviour player = other.GetComponent<PlayerBehaviour>();
-            player?.OnDamage();
             DeathSequence();
+            player?.OnDamage();
             
         }
 
@@ -57,13 +58,12 @@ public class EnemyBehaviour : MonoBehaviour
             GameObject.Find("Main Camera").TryGetComponent<CameraBehaviour>(out CameraBehaviour cam);
             if (other.transform.parent != null)
             {
-                //_audioSource.Play();
                 Destroy(other.transform.parent.gameObject);
             }
             cam.ScreenShake();
             Destroy(other.gameObject);
-            _player?.AddScore(10);           
             DeathSequence();
+            _player?.AddScore(10);           
             //Destroy(this.gameObject);
         }
     }
@@ -74,7 +74,7 @@ public class EnemyBehaviour : MonoBehaviour
         DeathSequence();
     }
 
-    private void DeathSequence()
+    protected virtual void DeathSequence()
     {
         _audioSource.Play();
         _anim.Play("Explode");
