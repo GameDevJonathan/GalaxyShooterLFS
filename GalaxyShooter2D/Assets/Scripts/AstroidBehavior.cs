@@ -47,7 +47,7 @@ public class AstroidBehavior : MonoBehaviour
         }
     }
 
-    public void Destroyed()
+    public void AstroidDestroyed()
     {
         _spawnManager?.StartSpawning();
         Destroy(this.gameObject);

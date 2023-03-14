@@ -745,6 +745,12 @@ MonoBehaviour:
   _lowerBound: -5.8
   _leftBound: -13.2
   _rightBound: 13.2
+  _spriteRenderer: {fileID: 2748172071728163175}
+  _afterImage: {fileID: 1687595639017182526, guid: b41300d465be54340a036e7a52dfdc4a, type: 3}
+  _afterImageLifeTime: 0.5
+  _timeBetweenAfterImages: 0.05
+  _afterImageCounter: 0
+  afterImageColor: {r: 0.0045834924, g: 0.62029064, b: 0.9716981, a: 0.62352943}
   _offset: {fileID: 2748172071470543987}
   _maxAmmo: 15
   _ammo: 15

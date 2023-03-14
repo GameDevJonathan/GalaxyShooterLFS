@@ -37,8 +37,8 @@ public class UIManager : MonoBehaviour
         NullChecks();
         _scoreText.text = $"Score: {0}";       
         _gameOverText.gameObject.SetActive(false);
-        _ammoText.text = $"Ammo: {0}/{0}";        
-              
+        //_ammoText.text = $"Ammo: {0}/{0}";
+
     }
 
     private void NullChecks()

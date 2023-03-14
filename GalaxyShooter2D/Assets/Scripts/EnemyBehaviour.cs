@@ -16,6 +16,7 @@ public class EnemyBehaviour : MonoBehaviour
     private BoxCollider2D _boxCollider;
 
     private PlayerBehaviour _player;
+    private SpawnManager _spawnManager;
 
     private AudioSource _audioSource;
 
@@ -24,6 +25,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         _audioSource = GetComponent<AudioSource>();
         _player = GameObject.Find("Player")?.GetComponent<PlayerBehaviour>();
+        _spawnManager = GameObject.Find("SpawnManager")?.GetComponent<SpawnManager>();
         _anim = GetComponent<Animator>();
         _boxCollider = GetComponent<BoxCollider2D>();
     }
@@ -76,6 +78,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     protected virtual void DeathSequence()
     {
+        _spawnManager.KillCount();
         _audioSource.Play();
         _anim.Play("Explode");
         _boxCollider.enabled = false;
