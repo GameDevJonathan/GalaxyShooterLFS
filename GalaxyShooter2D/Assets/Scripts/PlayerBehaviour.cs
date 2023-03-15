@@ -50,7 +50,7 @@ public class PlayerBehaviour : MonoBehaviour
     private Transform _offset;
 
     [SerializeField]
-    private int _maxAmmo = 15;
+    private int _maxAmmo = 20;
 
     [SerializeField]
     private int _ammo;
@@ -149,6 +149,8 @@ public class PlayerBehaviour : MonoBehaviour
     private AudioClip[] _audioClip;
     private AudioSource _audioSource;
     private SpawnManager _spawnManager;
+
+
 
 
     // Start is called before the first frame update
@@ -349,7 +351,7 @@ public class PlayerBehaviour : MonoBehaviour
                     if (_ammo > 0)
                     {
                         _ammo--;
-                        _uiManager.UpdateAmmo(_ammo);
+                        _uiManager.UpdateAmmo(_ammo,_maxAmmo);
                         GameObject laser;
                         laser = Instantiate(_laserPrefab, _offset.position, Quaternion.identity);
                         _audioSource.PlayOneShot(_audioClip[0]);
@@ -504,7 +506,7 @@ public class PlayerBehaviour : MonoBehaviour
     public void RefillAmmo()
     {
         _ammo = _maxAmmo;
-        _uiManager.UpdateAmmo(_ammo);
+        _uiManager.UpdateAmmo(_ammo,_maxAmmo);
     }
 
     public void HealthUp()

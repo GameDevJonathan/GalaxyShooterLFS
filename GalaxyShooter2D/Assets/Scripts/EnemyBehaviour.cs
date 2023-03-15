@@ -7,8 +7,7 @@ using UnityEngine;
 public class EnemyBehaviour : MonoBehaviour
 {
     [SerializeField]
-    float moveSpeed = 5f;
-    Vector2 topPos = new Vector2(0, 6);
+    float moveSpeed = 5f;   
 
     [SerializeField]
     private Animator _anim;
@@ -37,8 +36,7 @@ public class EnemyBehaviour : MonoBehaviour
 
         if (transform.position.y < -6)
         {
-            topPos.x = Random.Range(-9f, 9f);
-            transform.position = topPos;
+            transform.position = _spawnManager.RandomPoint();
         }
 
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
-{    
+{
     [SerializeField]
     private GameObject _enemyContainer;
 
@@ -16,11 +16,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     public GameObject[] _powerUps;
 
-
-    [Header("Enemy Spawner")]
-    public Wave[] waves;
-    [SerializeField]
-    private Coroutine _enemyWaves;
+    [Header("Wave Variables")]
     [SerializeField]
     private int _waveIndex = 0;
     [SerializeField]
@@ -30,11 +26,17 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private int _enemiesKilled = 0;
     [SerializeField]
-    private enum SpawnState { Spawning, Waiting, Counting };
+    private enum SpawnState { Spawning, Waiting, Counting, Complete };
     [SerializeField]
     private SpawnState state = SpawnState.Counting;
     [SerializeField]
     private Transform[] _spawnPoints;
+
+    [Header("Enemy Waves")]
+    public Wave[] waves;
+    [SerializeField]
+    private Coroutine _enemyWaves;
+
 
 
 
@@ -49,14 +51,18 @@ public class SpawnManager : MonoBehaviour
     private void Update()
     {
         if (_waveIndex >= waves.Length) return;
+
         
-        if(state == SpawnState.Waiting)
+
+
+        if (state == SpawnState.Waiting)
         {
-            //Check if Enemies are still alive
+            
             if (!EnemiesAlive())
             {
                 //Begin a new round
-                _waveIndex++;
+                WaveCompleted();
+
             }
             else
             {
@@ -68,8 +74,8 @@ public class SpawnManager : MonoBehaviour
         {
             if (state != SpawnState.Spawning)
             {
-                if(_enemyWaves == null)
-                _enemyWaves = StartCoroutine(EnemyWave(waves[_waveIndex]));
+                if (_enemyWaves == null)
+                    _enemyWaves = StartCoroutine(EnemyWave(waves[_waveIndex]));
             }
         }
         else
@@ -80,7 +86,7 @@ public class SpawnManager : MonoBehaviour
 
     bool EnemiesAlive()
     {
-        if(_enemiesKilled == waves[_waveIndex].enemy.Length)
+        if (_enemiesKilled == waves[_waveIndex].enemy.Length)
         {
             return false;
         }
@@ -110,15 +116,23 @@ public class SpawnManager : MonoBehaviour
         _clone.transform.parent = _enemyContainer.transform;
 
     }
-    
-   
+
+
     public void KillCount()
     {
         _enemiesKilled++;
     }
-    
-    
-    
+
+    private void WaveCompleted()
+    {
+        state = SpawnState.Counting;
+        _waveCountdown = _timeBetweenWaves;
+        _enemiesKilled = 0;
+        _waveIndex++;
+    }
+
+
+
     IEnumerator SpawnPowerUp()
     {
         while (_stopSpawning == false)
@@ -145,13 +159,20 @@ public class SpawnManager : MonoBehaviour
         //StartCoroutine(SpawnEnemies());
         //StartCoroutine(SpawnPowerUp());
     }
+
+    public Vector3 RandomPoint()
+    {
+        int randomPoint = Random.Range(0, _spawnPoints.Length);
+
+        return _spawnPoints[randomPoint].position;
+    }
 }
 
 [System.Serializable]
 public class Wave
 {
     public string currentWave;
-    public Transform[] enemy;    
+    public Transform[] enemy;
     public float spawnRate;
 
 }

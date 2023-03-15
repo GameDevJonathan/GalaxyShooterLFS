@@ -677,13 +677,6 @@ MonoBehaviour:
   - {fileID: 6282918454664499344, guid: 34810ef0bf9fc4f45beda1c29c1cd33c, type: 3}
   - {fileID: 2722547918936907555, guid: 89af464fa9d10dd48adacbb6ecb39294, type: 3}
   - {fileID: 6282918454664499344, guid: 971df20cbd438b442a0b553784d95c42, type: 3}
-  waves:
-  - currentWave: First Wave
-    enemy:
-    - {fileID: 2889776942621885239, guid: 2b254f024c227194ba8e8e601a1001d7, type: 3}
-    - {fileID: 2889776942621885239, guid: 2b254f024c227194ba8e8e601a1001d7, type: 3}
-    - {fileID: 6491652142168414477, guid: a15bb69442921b44684ce0dcc2078c18, type: 3}
-    spawnRate: 2
   _waveIndex: 0
   _timeBetweenWaves: 5
   _waveCountdown: 0
@@ -696,6 +689,20 @@ MonoBehaviour:
   - {fileID: 1244714081}
   - {fileID: 1068540428}
   - {fileID: 560709443}
+  waves:
+  - currentWave: First Wave
+    enemy:
+    - {fileID: 2889776942621885239, guid: 2b254f024c227194ba8e8e601a1001d7, type: 3}
+    - {fileID: 2889776942621885239, guid: 2b254f024c227194ba8e8e601a1001d7, type: 3}
+    - {fileID: 6491652142168414477, guid: a15bb69442921b44684ce0dcc2078c18, type: 3}
+    - {fileID: 2889776942621885239, guid: 2b254f024c227194ba8e8e601a1001d7, type: 3}
+    - {fileID: 2889776942621885239, guid: 2b254f024c227194ba8e8e601a1001d7, type: 3}
+    - {fileID: 2889776942621885239, guid: 2b254f024c227194ba8e8e601a1001d7, type: 3}
+    - {fileID: 2889776942621885239, guid: 2b254f024c227194ba8e8e601a1001d7, type: 3}
+    - {fileID: 2889776942621885239, guid: 2b254f024c227194ba8e8e601a1001d7, type: 3}
+    - {fileID: 2889776942621885239, guid: 2b254f024c227194ba8e8e601a1001d7, type: 3}
+    - {fileID: 2889776942621885239, guid: 2b254f024c227194ba8e8e601a1001d7, type: 3}
+    spawnRate: 2
 --- !u!1 &436858400
 GameObject:
   m_ObjectHideFlags: 0
@@ -1205,8 +1212,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 81.79652
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 9.67
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3644,9 +3651,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1185065493}
     m_Modifications:
+    - target: {fileID: 2748172070324930573, guid: 2a343e06ad3410343b3830cb0d00eb27, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2748172070324930575, guid: 2a343e06ad3410343b3830cb0d00eb27, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2748172071728163168, guid: 2a343e06ad3410343b3830cb0d00eb27, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2748172071728163169, guid: 2a343e06ad3410343b3830cb0d00eb27, type: 3}
+      propertyPath: _maxAmmo
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2748172071728163169, guid: 2a343e06ad3410343b3830cb0d00eb27, type: 3}
       propertyPath: _uiManager

@@ -90,7 +90,7 @@ public class UIManager : MonoBehaviour
         _thrusterBarFill.fillAmount = bar;
     }
 
-    public void UpdateAmmo(int curAmmo, int maxAmmo = 15)
+    public void UpdateAmmo(int curAmmo, int maxAmmo) 
     {
         _ammoText.text = $"Ammo: {curAmmo}/{maxAmmo}";
     }
