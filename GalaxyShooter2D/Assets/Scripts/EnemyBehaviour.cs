@@ -76,7 +76,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     protected virtual void DeathSequence()
     {
-        _spawnManager.KillCount();
+        _spawnManager?.KillCount();
         _audioSource.Play();
         _anim.Play("Explode");
         _boxCollider.enabled = false;

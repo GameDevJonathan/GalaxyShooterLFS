@@ -58,5 +58,5 @@ public class EnemyBehaviour2 : EnemyBehaviour
         base.DeathSequence();
 
         _hSpeed = 0f;
-    }
+    }   
 }

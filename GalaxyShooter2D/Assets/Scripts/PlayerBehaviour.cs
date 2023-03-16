@@ -31,12 +31,12 @@ public class PlayerBehaviour : MonoBehaviour
 
     [Header("Sprite Reneder")]
     [SerializeField]
-    
+
     private SpriteRenderer _spriteRenderer, _afterImage;
 
     [SerializeField]
     private float _afterImageLifeTime, _timeBetweenAfterImages;
-    
+
     [SerializeField]
     private float _afterImageCounter;
     public Color afterImageColor;
@@ -71,11 +71,17 @@ public class PlayerBehaviour : MonoBehaviour
     #region Hyper Beam
     [Header("Hyper Beam")]
     [SerializeField]
+    private bool _isBeamActive;
+    [SerializeField]
     private Transform _hyperBeamSpawnPoint;
     [SerializeField]
-    private float _beamDistance = 100f, _beamDuration = 4f;
+    private Vector2 _beamBoxDirections = new Vector2(.5f, .5f);
     [SerializeField]
-    private BoxCollider2D _boxCollider;
+    private LayerMask _enemyMask;
+    [SerializeField]
+    private float _beamDistance = 100f, _beamDuration = 5f;
+    [SerializeField]
+    private BoxCollider2D[] _boxCollider;
     [SerializeField]
     private LineRenderer _lineRenderer;
     Coroutine HyperBeamCoroutine;
@@ -185,9 +191,9 @@ public class PlayerBehaviour : MonoBehaviour
     {
         _thrusterAmount = Mathf.Clamp(_thrusterAmount, 0, _maxThrusterAmount);
         _specialMeter = Mathf.Clamp(_specialMeter, 0, 100);
-        
+
         _afterImageCounter = Mathf.Clamp(_afterImageCounter, 0f, 100f);
-        
+
         if (_afterImageCounter > 0)
         {
             _afterImageCounter -= Time.deltaTime;
@@ -196,6 +202,20 @@ public class PlayerBehaviour : MonoBehaviour
 
 
         CalculateMovement();
+
+        switch (_isBeamActive)
+        {
+            case true:                
+                LaserBeamActive();
+                if (_beamDuration < 0)
+                _isBeamActive = false;                
+                break;
+            case false:
+                _beamDuration = 5f;
+                _lineRenderer.enabled = false;                
+                break;
+
+        }
 
 
         if (Input.GetKey(KeyCode.Space))
@@ -209,16 +229,22 @@ public class PlayerBehaviour : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.X) && _specialMeter == 100)
         {
+            _specialMeter = 0;
+            _isBeamActive = true;
 
             //LaserBeamDebug();
 
-            if (HyperBeamCoroutine == null)
-            {
-                _specialMeter = 0;
-                HyperBeamCoroutine = StartCoroutine(LaserBeam());
-            }
+            //if (HyperBeamCoroutine == null)
+            //{
+            //    _specialMeter = 0;
+            //    HyperBeamCoroutine = StartCoroutine(LaserBeam());
+            //}
+
+
+            #region camera shake
             //GameObject.Find("Main Camera").TryGetComponent<CameraBehaviour>(out CameraBehaviour cam);
             //cam.ScreenShake(0.3f, _beamDuration);
+            #endregion
 
             //LaserBeamDebug();
             //if (missleBarageCoroutine == null)
@@ -262,19 +288,67 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
-    IEnumerator LaserBeam()
+    //IEnumerator LaserBeam()
+    //{
+    //    _lineRenderer.enabled = true;
+        
+    //    _lineRenderer.SetPosition(0, _hyperBeamSpawnPoint.position);
+    //    _lineRenderer.SetPosition(1, _hyperBeamSpawnPoint.position + _hyperBeamSpawnPoint.up * _beamDistance);
+
+    //    RaycastHit2D[] hit = Physics2D.BoxCastAll(gameObject.transform.position, _beamBoxDirections,
+    //        gameObject.transform.rotation.z, gameObject.transform.up, _beamDistance, _enemyMask);
+
+    //    foreach (RaycastHit2D collider in hit)
+    //    {
+    //        Debug.Log(collider.transform.name);
+    //        EnemyBehaviour enemy = collider.transform.GetComponent<EnemyBehaviour>();
+    //        if (enemy != null)
+    //        {
+    //            Debug.Log("got component");
+    //            enemy?.BeamHit();
+    //        }
+    //        else
+    //        {
+    //            Debug.Log("couldn't get component");
+    //        }
+
+    //    }
+    //    yield return new WaitForSeconds(_beamDuration);
+    //    _lineRenderer.enabled = false;        
+    //    HyperBeamCoroutine = null;
+    //}
+
+    void LaserBeamActive()
     {
+
         _lineRenderer.enabled = true;
-        _boxCollider.enabled = true;
-
-
         _lineRenderer.SetPosition(0, _hyperBeamSpawnPoint.position);
         _lineRenderer.SetPosition(1, _hyperBeamSpawnPoint.position + _hyperBeamSpawnPoint.up * _beamDistance);
-        yield return new WaitForSeconds(_beamDuration);
-        _lineRenderer.enabled = false;
-        _boxCollider.enabled = false;
-        HyperBeamCoroutine = null;
+
+        RaycastHit2D[] hit = Physics2D.BoxCastAll(gameObject.transform.position, _beamBoxDirections,
+            gameObject.transform.rotation.z, gameObject.transform.up, _beamDistance, _enemyMask);
+
+        foreach (RaycastHit2D collider in hit)
+        {
+            Debug.Log(collider.transform.name);
+            EnemyBehaviour enemy = collider.transform.GetComponent<EnemyBehaviour>();
+            if (enemy != null)
+            {
+                Debug.Log("got component");
+                enemy?.BeamHit();
+            }
+            else
+            {
+                Debug.Log("couldn't get component");
+            }
+        }
+
+        _beamDuration -= Time.deltaTime;
     }
+
+    
+
+
     #region missile barrage feature
     IEnumerator MissleBarrage()
     {
@@ -311,9 +385,6 @@ public class PlayerBehaviour : MonoBehaviour
 
     void CalculateMovement()
     {
-        if (HyperBeamCoroutine != null)
-            return;
-
         Vector3 movement = new Vector3();
         movement.x = Input.GetAxis("Horizontal");
         movement.y = Input.GetAxis("Vertical");
@@ -351,7 +422,7 @@ public class PlayerBehaviour : MonoBehaviour
                     if (_ammo > 0)
                     {
                         _ammo--;
-                        _uiManager.UpdateAmmo(_ammo,_maxAmmo);
+                        _uiManager.UpdateAmmo(_ammo, _maxAmmo);
                         GameObject laser;
                         laser = Instantiate(_laserPrefab, _offset.position, Quaternion.identity);
                         _audioSource.PlayOneShot(_audioClip[0]);
@@ -506,7 +577,7 @@ public class PlayerBehaviour : MonoBehaviour
     public void RefillAmmo()
     {
         _ammo = _maxAmmo;
-        _uiManager.UpdateAmmo(_ammo,_maxAmmo);
+        _uiManager.UpdateAmmo(_ammo, _maxAmmo);
     }
 
     public void HealthUp()
@@ -545,19 +616,7 @@ public class PlayerBehaviour : MonoBehaviour
         yield return new WaitForSeconds(time);
         _speedBoostActive = false;
         _speed = _speedDefault;
-    }
-
-    #region laser enable code
-    private void EnableLaser()
-    {
-
-    }
-
-    private void UpdateLaser()
-    {
-
-    }
-    #endregion
+    } 
 
     public void AfterImageEffect()
     {
@@ -570,5 +629,13 @@ public class PlayerBehaviour : MonoBehaviour
         Destroy(image.gameObject, _afterImageLifeTime);
         #endregion
 
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.matrix = gameObject.transform.localToWorldMatrix;
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireCube(Vector3.up * _beamDistance / 2,
+            new Vector2(_beamBoxDirections.x, _beamDistance));
     }
 }

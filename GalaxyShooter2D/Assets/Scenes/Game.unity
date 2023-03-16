@@ -3651,37 +3651,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1185065493}
     m_Modifications:
-    - target: {fileID: 2748172070324930573, guid: 2a343e06ad3410343b3830cb0d00eb27, type: 3}
+    - target: {fileID: 2748172070967178267, guid: 2a343e06ad3410343b3830cb0d00eb27, type: 3}
       propertyPath: m_Enabled
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2748172070324930575, guid: 2a343e06ad3410343b3830cb0d00eb27, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2748172071728163168, guid: 2a343e06ad3410343b3830cb0d00eb27, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 2748172071728163169, guid: 2a343e06ad3410343b3830cb0d00eb27, type: 3}
-      propertyPath: _maxAmmo
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 2748172071728163169, guid: 2a343e06ad3410343b3830cb0d00eb27, type: 3}
       propertyPath: _uiManager
       value: 
       objectReference: {fileID: 204408488}
     - target: {fileID: 2748172071728163169, guid: 2a343e06ad3410343b3830cb0d00eb27, type: 3}
-      propertyPath: afterImageColor.b
-      value: 0.47777084
-      objectReference: {fileID: 0}
-    - target: {fileID: 2748172071728163169, guid: 2a343e06ad3410343b3830cb0d00eb27, type: 3}
-      propertyPath: afterImageColor.g
-      value: 0.4669811
-      objectReference: {fileID: 0}
-    - target: {fileID: 2748172071728163169, guid: 2a343e06ad3410343b3830cb0d00eb27, type: 3}
-      propertyPath: afterImageColor.r
-      value: 1
+      propertyPath: _beamDistance
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 2748172071728163172, guid: 2a343e06ad3410343b3830cb0d00eb27, type: 3}
       propertyPath: m_RootOrder
