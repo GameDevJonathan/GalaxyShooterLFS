@@ -701,10 +701,12 @@ MonoBehaviour:
   _speedDefault: 5
   _boost: 2
   _thrusterBoost: 1.4
-  _upperBound: 3
-  _lowerBound: -5.8
-  _leftBound: -13.2
-  _rightBound: 13.2
+  _movement: {x: 0, y: 0, z: 0}
+  _negative: 0
+  _upperBound: 4
+  _lowerBound: -9
+  _leftBound: -17.2
+  _rightBound: 17.2
   _spriteRenderer: {fileID: 2748172071728163175}
   _afterImage: {fileID: 1687595639017182526, guid: b41300d465be54340a036e7a52dfdc4a, type: 3}
   _afterImageLifeTime: 0.5
@@ -717,12 +719,13 @@ MonoBehaviour:
   _laserPrefab: {fileID: 7917737143948429990, guid: 2abc9b17cb330b44d970579cf74665be, type: 3}
   _fireSpeed: 0.35
   _specialMeter: 100
+  _isBeamActive: 0
   _hyperBeamSpawnPoint: {fileID: 2748172070324930572}
   _beamBoxDirections: {x: 3.15, y: 0.5}
   _enemyMask:
     serializedVersion: 2
     m_Bits: 128
-  _beamDistance: 18
+  _beamDistance: 38
   _beamDuration: 5
   _boxCollider:
   - {fileID: 0}
@@ -745,9 +748,9 @@ MonoBehaviour:
   _boosting: 0
   _maxThrusterAmount: 100
   _thrusterAmount: 100
-  _thrusterDecayRate: 0.3
-  _thrusterRechargeRate: 0.03
-  _canRecharge: 15.354307
+  _thrusterDecayRate: 25
+  _thrusterRechargeRate: 0.3
+  _canRecharge: -1
   _thrusterRechargeAmount: 2
   _lives: 3
   _score: 0

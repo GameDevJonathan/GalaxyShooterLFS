@@ -7,7 +7,7 @@ public class PowerUpBehavior : MonoBehaviour
     [SerializeField]
     private float _speed = 2f;
     [SerializeField] // 0 = triple shot / 1 = speed boost / 2 = shields /3 = ammo refill / 4 = health up
-    private enum PowerUp { TripleShot, SpeedBoost, Shields, AmmoRefill, HealthUp};
+    private enum PowerUp { TripleShot, SpeedBoost, Shields, AmmoRefill, HealthUp, Negative};
     
     [SerializeField]
     private PowerUp _playerPowerUp;
@@ -55,6 +55,9 @@ public class PowerUpBehavior : MonoBehaviour
                         break;
                     case PowerUp.HealthUp:
                         player.HealthUp();
+                        break;
+                    case PowerUp.Negative:
+                        player.PoweredDown();
                         break;
                 }
             }

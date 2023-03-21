@@ -14,6 +14,10 @@ public class PlayerBehaviour : MonoBehaviour
     private float _boost = 1.5f;
     [SerializeField]
     private float _thrusterBoost = 1.25f;
+    [SerializeField]
+    private Vector3 _movement = new Vector3();
+    [SerializeField]
+    private bool _poweredDown = false;
     [Space]
     #endregion
 
@@ -64,11 +68,13 @@ public class PlayerBehaviour : MonoBehaviour
     private float _fireSpeed = .5f;
     #endregion
 
+
+    #region Hyper Beam
+    
     [Header("Special Meter")]
     [SerializeField]
     private float _specialMeter = 100f;
-
-    #region Hyper Beam
+    
     [Header("Hyper Beam")]
     [SerializeField]
     private bool _isBeamActive;
@@ -203,6 +209,15 @@ public class PlayerBehaviour : MonoBehaviour
 
         CalculateMovement();
 
+        if (_poweredDown)
+        {
+            _speed = _speedDefault;
+            _tripleShotActive = false;
+            _speedBoostActive = false;
+            StopCoroutine("PowerUpTime");
+            StopCoroutine("SpeedCoolDown");
+        }
+
         switch (_isBeamActive)
         {
             case true:                
@@ -227,31 +242,17 @@ public class PlayerBehaviour : MonoBehaviour
 
         }
 
-        if (Input.GetKeyDown(KeyCode.X) && _specialMeter == 100)
+        if (Input.GetKeyDown(KeyCode.X) && _specialMeter == 100 && !_poweredDown)
         {
             _specialMeter = 0;
             _isBeamActive = true;
 
             //LaserBeamDebug();
 
-            //if (HyperBeamCoroutine == null)
-            //{
-            //    _specialMeter = 0;
-            //    HyperBeamCoroutine = StartCoroutine(LaserBeam());
-            //}
-
-
             #region camera shake
-            //GameObject.Find("Main Camera").TryGetComponent<CameraBehaviour>(out CameraBehaviour cam);
-            //cam.ScreenShake(0.3f, _beamDuration);
-            #endregion
-
-            //LaserBeamDebug();
-            //if (missleBarageCoroutine == null)
-            //{
-            //    _specialMeter = 0;
-            //    missleBarageCoroutine = StartCoroutine(MissleBarrage());
-            //}
+            GameObject.Find("Main Camera").TryGetComponent<CameraBehaviour>(out CameraBehaviour cam);
+            cam.ScreenShake(0.3f, _beamDuration);
+            #endregion            
         }
         #region laser code unused
         //if (Input.GetKeyDown(KeyCode.X))
@@ -284,6 +285,9 @@ public class PlayerBehaviour : MonoBehaviour
                 break;
             case 1:
                 _shieldSprite.color = Color.red;
+                break;
+            default:
+                _shieldSprite.color = Color.yellow;
                 break;
         }
     }
@@ -385,11 +389,18 @@ public class PlayerBehaviour : MonoBehaviour
 
     void CalculateMovement()
     {
-        Vector3 movement = new Vector3();
-        movement.x = Input.GetAxis("Horizontal");
-        movement.y = Input.GetAxis("Vertical");
+        if (_poweredDown)
+        {
+            _movement.x = -Input.GetAxisRaw("Horizontal");
+            _movement.y = -Input.GetAxisRaw("Vertical");
+        }
+        else
+        {
+            _movement.x = Input.GetAxisRaw("Horizontal");
+            _movement.y = Input.GetAxisRaw("Vertical");
+        }
 
-        transform.Translate(movement * _speed * Time.deltaTime);
+        transform.Translate(_movement * _speed * Time.deltaTime);
 
         #region bounds
         if (transform.position.y >= _upperBound)
@@ -445,19 +456,24 @@ public class PlayerBehaviour : MonoBehaviour
 
     void Thrusters()
     {
-
+        if (_poweredDown) return;
+        
+        
         switch (_boosting)
         {
             case false:
                 if ((_thrusterAmount < _maxThrusterAmount) && Time.time > _canRecharge)
                 {
                     _canRecharge = Time.time + _thrusterRechargeRate;
-                    _thrusterAmount += _thrusterDecayRate + Time.deltaTime;
-                    //_uiManager.UpdateThrusterBar(_thrusterAmount / _maxThrusterAmount);
+                    _thrusterAmount += _thrusterRechargeAmount;
+                    _uiManager.UpdateThrusterBar(_thrusterAmount / _maxThrusterAmount);
                 }
                 break;
 
             case true:
+                //if (_movement == Vector3.zero) return;
+                _thrusterAmount -= _thrusterDecayRate * Time.deltaTime;
+                _uiManager.UpdateThrusterBar(_thrusterAmount / _maxThrusterAmount);
                 if (_afterImageCounter <= 0)
                 {
                     AfterImageEffect();
@@ -501,6 +517,11 @@ public class PlayerBehaviour : MonoBehaviour
         {
             _shieldsActive = false;
             _shieldVisualizer.SetActive(false);
+        }
+
+        if(_shieldHp == -1)
+        {
+            _shieldVisualizer.SetActive(true);
         }
         #endregion
     }
@@ -588,12 +609,14 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void ActivateTripleShot()
     {
+        if (_poweredDown) return;
         _tripleShotActive = true;
         StartCoroutine(PowerUpTime(_powerUpTime));
     }
 
     public void ActivateSpeedBoost()
     {
+        if (_poweredDown) return;
         _speedBoostActive = true;
         _speed *= _boost;
         StartCoroutine(SpeedCoolDown(_powerUpTime));
@@ -601,6 +624,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void ActivateShields()
     {
+        if (_poweredDown) return;
+        _shieldHp = 3;
         _shieldsActive = true;
         _shieldVisualizer.SetActive(true);
     }
@@ -616,6 +641,7 @@ public class PlayerBehaviour : MonoBehaviour
         yield return new WaitForSeconds(time);
         _speedBoostActive = false;
         _speed = _speedDefault;
+        
     } 
 
     public void AfterImageEffect()
@@ -629,6 +655,22 @@ public class PlayerBehaviour : MonoBehaviour
         Destroy(image.gameObject, _afterImageLifeTime);
         #endregion
 
+    }
+
+    public void PoweredDown()
+    {
+        _poweredDown = true;        
+        _shieldHp = -1;
+        Shields();
+        StartCoroutine(NegativeCoolDown(_powerUpTime));
+    }
+
+    IEnumerator NegativeCoolDown(float time)
+    {
+        yield return new WaitForSeconds(time);
+        _poweredDown = false;
+        _shieldHp = 0;
+        _shieldVisualizer.SetActive(false);
     }
 
     private void OnDrawGizmos()
