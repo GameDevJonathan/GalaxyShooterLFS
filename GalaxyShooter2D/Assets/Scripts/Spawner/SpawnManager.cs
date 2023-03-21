@@ -10,36 +10,29 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private bool _stopSpawning = false;
 
-    //[SerializeField]
-    //private float _spawnTime = 5f;
-
     [SerializeField]
     public GameObject[] _powerUps;
 
     [Header("Wave Variables")]
     [SerializeField]
-    private int _waveIndex = 0;
+    private int _waveIndex = 0; //index of current wave
     [SerializeField]
-    private float _timeBetweenWaves = 5f;
+    private float _timeBetweenWaves = 5f; // default time before each wave starts
     [SerializeField]
-    private float _waveCountdown = 0f;
+    private float _waveCountdown = 0f; //time before each wave starts
     [SerializeField]
-    private int _enemiesKilled = 0;
+    private int _enemiesKilled = 0; // used to keep track of how many enemies were killed in the wave
     [SerializeField]
-    private enum SpawnState { Spawning, Waiting, Counting, Complete };
+    private enum SpawnState { Spawning, Waiting, Counting, Complete }; // state machine for wave system
     [SerializeField]
-    private SpawnState state = SpawnState.Counting;
+    private SpawnState state = SpawnState.Counting; // default state
     [SerializeField]
-    private Transform[] _spawnPoints;
+    private Transform[] _spawnPoints; // where I want to spawn my enemies
 
     [Header("Enemy Waves")]
-    public Wave[] waves;
+    public Wave[] waves; // wave class
     [SerializeField]
-    private Coroutine _enemyWaves;
-
-
-
-
+    private Coroutine _enemyWaves; // when and how to spawn enemies
 
     // Start is called before the first frame update
     private void Start()
@@ -84,7 +77,7 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    bool EnemiesAlive()
+    private bool EnemiesAlive()
     {
         if (_enemiesKilled == waves[_waveIndex].enemy.Length)
         {
@@ -95,16 +88,16 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator EnemyWave(Wave _wave)
     {
-        state = SpawnState.Spawning;
+        state = SpawnState.Spawning; //change state to spawning
         //Spawn
-        for (int i = 0; i < _wave.enemy.Length; i++)
+        for (int i = 0; i < _wave.enemy.Length; i++) //loop through all enemies in the wave
         {
             SpawnEnemy(_wave.enemy[i]);
-            yield return new WaitForSeconds(_wave.spawnRate);
+            yield return new WaitForSeconds(_wave.spawnRate); //balance spawning time.
         }
-        state = SpawnState.Waiting;
-        _enemyWaves = null;
-        yield break;
+        state = SpawnState.Waiting; // now wait till all enemies are killed
+        _enemyWaves = null; // reset coroutine.
+        yield break; //exit coroutine. 
     }
 
     void SpawnEnemy(Transform enemy)
