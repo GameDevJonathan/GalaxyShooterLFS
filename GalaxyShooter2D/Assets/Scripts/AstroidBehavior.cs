@@ -13,11 +13,15 @@ public class AstroidBehavior : MonoBehaviour
     private SpawnManager _spawnManager;
 
     private AudioSource _audioSource;
+
+    [SerializeField]
+    private LootDrop _lootTable;
     // Start is called before the first frame update
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
         _anim = GetComponent<Animator>();
+        _lootTable = GetComponent<LootDrop>();
         if (!_anim)
             Debug.LogError("Animator is Null");
         //else
@@ -41,6 +45,7 @@ public class AstroidBehavior : MonoBehaviour
     {
         if(other.gameObject.tag == "Laser")
         {
+            _lootTable.SetDrop();
             _anim.SetTrigger("Explode");
             _audioSource.Play();
             Destroy(other.gameObject);
@@ -49,7 +54,7 @@ public class AstroidBehavior : MonoBehaviour
 
     public void AstroidDestroyed()
     {
-        _spawnManager?.StartSpawning();
+        
         Destroy(this.gameObject);
     }
 }

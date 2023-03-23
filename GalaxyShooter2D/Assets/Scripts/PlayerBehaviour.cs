@@ -162,16 +162,20 @@ public class PlayerBehaviour : MonoBehaviour
     private AudioSource _audioSource;
     private SpawnManager _spawnManager;
 
-
+    private void Awake()
+    {
+        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        
+    }
 
 
     // Start is called before the first frame update
     void Start()
     {
-
         _audioSource = GetComponent<AudioSource>();
-
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+
+
 
         if (_spawnManager == null)
         {
@@ -182,14 +186,17 @@ public class PlayerBehaviour : MonoBehaviour
         {
             Debug.LogError("No UI Manager");
         }
+        else
+        {
+            _ammo = _maxAmmo;
+            _uiManager.UpdateAmmo(_ammo, _maxAmmo);
+        }
 
         if (!_shieldSprite)
         {
             Debug.LogError("Shield Sprite Not Found");
         }
 
-        _ammo = _maxAmmo;
-        _uiManager.UpdateAmmo(_ammo, _maxAmmo);
     }
 
     // Update is called once per frame
@@ -603,7 +610,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void HealthUp()
     {
-        _lives++;
+        if(_lives < 3) _lives++;
         _uiManager.UpdateLives(_lives);
     }
 
