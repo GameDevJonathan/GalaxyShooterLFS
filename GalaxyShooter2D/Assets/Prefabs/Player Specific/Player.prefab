@@ -702,7 +702,7 @@ MonoBehaviour:
   _boost: 2
   _thrusterBoost: 1.4
   _movement: {x: 0, y: 0, z: 0}
-  _negative: 0
+  _poweredDown: 0
   _upperBound: 4
   _lowerBound: -9
   _leftBound: -17.2
@@ -715,7 +715,7 @@ MonoBehaviour:
   afterImageColor: {r: 1, g: 0.4669811, b: 0.47777084, a: 0.62352943}
   _offset: {fileID: 2748172071470543987}
   _maxAmmo: 20
-  _ammo: 15
+  _ammo: 20
   _laserPrefab: {fileID: 7917737143948429990, guid: 2abc9b17cb330b44d970579cf74665be, type: 3}
   _fireSpeed: 0.35
   _specialMeter: 100

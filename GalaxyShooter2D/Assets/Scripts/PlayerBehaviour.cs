@@ -162,18 +162,15 @@ public class PlayerBehaviour : MonoBehaviour
     private AudioSource _audioSource;
     private SpawnManager _spawnManager;
 
-    private void Awake()
-    {
-        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
-        
-    }
+    
 
 
     // Start is called before the first frame update
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
-        _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        //_uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        //_spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
 
 
 
@@ -440,7 +437,7 @@ public class PlayerBehaviour : MonoBehaviour
                     if (_ammo > 0)
                     {
                         _ammo--;
-                        _uiManager.UpdateAmmo(_ammo, _maxAmmo);
+                        _uiManager?.UpdateAmmo(_ammo, _maxAmmo);
                         GameObject laser;
                         laser = Instantiate(_laserPrefab, _offset.position, Quaternion.identity);
                         _audioSource.PlayOneShot(_audioClip[0]);

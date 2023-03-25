@@ -16,7 +16,7 @@ public class LootTable : ScriptableObject
 
     public List<Drop> table;
 
-    [System.NonSerialized]
+   [System.NonSerialized]
     int totalWeight = -1;
 
     public int TotalWeight

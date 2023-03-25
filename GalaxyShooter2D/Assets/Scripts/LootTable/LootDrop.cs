@@ -18,7 +18,8 @@ public class LootDrop : MonoBehaviour
             _canDrop = false;
             PowerUpBehavior powerUp = lootTable.GetDrop();
             Debug.Log(powerUp);
-            if(powerUp != null) Instantiate(powerUp.gameObject,this.gameObject.transform.position, Quaternion.identity);
+            if(powerUp != null) Instantiate(powerUp.gameObject,this.gameObject.transform.position, 
+                Quaternion.identity);
             
         }
         

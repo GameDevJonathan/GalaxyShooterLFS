@@ -2,24 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider2D),typeof(Animator),typeof(Rigidbody2D))]
+[RequireComponent(typeof(BoxCollider2D), typeof(Animator), typeof(Rigidbody2D))]
 [RequireComponent(typeof(AudioSource))]
 public class EnemyBehaviour : MonoBehaviour
 {
     [SerializeField]
-    float moveSpeed = 5f;   
+    float moveSpeed = 5f;
 
     [SerializeField]
     private Animator _anim;
     [SerializeField]
     private BoxCollider2D _boxCollider;
+    [SerializeField]
+    private GameObject _shieldVisualizer;
+    [SerializeField]
+    private bool _isShielded = true;
 
     private PlayerBehaviour _player;
     private SpawnManager _spawnManager;
 
     private AudioSource _audioSource;
 
-    
+
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
@@ -27,6 +31,18 @@ public class EnemyBehaviour : MonoBehaviour
         _spawnManager = GameObject.Find("SpawnManager")?.GetComponent<SpawnManager>();
         _anim = GetComponent<Animator>();
         _boxCollider = GetComponent<BoxCollider2D>();
+
+        _isShielded = Random.value > 0.5;
+
+        switch (_isShielded)
+        {
+            case true:
+                _shieldVisualizer.SetActive(true);
+                break;
+            case false:
+                _shieldVisualizer.SetActive(false);
+                break;
+        }
     }
 
     // Update is called once per frame
@@ -43,19 +59,25 @@ public class EnemyBehaviour : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other.transform.name);
+
+        GameObject.Find("Main Camera").TryGetComponent<CameraBehaviour>(out CameraBehaviour cam);
         if (other.tag == "Player")
         {
-
-            PlayerBehaviour player = other.GetComponent<PlayerBehaviour>();
             DeathSequence();
-            player?.OnDamage();
-            
+            _player?.OnDamage();
+            cam.ScreenShake();
         }
 
         if (other.tag == "Laser")
         {
-            GameObject.Find("Main Camera").TryGetComponent<CameraBehaviour>(out CameraBehaviour cam);
+            if (_isShielded)
+            {
+                _isShielded = false;
+                Destroy(other.gameObject);
+                _shieldVisualizer.SetActive(false);
+                return;
+            }
+
             if (other.transform.parent != null)
             {
                 Destroy(other.transform.parent.gameObject);
@@ -63,8 +85,7 @@ public class EnemyBehaviour : MonoBehaviour
             cam.ScreenShake();
             Destroy(other.gameObject);
             DeathSequence();
-            _player?.AddScore(10);           
-            //Destroy(this.gameObject);
+            _player?.AddScore(10);
         }
     }
 
@@ -77,8 +98,8 @@ public class EnemyBehaviour : MonoBehaviour
     protected virtual void DeathSequence()
     {
         _spawnManager?.KillCount();
-        _audioSource.Play();
-        _anim.Play("Explode");
+        _audioSource?.Play();
+        _anim?.Play("Explode");
         _boxCollider.enabled = false;
         moveSpeed = 0f;
     }

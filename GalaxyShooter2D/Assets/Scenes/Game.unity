@@ -1217,6 +1217,8 @@ MonoBehaviour:
   moveSpeed: 0
   _anim: {fileID: 437378119}
   _boxCollider: {fileID: 437378120}
+  _shieldVisualizer: {fileID: 0}
+  _isShielded: 1
 --- !u!212 &437378123
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2927,6 +2929,8 @@ MonoBehaviour:
   moveSpeed: 0
   _anim: {fileID: 1608969054}
   _boxCollider: {fileID: 1608969055}
+  _shieldVisualizer: {fileID: 0}
+  _isShielded: 1
 --- !u!212 &1608969058
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3293,6 +3297,8 @@ MonoBehaviour:
   moveSpeed: 0
   _anim: {fileID: 1778071408}
   _boxCollider: {fileID: 1778071409}
+  _shieldVisualizer: {fileID: 0}
+  _isShielded: 1
 --- !u!212 &1778071412
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4063,6 +4069,8 @@ MonoBehaviour:
   moveSpeed: 0
   _anim: {fileID: 2132433724}
   _boxCollider: {fileID: 2132433725}
+  _shieldVisualizer: {fileID: 0}
+  _isShielded: 1
 --- !u!212 &2132433728
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4249,10 +4257,6 @@ PrefabInstance:
     - target: {fileID: 2748172071728163168, guid: 2a343e06ad3410343b3830cb0d00eb27, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 2748172071728163169, guid: 2a343e06ad3410343b3830cb0d00eb27, type: 3}
-      propertyPath: _ammo
-      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2748172071728163169, guid: 2a343e06ad3410343b3830cb0d00eb27, type: 3}
       propertyPath: _uiManager
@@ -4523,3 +4527,5 @@ MonoBehaviour:
   moveSpeed: 0
   _anim: {fileID: 1633646223664344323}
   _boxCollider: {fileID: 2882094330061850385}
+  _shieldVisualizer: {fileID: 0}
+  _isShielded: 1

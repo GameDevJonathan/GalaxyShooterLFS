@@ -46,7 +46,7 @@ public class AstroidBehavior : MonoBehaviour
         if(other.gameObject.tag == "Laser")
         {
             _lootTable.SetDrop();
-            _anim.SetTrigger("Explode");
+            //_anim.SetTrigger("Explode");
             _audioSource.Play();
             Destroy(other.gameObject);
         }
