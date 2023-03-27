@@ -14,9 +14,15 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField]
     private BoxCollider2D _boxCollider;
     [SerializeField]
+    private CircleCollider2D _circleCollider;
+    [SerializeField]
     private GameObject _shieldVisualizer;
     [SerializeField]
     private bool _isShielded = true;
+    [SerializeField]
+    private float _radius = 5f;
+    [SerializeField]
+    private LayerMask _playerMask;
 
     private PlayerBehaviour _player;
     private SpawnManager _spawnManager;
@@ -55,6 +61,7 @@ public class EnemyBehaviour : MonoBehaviour
             transform.position = _spawnManager.RandomPoint();
         }
 
+        PlayerRam();
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D other)
@@ -89,6 +96,10 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
+   
+        
+    
+
     public void BeamHit()
     {
         _player?.AddScore(10, 0);
@@ -103,6 +114,30 @@ public class EnemyBehaviour : MonoBehaviour
         _boxCollider.enabled = false;
         moveSpeed = 0f;
     }
+
+    private void PlayerRam()
+    {
+        Collider2D finder =  Physics2D.OverlapCircle(transform.position, _radius,_playerMask);
+        if (finder)
+        {
+            Debug.Log($"{finder.transform.name}");
+            Debug.Log($"{finder.transform.position}");
+            if (finder)
+            {
+               transform.position =  Vector2.MoveTowards(transform.position, finder.transform.position, 6f * Time.deltaTime);
+            }
+        }
+
+        
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, _radius);
+    }
+
+
 
     public void Destroyed()
     {
