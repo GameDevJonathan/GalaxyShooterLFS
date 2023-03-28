@@ -846,7 +846,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &331539297
 Transform:
   m_ObjectHideFlags: 0
@@ -1215,10 +1215,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0
+  _canRam: 0
+  _ramSpeed: 1
   _anim: {fileID: 437378119}
   _boxCollider: {fileID: 437378120}
+  _circleCollider: {fileID: 0}
   _shieldVisualizer: {fileID: 0}
   _isShielded: 1
+  _radius: 5
+  _playerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!212 &437378123
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2927,10 +2934,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0
+  _canRam: 0
+  _ramSpeed: 1
   _anim: {fileID: 1608969054}
   _boxCollider: {fileID: 1608969055}
+  _circleCollider: {fileID: 0}
   _shieldVisualizer: {fileID: 0}
   _isShielded: 1
+  _radius: 5
+  _playerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!212 &1608969058
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3295,10 +3309,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0
+  _canRam: 0
+  _ramSpeed: 1
   _anim: {fileID: 1778071408}
   _boxCollider: {fileID: 1778071409}
+  _circleCollider: {fileID: 0}
   _shieldVisualizer: {fileID: 0}
   _isShielded: 1
+  _radius: 5
+  _playerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!212 &1778071412
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4067,10 +4088,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0
+  _canRam: 0
+  _ramSpeed: 1
   _anim: {fileID: 2132433724}
   _boxCollider: {fileID: 2132433725}
+  _circleCollider: {fileID: 0}
   _shieldVisualizer: {fileID: 0}
   _isShielded: 1
+  _radius: 5
+  _playerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!212 &2132433728
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4525,7 +4553,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0
+  _canRam: 0
+  _ramSpeed: 1
   _anim: {fileID: 1633646223664344323}
   _boxCollider: {fileID: 2882094330061850385}
+  _circleCollider: {fileID: 0}
   _shieldVisualizer: {fileID: 0}
   _isShielded: 1
+  _radius: 5
+  _playerMask:
+    serializedVersion: 2
+    m_Bits: 0

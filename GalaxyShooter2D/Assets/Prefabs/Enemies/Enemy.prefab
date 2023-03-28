@@ -99,14 +99,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 2889776942621885237}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa671c751fc78a0468a4b0a2f5dfe753, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ab415423c7d7ec4fa46830a439473b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  _canRam: 0
+  _ramSpeed: 1
   _anim: {fileID: 3554643097587172647}
   _boxCollider: {fileID: 1817227061}
-  _shieldVisualizer: {fileID: 351924179108842925, guid: 34eccd55076879f4986e6d24e13e34da, type: 3}
+  _shieldVisualizer: {fileID: 8252305305754101531}
   _isShielded: 1
+  _radius: 5
+  _playerMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!50 &1817227062
 Rigidbody2D:
   serializedVersion: 4
@@ -282,6 +288,10 @@ PrefabInstance:
       value: Shields_Visual
       objectReference: {fileID: 0}
     - target: {fileID: 351924179108842925, guid: 34eccd55076879f4986e6d24e13e34da, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 351924179108842925, guid: 34eccd55076879f4986e6d24e13e34da, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -338,5 +348,10 @@ PrefabInstance:
 --- !u!4 &1440791742849019087 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7321413364284442233, guid: 34eccd55076879f4986e6d24e13e34da, type: 3}
+  m_PrefabInstance: {fileID: 8531043507235465910}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8252305305754101531 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 351924179108842925, guid: 34eccd55076879f4986e6d24e13e34da, type: 3}
   m_PrefabInstance: {fileID: 8531043507235465910}
   m_PrefabAsset: {fileID: 0}

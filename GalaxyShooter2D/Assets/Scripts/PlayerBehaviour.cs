@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerBehaviour : MonoBehaviour
 {
@@ -70,11 +71,11 @@ public class PlayerBehaviour : MonoBehaviour
 
 
     #region Hyper Beam
-    
+
     [Header("Special Meter")]
     [SerializeField]
     private float _specialMeter = 100f;
-    
+
     [Header("Hyper Beam")]
     [SerializeField]
     private bool _isBeamActive;
@@ -162,7 +163,7 @@ public class PlayerBehaviour : MonoBehaviour
     private AudioSource _audioSource;
     private SpawnManager _spawnManager;
 
-    
+
 
 
     // Start is called before the first frame update
@@ -224,14 +225,14 @@ public class PlayerBehaviour : MonoBehaviour
 
         switch (_isBeamActive)
         {
-            case true:                
+            case true:
                 LaserBeamActive();
                 if (_beamDuration < 0)
-                _isBeamActive = false;                
+                    _isBeamActive = false;
                 break;
             case false:
                 _beamDuration = 5f;
-                _lineRenderer.enabled = false;                
+                _lineRenderer.enabled = false;
                 break;
 
         }
@@ -244,6 +245,11 @@ public class PlayerBehaviour : MonoBehaviour
                 _fireRate = StartCoroutine(FireRate(_fireSpeed));
             }
 
+        }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         if (Input.GetKeyDown(KeyCode.X) && _specialMeter == 100 && !_poweredDown)
@@ -299,7 +305,7 @@ public class PlayerBehaviour : MonoBehaviour
     //IEnumerator LaserBeam()
     //{
     //    _lineRenderer.enabled = true;
-        
+
     //    _lineRenderer.SetPosition(0, _hyperBeamSpawnPoint.position);
     //    _lineRenderer.SetPosition(1, _hyperBeamSpawnPoint.position + _hyperBeamSpawnPoint.up * _beamDistance);
 
@@ -333,8 +339,10 @@ public class PlayerBehaviour : MonoBehaviour
         _lineRenderer.SetPosition(0, _hyperBeamSpawnPoint.position);
         _lineRenderer.SetPosition(1, _hyperBeamSpawnPoint.position + _hyperBeamSpawnPoint.up * _beamDistance);
 
-        RaycastHit2D[] hit = Physics2D.BoxCastAll(gameObject.transform.position, _beamBoxDirections,
-            gameObject.transform.rotation.z, gameObject.transform.up, _beamDistance, _enemyMask);
+        RaycastHit2D[] hit =
+            Physics2D.BoxCastAll(gameObject.transform.position, _beamBoxDirections,
+                                 gameObject.transform.rotation.z, gameObject.transform.up,
+                                 _beamDistance, _enemyMask);
 
         foreach (RaycastHit2D collider in hit)
         {
@@ -354,7 +362,7 @@ public class PlayerBehaviour : MonoBehaviour
         _beamDuration -= Time.deltaTime;
     }
 
-    
+
 
 
     #region missile barrage feature
@@ -461,8 +469,8 @@ public class PlayerBehaviour : MonoBehaviour
     void Thrusters()
     {
         if (_poweredDown) return;
-        
-        
+
+
         switch (_boosting)
         {
             case false:
@@ -523,7 +531,7 @@ public class PlayerBehaviour : MonoBehaviour
             _shieldVisualizer.SetActive(false);
         }
 
-        if(_shieldHp == -1)
+        if (_shieldHp == -1)
         {
             _shieldVisualizer.SetActive(true);
         }
@@ -559,7 +567,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         _score += score;
         _specialMeter += powerAdd;
-        _uiManager.UpdateScore(_score);
+        _uiManager?.UpdateScore(_score);
     }
     //communicate with the ui to update the score
 
@@ -580,7 +588,7 @@ public class PlayerBehaviour : MonoBehaviour
 
         _lives--;
 
-        _uiManager.UpdateLives(_lives);
+        _uiManager?.UpdateLives(_lives);
 
         switch (_lives)
         {
@@ -594,7 +602,7 @@ public class PlayerBehaviour : MonoBehaviour
 
         if (_lives < 1)
         {
-            _spawnManager.OnPlayerDeath();
+            _spawnManager?.OnPlayerDeath();
             Destroy(this.gameObject);
         }
     }
@@ -607,7 +615,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void HealthUp()
     {
-        if(_lives < 3) _lives++;
+        if (_lives < 3) _lives++;
         _uiManager.UpdateLives(_lives);
     }
 
@@ -645,8 +653,8 @@ public class PlayerBehaviour : MonoBehaviour
         yield return new WaitForSeconds(time);
         _speedBoostActive = false;
         _speed = _speedDefault;
-        
-    } 
+
+    }
 
     public void AfterImageEffect()
     {
@@ -663,7 +671,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void PoweredDown()
     {
-        _poweredDown = true;        
+        _poweredDown = true;
         _shieldHp = -1;
         Shields();
         StartCoroutine(NegativeCoolDown(_powerUpTime));

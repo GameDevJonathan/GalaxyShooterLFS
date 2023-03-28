@@ -10,19 +10,29 @@ public class EnemyBehaviour : MonoBehaviour
     float moveSpeed = 5f;
 
     [SerializeField]
+    private bool _canRam = false;
+    
+    [SerializeField]
+    private float _ramSpeed = 1f;
+
+    [SerializeField]
     private Animator _anim;
+    
     [SerializeField]
     private BoxCollider2D _boxCollider;
-    [SerializeField]
-    private CircleCollider2D _circleCollider;
+   
+    
     [SerializeField]
     private GameObject _shieldVisualizer;
+    
     [SerializeField]
-    private bool _isShielded = true;
+    private bool _isShielded;
+    
     [SerializeField]
     private float _radius = 5f;
+    
     [SerializeField]
-    private LayerMask _playerMask;
+    protected LayerMask _playerMask;
 
     private PlayerBehaviour _player;
     private SpawnManager _spawnManager;
@@ -33,21 +43,32 @@ public class EnemyBehaviour : MonoBehaviour
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
+        
         _player = GameObject.Find("Player")?.GetComponent<PlayerBehaviour>();
+        
         _spawnManager = GameObject.Find("SpawnManager")?.GetComponent<SpawnManager>();
+        
         _anim = GetComponent<Animator>();
+        
         _boxCollider = GetComponent<BoxCollider2D>();
 
-        _isShielded = Random.value > 0.5;
-
-        switch (_isShielded)
+        _canRam = Random.value > 0.25;
+        
+        
+        if(this.gameObject.name == "Enemy" || this.gameObject.name == "Enemy2")
         {
-            case true:
-                _shieldVisualizer.SetActive(true);
-                break;
-            case false:
-                _shieldVisualizer.SetActive(false);
-                break;
+            _isShielded = Random.value > 0.5;
+            
+            switch (_isShielded)
+            {
+                case true:
+                    _shieldVisualizer?.SetActive(true);
+                    break;
+                case false:
+                    _shieldVisualizer?.SetActive(false);
+                    break;
+            }
+
         }
     }
 
@@ -77,11 +98,14 @@ public class EnemyBehaviour : MonoBehaviour
 
         if (other.tag == "Laser")
         {
+            other.TryGetComponent(out LaserBehaviour laser);
+            if (!laser._human) return;
+            
             if (_isShielded)
             {
                 _isShielded = false;
                 Destroy(other.gameObject);
-                _shieldVisualizer.SetActive(false);
+                _shieldVisualizer?.SetActive(false);
                 return;
             }
 
@@ -113,10 +137,13 @@ public class EnemyBehaviour : MonoBehaviour
         _anim?.Play("Explode");
         _boxCollider.enabled = false;
         moveSpeed = 0f;
+        StopAllCoroutines();
     }
 
     private void PlayerRam()
     {
+        if (!_canRam) return;
+
         Collider2D finder =  Physics2D.OverlapCircle(transform.position, _radius,_playerMask);
         if (finder)
         {
@@ -124,14 +151,14 @@ public class EnemyBehaviour : MonoBehaviour
             Debug.Log($"{finder.transform.position}");
             if (finder)
             {
-               transform.position =  Vector2.MoveTowards(transform.position, finder.transform.position, 6f * Time.deltaTime);
+               transform.position =  Vector2.MoveTowards(transform.position, finder.transform.position, _ramSpeed * Time.deltaTime);
             }
         }
 
         
     }
 
-    private void OnDrawGizmos()
+    protected virtual void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, _radius);
