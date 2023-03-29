@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D), typeof(Animator), typeof(Rigidbody2D))]
-[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(AudioSource), typeof(LootDrop))]
 public class EnemyBehaviour : MonoBehaviour
 {
     [SerializeField]
@@ -26,13 +26,17 @@ public class EnemyBehaviour : MonoBehaviour
     private GameObject _shieldVisualizer;
     
     [SerializeField]
-    private bool _isShielded;
+    protected bool _isShielded;
     
     [SerializeField]
     private float _radius = 5f;
     
     [SerializeField]
     protected LayerMask _playerMask;
+
+    [SerializeField]
+    private LootDrop _lootDrop;
+
 
     private PlayerBehaviour _player;
     private SpawnManager _spawnManager;
@@ -53,9 +57,11 @@ public class EnemyBehaviour : MonoBehaviour
         _boxCollider = GetComponent<BoxCollider2D>();
 
         _canRam = Random.value > 0.25;
+
+        _lootDrop = GetComponent<LootDrop>();
         
         
-        if(this.gameObject.name == "Enemy" || this.gameObject.name == "Enemy2")
+        if(this.gameObject.name == "Enemy" || this.gameObject.name == "Enemy_Smart")
         {
             _isShielded = Random.value > 0.5;
             
@@ -77,12 +83,13 @@ public class EnemyBehaviour : MonoBehaviour
     {
         transform.Translate(Vector2.down * moveSpeed * Time.deltaTime);
 
+        PlayerRam();
         if (transform.position.y < -6)
         {
+            if (_spawnManager == null) return;
             transform.position = _spawnManager.RandomPoint();
         }
 
-        PlayerRam();
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D other)
@@ -120,10 +127,6 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
-   
-        
-    
-
     public void BeamHit()
     {
         _player?.AddScore(10, 0);
@@ -132,8 +135,10 @@ public class EnemyBehaviour : MonoBehaviour
 
     protected virtual void DeathSequence()
     {
+        _boxCollider.enabled = false;
         _spawnManager?.KillCount();
         _audioSource?.Play();
+        _lootDrop?.SetDrop();
         _anim?.Play("Explode");
         _boxCollider.enabled = false;
         moveSpeed = 0f;

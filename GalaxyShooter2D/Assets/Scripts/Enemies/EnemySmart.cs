@@ -26,8 +26,8 @@ public class EnemySmart : EnemyBehaviour
 
     protected override void Update()
     {
-        base.Update();
         DetectionRange();
+        base.Update();
 
     }
 
@@ -46,6 +46,7 @@ public class EnemySmart : EnemyBehaviour
 
         if (hitForward)
         {
+            Debug.Log(hitForward.transform.name);
             if (_fireAtPlayer == null)
             {
                 _fireAtPlayer = StartCoroutine(FireLaser(_firePointFront,false));

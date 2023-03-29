@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2216110992969757595}
   - component: {fileID: 6525055386173888393}
   - component: {fileID: 7447586250624222055}
+  - component: {fileID: 2784117191850204309}
   m_Layer: 7
   m_Name: Enemy_Smart
   m_TagString: Enemy
@@ -266,25 +267,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8807ffb127ddc4d4c88bcf277ddde465, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
+  moveSpeed: 2
   _canRam: 0
   _ramSpeed: 1
   _anim: {fileID: 0}
   _boxCollider: {fileID: 0}
-  _shieldVisualizer: {fileID: 0}
+  _shieldVisualizer: {fileID: 351924179108842925, guid: 34eccd55076879f4986e6d24e13e34da, type: 3}
   _isShielded: 0
   _radius: 1.91
   _playerMask:
     serializedVersion: 2
     m_Bits: 256
+  _lootDrop: {fileID: 0}
   _detectionBoxForward: {x: 1.25, y: 0.5}
   _detectionBoxBackward: {x: 1.5, y: 0.5}
-  _detectionRangeForward: 4.5
-  _detectionRangeBackward: 7
-  Laser: {fileID: 7917737143948429990, guid: 2abc9b17cb330b44d970579cf74665be, type: 3}
+  _detectionRangeForward: 10
+  _detectionRangeBackward: 10
+  _laser: {fileID: 178767188534510739, guid: 2abc9b17cb330b44d970579cf74665be, type: 3}
   _firePointFront: {fileID: 8791874002372864778}
   _firePointBack: {fileID: 8408308178700240449}
-  _timeToFire: 0.5
+  _timeToFire: 2
+--- !u!114 &2784117191850204309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2365960882757198633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 763299fb2653f9243b6548c5b0f6cdcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootTable: {fileID: 11400000, guid: 043cfd47bb5815f4f9c3f03bc27f380f, type: 2}
+  _canDrop: 0
 --- !u!1 &7193758902314511453
 GameObject:
   m_ObjectHideFlags: 0

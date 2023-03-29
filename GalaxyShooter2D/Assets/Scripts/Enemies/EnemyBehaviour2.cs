@@ -13,6 +13,7 @@ public class EnemyBehaviour2 : EnemyBehaviour
     
     protected override void Update()
     {
+        _isShielded = false;
         base.Update();
 
         if (_movingRight)

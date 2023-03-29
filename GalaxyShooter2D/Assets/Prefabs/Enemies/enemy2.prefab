@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6491652142168414479}
   - component: {fileID: 6491652142168414476}
   - component: {fileID: 4818908349694108823}
+  - component: {fileID: 1000580640934283480}
   m_Layer: 7
   m_Name: Enemy2
   m_TagString: Enemy
@@ -169,8 +170,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
+  _canRam: 0
+  _ramSpeed: 1
   _anim: {fileID: 0}
   _boxCollider: {fileID: 0}
+  _shieldVisualizer: {fileID: 351924179108842925, guid: 34eccd55076879f4986e6d24e13e34da, type: 3}
+  _isShielded: 0
+  _radius: 5
+  _playerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  _lootDrop: {fileID: 0}
   _hSpeed: 3
   _movingRight: 0
   _min: 1
@@ -272,3 +282,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1000580640934283480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6491652142168414475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 763299fb2653f9243b6548c5b0f6cdcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootTable: {fileID: 11400000, guid: 6fc2fd6f16daaf34fb055911b32393e5, type: 2}
+  _canDrop: 0

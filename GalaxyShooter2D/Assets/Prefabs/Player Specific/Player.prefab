@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2748172070324930572}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HyperBeam
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2748172070330681470}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point (1)
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
@@ -72,7 +72,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2748172070434122081}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MissleSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
@@ -107,7 +107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2748172070967178264}
   - component: {fileID: 2748172070967178267}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 2748172071209430893}
   - component: {fileID: 2748172071209430892}
   - component: {fileID: 2748172071209430895}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shields_Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -344,7 +344,7 @@ GameObject:
   - component: {fileID: 2748172071320180898}
   - component: {fileID: 2748172071320180896}
   - component: {fileID: 2748172071320180899}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Thrusters
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -447,7 +447,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2748172071470543987}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -482,7 +482,7 @@ GameObject:
   - component: {fileID: 2748172071728163174}
   - component: {fileID: 2748172071728163173}
   - component: {fileID: 2748172071728163169}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -703,10 +703,10 @@ MonoBehaviour:
   _thrusterBoost: 1.4
   _movement: {x: 0, y: 0, z: 0}
   _poweredDown: 0
-  _upperBound: 4
-  _lowerBound: -9
-  _leftBound: -17.2
-  _rightBound: 17.2
+  _upperBound: 17
+  _lowerBound: -17
+  _leftBound: -17
+  _rightBound: 17
   _spriteRenderer: {fileID: 2748172071728163175}
   _afterImage: {fileID: 1687595639017182526, guid: b41300d465be54340a036e7a52dfdc4a, type: 3}
   _afterImageLifeTime: 0.5
@@ -769,7 +769,7 @@ GameObject:
   - component: {fileID: 2748172071741421555}
   - component: {fileID: 2748172071741421553}
   - component: {fileID: 2748172071741421552}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RightDamage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -872,7 +872,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2748172072139674464}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
@@ -903,7 +903,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2748172072161881435}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point (2)
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
@@ -936,7 +936,7 @@ GameObject:
   - component: {fileID: 2748172072405784674}
   - component: {fileID: 2748172072405784672}
   - component: {fileID: 2748172072405784675}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LeftDamage
   m_TagString: Untagged
   m_Icon: {fileID: 0}

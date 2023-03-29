@@ -10,11 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 2889776942621885239}
   - component: {fileID: 2889776942621885238}
-  - component: {fileID: 5438761738024099469}
   - component: {fileID: 1817227062}
   - component: {fileID: 1817227061}
   - component: {fileID: 3554643097587172647}
   - component: {fileID: -1486637427134154670}
+  - component: {fileID: 5438761738024099469}
+  - component: {fileID: 5950782164978674361}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
@@ -90,29 +91,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5438761738024099469
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2889776942621885237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ab415423c7d7ec4fa46830a439473b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  _canRam: 0
-  _ramSpeed: 1
-  _anim: {fileID: 3554643097587172647}
-  _boxCollider: {fileID: 1817227061}
-  _shieldVisualizer: {fileID: 8252305305754101531}
-  _isShielded: 1
-  _radius: 5
-  _playerMask:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!50 &1817227062
 Rigidbody2D:
   serializedVersion: 4
@@ -276,6 +254,44 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5438761738024099469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2889776942621885237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ab415423c7d7ec4fa46830a439473b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  _canRam: 0
+  _ramSpeed: 1
+  _anim: {fileID: 3554643097587172647}
+  _boxCollider: {fileID: 1817227061}
+  _shieldVisualizer: {fileID: 8252305305754101531}
+  _isShielded: 1
+  _radius: 5
+  _playerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  _lootDrop: {fileID: 0}
+--- !u!114 &5950782164978674361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2889776942621885237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 763299fb2653f9243b6548c5b0f6cdcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootTable: {fileID: 11400000, guid: 47f7359116ced8f438d844e513e8d35e, type: 2}
+  _canDrop: 0
 --- !u!1001 &8531043507235465910
 PrefabInstance:
   m_ObjectHideFlags: 0

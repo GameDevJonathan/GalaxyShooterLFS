@@ -238,7 +238,7 @@ public class PlayerBehaviour : MonoBehaviour
         }
 
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && !_isBeamActive)
         {
             if (_fireRate == null)
             {
@@ -578,22 +578,31 @@ public class PlayerBehaviour : MonoBehaviour
         _fireRate = null;
     }
 
-    public void OnDamage()
+    public void OnDamage(bool healthUp = false)
     {
-        if (_shieldHp > 0)
+        if (!healthUp)
         {
-            Shields();
-            return;
-        }
+            if (_shieldHp > 0)
+            {
+                Shields();
+                return;
+            }
 
-        _lives--;
+            _lives--;
+        }
 
         _uiManager?.UpdateLives(_lives);
 
         switch (_lives)
         {
+            case 3:
+                _leftThruster.SetActive(false);
+                _rightThruster.SetActive(false);
+                break;
+
             case 2:
                 _leftThruster.SetActive(true);
+                _rightThruster.SetActive(false);
                 break;
             case 1:
                 _rightThruster.SetActive(true);
@@ -616,6 +625,7 @@ public class PlayerBehaviour : MonoBehaviour
     public void HealthUp()
     {
         if (_lives < 3) _lives++;
+        OnDamage(true);
         _uiManager.UpdateLives(_lives);
     }
 
