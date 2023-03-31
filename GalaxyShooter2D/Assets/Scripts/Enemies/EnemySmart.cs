@@ -28,7 +28,6 @@ public class EnemySmart : EnemyBehaviour
     {
         DetectionRange();
         base.Update();
-
     }
 
 
@@ -88,6 +87,4 @@ public class EnemySmart : EnemyBehaviour
         Gizmos.DrawWireCube(Vector3.up * _detectionRangeBackward / 2,
             new Vector2(_detectionBoxBackward.x, _detectionRangeBackward));
     }
-
-
 }

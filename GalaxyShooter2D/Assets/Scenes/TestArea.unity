@@ -281,6 +281,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7447586250624222055, guid: bb7fc3a4a3699a44b8f121dfbfef109a, type: 3}
+      propertyPath: moveSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7447586250624222055, guid: bb7fc3a4a3699a44b8f121dfbfef109a, type: 3}
+      propertyPath: _playerMask.m_Bits
+      value: 768
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb7fc3a4a3699a44b8f121dfbfef109a, type: 3}
 --- !u!1001 &1434915165
@@ -300,7 +308,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2748172071728163172, guid: 2a343e06ad3410343b3830cb0d00eb27, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.26
+      value: 5.23
       objectReference: {fileID: 0}
     - target: {fileID: 2748172071728163172, guid: 2a343e06ad3410343b3830cb0d00eb27, type: 3}
       propertyPath: m_LocalPosition.y

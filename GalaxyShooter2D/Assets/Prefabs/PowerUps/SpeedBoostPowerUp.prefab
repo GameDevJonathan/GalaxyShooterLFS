@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6282918454664499351}
   - component: {fileID: 6282918454664499355}
   - component: {fileID: 4888417468622133924}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SpeedBoostPowerUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 2
+  explosion: {fileID: 8393229116890775222, guid: 6c7c537466574a843bb9a593cfd2c3e2, type: 3}
   _playerPowerUp: 1
   _audioClip: {fileID: 8300000, guid: 5ee343246919d2b4bba63ae629e95494, type: 3}
 --- !u!95 &4888417468622133924

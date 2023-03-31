@@ -46,9 +46,6 @@ public class PlayerBehaviour : MonoBehaviour
     private float _afterImageCounter;
     public Color afterImageColor;
 
-
-
-
     #region Spawn Points and Ammo
     [Header("Spawn Points and Ammo")]
     [SerializeField]
@@ -162,9 +159,6 @@ public class PlayerBehaviour : MonoBehaviour
     private AudioClip[] _audioClip;
     private AudioSource _audioSource;
     private SpawnManager _spawnManager;
-
-
-
 
     // Start is called before the first frame update
     void Start()

@@ -49,7 +49,6 @@ public class LaserBehaviour : MonoBehaviour
             other.TryGetComponent(out PlayerBehaviour player);
             player.OnDamage();
             Destroy(this.gameObject);
-        }
-        
+        }        
     }
 }
