@@ -45,17 +45,12 @@ public class SpawnManager : MonoBehaviour
     {
         if (_waveIndex >= waves.Length) return;
 
-        
-
-
         if (state == SpawnState.Waiting)
-        {
-            
+        {            
             if (!EnemiesAlive())
             {
                 //Begin a new round
                 WaveCompleted();
-
             }
             else
             {

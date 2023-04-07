@@ -14,11 +14,10 @@ public class PowerUpBehavior : MonoBehaviour
     [SerializeField]
     private PowerUp _playerPowerUp;
 
-
+    
 
     [SerializeField]
     private AudioClip _audioClip;
-
 
     // Update is called once per frame
     void Update()
@@ -33,6 +32,7 @@ public class PowerUpBehavior : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+
         if (other.tag == "Player")
         {
             AudioSource.PlayClipAtPoint(_audioClip, transform.position);
@@ -62,7 +62,6 @@ public class PowerUpBehavior : MonoBehaviour
                 }
             }
             Destroy(this.gameObject);
-
         }
 
         if (other.tag == "Laser")
@@ -71,6 +70,7 @@ public class PowerUpBehavior : MonoBehaviour
             Destroy(other.gameObject);
             Destroy(this.gameObject);
         }
-
+        
     }
+   
 }

@@ -34,6 +34,7 @@ public class PlayerBehaviour : MonoBehaviour
     private float _rightBound = 11.3f;
     #endregion
 
+    #region Sprite Renderer
     [Header("Sprite Reneder")]
     [SerializeField]
 
@@ -45,6 +46,7 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField]
     private float _afterImageCounter;
     public Color afterImageColor;
+    #endregion
 
     #region Spawn Points and Ammo
     [Header("Spawn Points and Ammo")]
@@ -66,9 +68,7 @@ public class PlayerBehaviour : MonoBehaviour
     private float _fireSpeed = .5f;
     #endregion
 
-
     #region Hyper Beam
-
     [Header("Special Meter")]
     [SerializeField]
     private float _specialMeter = 100f;
@@ -127,6 +127,7 @@ public class PlayerBehaviour : MonoBehaviour
     private float _powerUpTime = 5f;
     #endregion
 
+    #region Thrusters
     [Header("Thruster")]
     [SerializeField]
     private bool _boosting = false;
@@ -142,7 +143,9 @@ public class PlayerBehaviour : MonoBehaviour
     private float _canRecharge = -1f;
     [SerializeField]
     private float _thrusterRechargeAmount;
+    #endregion
 
+    #region Score and Lives and Audio
     [Header("Score and Lives")]
     [SerializeField]
     private int _lives = 3;
@@ -159,6 +162,15 @@ public class PlayerBehaviour : MonoBehaviour
     private AudioClip[] _audioClip;
     private AudioSource _audioSource;
     private SpawnManager _spawnManager;
+    #endregion
+
+    [Header("Debug")]
+    [SerializeField]
+    private float _detectRadius = 5f;
+    [SerializeField]
+    private LayerMask _powerUpMask;
+    [SerializeField]
+    private float _pullSpeed = 1f;
 
     // Start is called before the first frame update
     void Start()
@@ -166,8 +178,6 @@ public class PlayerBehaviour : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
         //_uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         //_spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
-
-
 
         if (_spawnManager == null)
         {
@@ -188,7 +198,6 @@ public class PlayerBehaviour : MonoBehaviour
         {
             Debug.LogError("Shield Sprite Not Found");
         }
-
     }
 
     // Update is called once per frame
@@ -205,7 +214,6 @@ public class PlayerBehaviour : MonoBehaviour
         }
         Debuging();
 
-
         CalculateMovement();
 
         if (_poweredDown)
@@ -217,6 +225,7 @@ public class PlayerBehaviour : MonoBehaviour
             StopCoroutine("SpeedCoolDown");
         }
 
+        //HyperBeam Active
         switch (_isBeamActive)
         {
             case true:
@@ -228,7 +237,6 @@ public class PlayerBehaviour : MonoBehaviour
                 _beamDuration = 5f;
                 _lineRenderer.enabled = false;
                 break;
-
         }
 
 
@@ -258,6 +266,7 @@ public class PlayerBehaviour : MonoBehaviour
             cam.ScreenShake(0.3f, _beamDuration);
             #endregion            
         }
+
         #region laser code unused
         //if (Input.GetKeyDown(KeyCode.X))
         //{
@@ -276,8 +285,9 @@ public class PlayerBehaviour : MonoBehaviour
         //}
         #endregion
 
-
         Thrusters();
+
+        if(Input.GetKey(KeyCode.V)) DetectionSphere();
 
         switch (_shieldHp)
         {
@@ -294,37 +304,7 @@ public class PlayerBehaviour : MonoBehaviour
                 _shieldSprite.color = Color.yellow;
                 break;
         }
-    }
-
-    //IEnumerator LaserBeam()
-    //{
-    //    _lineRenderer.enabled = true;
-
-    //    _lineRenderer.SetPosition(0, _hyperBeamSpawnPoint.position);
-    //    _lineRenderer.SetPosition(1, _hyperBeamSpawnPoint.position + _hyperBeamSpawnPoint.up * _beamDistance);
-
-    //    RaycastHit2D[] hit = Physics2D.BoxCastAll(gameObject.transform.position, _beamBoxDirections,
-    //        gameObject.transform.rotation.z, gameObject.transform.up, _beamDistance, _enemyMask);
-
-    //    foreach (RaycastHit2D collider in hit)
-    //    {
-    //        Debug.Log(collider.transform.name);
-    //        EnemyBehaviour enemy = collider.transform.GetComponent<EnemyBehaviour>();
-    //        if (enemy != null)
-    //        {
-    //            Debug.Log("got component");
-    //            enemy?.BeamHit();
-    //        }
-    //        else
-    //        {
-    //            Debug.Log("couldn't get component");
-    //        }
-
-    //    }
-    //    yield return new WaitForSeconds(_beamDuration);
-    //    _lineRenderer.enabled = false;        
-    //    HyperBeamCoroutine = null;
-    //}
+    }  
 
     void LaserBeamActive()
     {
@@ -354,6 +334,24 @@ public class PlayerBehaviour : MonoBehaviour
         }
 
         _beamDuration -= Time.deltaTime;
+    }
+
+    void DetectionSphere()
+    {
+
+
+        RaycastHit2D[] hit =
+            Physics2D.CircleCastAll(gameObject.transform.position, _detectRadius, gameObject.transform.up, _detectRadius, _powerUpMask);
+        foreach (RaycastHit2D collider in hit)
+        {
+            PowerUpBehavior powerUp = collider.transform.GetComponent<PowerUpBehavior>();
+            if (powerUp != null)
+            {
+                Debug.Log("Got PowerUp");
+                powerUp.transform.position = Vector2.MoveTowards(powerUp.transform.position, transform.position, _pullSpeed * Time.deltaTime);
+            }
+        }
+
     }
 
 
@@ -472,14 +470,14 @@ public class PlayerBehaviour : MonoBehaviour
                 {
                     _canRecharge = Time.time + _thrusterRechargeRate;
                     _thrusterAmount += _thrusterRechargeAmount;
-                    _uiManager.UpdateThrusterBar(_thrusterAmount / _maxThrusterAmount);
+                    _uiManager?.UpdateThrusterBar(_thrusterAmount / _maxThrusterAmount);
                 }
                 break;
 
             case true:
                 //if (_movement == Vector3.zero) return;
                 _thrusterAmount -= _thrusterDecayRate * Time.deltaTime;
-                _uiManager.UpdateThrusterBar(_thrusterAmount / _maxThrusterAmount);
+                _uiManager?.UpdateThrusterBar(_thrusterAmount / _maxThrusterAmount);
                 if (_afterImageCounter <= 0)
                 {
                     AfterImageEffect();
@@ -613,7 +611,7 @@ public class PlayerBehaviour : MonoBehaviour
     public void RefillAmmo()
     {
         _ammo = _maxAmmo;
-        _uiManager.UpdateAmmo(_ammo, _maxAmmo);
+        _uiManager?.UpdateAmmo(_ammo, _maxAmmo);
     }
 
     public void HealthUp()
@@ -691,9 +689,13 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(gameObject.transform.position, _detectRadius);
+
         Gizmos.matrix = gameObject.transform.localToWorldMatrix;
         Gizmos.color = Color.blue;
         Gizmos.DrawWireCube(Vector3.up * _beamDistance / 2,
             new Vector2(_beamBoxDirections.x, _beamDistance));
+
     }
 }

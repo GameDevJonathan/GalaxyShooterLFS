@@ -33,6 +33,7 @@ public class EnemySmart : EnemyBehaviour
 
     private void DetectionRange()
     {
+        if (_destroyed) return;
         RaycastHit2D hitForward =
             Physics2D.BoxCast(gameObject.transform.position, _detectionBoxForward,
                               gameObject.transform.rotation.z, Vector2.down,

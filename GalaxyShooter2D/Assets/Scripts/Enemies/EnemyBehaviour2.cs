@@ -23,7 +23,7 @@ public class EnemyBehaviour2 : EnemyBehaviour
         RandomDirection();
     }
 
-    void RandomDirection(bool hit = false)
+    protected virtual void RandomDirection(bool hit = false)
     {
         if (!hit)
         {

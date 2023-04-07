@@ -37,6 +37,9 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField]
     private LootDrop _lootDrop;
 
+    [SerializeField]
+    protected bool _destroyed = false;
+
 
     private PlayerBehaviour _player;
     private SpawnManager _spawnManager;
@@ -135,13 +138,13 @@ public class EnemyBehaviour : MonoBehaviour
 
     protected virtual void DeathSequence()
     {
+        _destroyed = true;
         _boxCollider.enabled = false;
         _spawnManager?.KillCount();
         _audioSource?.Play();
         _lootDrop?.SetDrop();
-        _anim?.Play("Explode");
-        _boxCollider.enabled = false;
-        moveSpeed = 0f;
+        _anim?.Play("Explode");        
+        moveSpeed = 0f;        
         StopAllCoroutines();
     }
 
@@ -152,8 +155,8 @@ public class EnemyBehaviour : MonoBehaviour
         Collider2D finder =  Physics2D.OverlapCircle(transform.position, _radius,_playerMask);
         if (finder)
         {
-            Debug.Log($"{finder.transform.name}");
-            Debug.Log($"{finder.transform.position}");
+            //Debug.Log($"{finder.transform.name}");
+            //Debug.Log($"{finder.transform.position}");
             if (finder)
             {
                transform.position =  Vector2.MoveTowards(transform.position, finder.transform.position, _ramSpeed * Time.deltaTime);
