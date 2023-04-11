@@ -66,6 +66,8 @@ public class PowerUpBehavior : MonoBehaviour
 
         if (other.tag == "Laser")
         {
+            other.TryGetComponent(out LaserBehaviour laser);
+            if (laser._human) return;
             Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(other.gameObject);
             Destroy(this.gameObject);

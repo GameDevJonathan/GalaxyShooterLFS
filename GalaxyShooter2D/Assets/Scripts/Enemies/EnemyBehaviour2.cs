@@ -9,6 +9,8 @@ public class EnemyBehaviour2 : EnemyBehaviour
     [SerializeField]
     private bool _movingRight = false; // flag to see if i'm moving left or right
     [SerializeField]
+    protected bool _canShift = true;
+    [SerializeField]
     private float _min, _max, _randomMove; // floats for random move counter, min and max values
     
     protected override void Update()
@@ -16,6 +18,7 @@ public class EnemyBehaviour2 : EnemyBehaviour
         _isShielded = false;
         base.Update();
 
+        if (!_canShift) return;
         if (_movingRight)
             transform.Translate(Vector2.right * _hSpeed * Time.deltaTime);
         else

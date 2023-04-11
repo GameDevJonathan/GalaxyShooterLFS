@@ -335,21 +335,22 @@ MonoBehaviour:
   _boxCollider: {fileID: 0}
   _shieldVisualizer: {fileID: 0}
   _isShielded: 0
-  _radius: 2
+  _radius: 2.5
   _playerMask:
     serializedVersion: 2
     m_Bits: 256
   _lootDrop: {fileID: 0}
   _destroyed: 0
-  _hSpeed: 0
-  _movingRight: 0
-  _min: 1
-  _max: 2
-  _randomMove: 2
-  _detectRadius: 2.5
+  _detectRadius: 2
   _laserLayer:
     serializedVersion: 2
     m_Bits: 1024
+  _canDodge: 0
+  _dodgeRight: 0
+  _dodgeSpeed: 5
+  _dodgeTime: 1
+  _dodgeCounter: 0
+  _dodgeVector: {x: 1, y: 0}
 --- !u!114 &382936123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -541,6 +542,10 @@ PrefabInstance:
     - target: {fileID: 2748172071728163169, guid: 2a343e06ad3410343b3830cb0d00eb27, type: 3}
       propertyPath: _pullSpeed
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2748172071728163169, guid: 2a343e06ad3410343b3830cb0d00eb27, type: 3}
+      propertyPath: _timeScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2748172071728163169, guid: 2a343e06ad3410343b3830cb0d00eb27, type: 3}
       propertyPath: _detectRadius

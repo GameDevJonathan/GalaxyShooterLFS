@@ -162,6 +162,8 @@ public class PlayerBehaviour : MonoBehaviour
     private AudioClip[] _audioClip;
     private AudioSource _audioSource;
     private SpawnManager _spawnManager;
+    [SerializeField, Range(0, 1)]
+    private float _timeScale = 1;
     #endregion
 
     [Header("Debug")]
@@ -203,6 +205,7 @@ public class PlayerBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Time.timeScale = _timeScale;
         _thrusterAmount = Mathf.Clamp(_thrusterAmount, 0, _maxThrusterAmount);
         _specialMeter = Mathf.Clamp(_specialMeter, 0, 100);
 
