@@ -758,6 +758,12 @@ MonoBehaviour:
   _audioClip:
   - {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
   - {fileID: 8300000, guid: fcabf7a9771cda845963ead79035cb5f, type: 3}
+  _timeScale: 1
+  _detectRadius: 5
+  _powerUpMask:
+    serializedVersion: 2
+    m_Bits: 0
+  _pullSpeed: 1
 --- !u!1 &2748172071741421554
 GameObject:
   m_ObjectHideFlags: 0

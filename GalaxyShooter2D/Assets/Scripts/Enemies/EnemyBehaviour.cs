@@ -126,6 +126,7 @@ public class EnemyBehaviour : MonoBehaviour
             cam.ScreenShake();
             Destroy(other.gameObject);
             DeathSequence();
+            _lootDrop?.SetDrop();
             _player?.AddScore(10);
         }
     }
@@ -142,7 +143,6 @@ public class EnemyBehaviour : MonoBehaviour
         _boxCollider.enabled = false;
         _spawnManager?.KillCount();
         _audioSource?.Play();
-        _lootDrop?.SetDrop();
         _anim?.Play("Explode");        
         moveSpeed = 0f;        
         StopAllCoroutines();

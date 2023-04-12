@@ -47,11 +47,9 @@ public class EnemyBehaviour2 : EnemyBehaviour
 
     protected override void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other.transform.tag);
-        
         base.OnTriggerEnter2D(other);
 
-        if(other.transform.tag == "Bounds")
+        if (other.transform.tag == "Bounds")
         {
             RandomDirection(true);
         }
