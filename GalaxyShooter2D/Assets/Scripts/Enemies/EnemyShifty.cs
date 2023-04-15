@@ -20,13 +20,16 @@ public class EnemyShifty : EnemyBehaviour
     private Vector2 _dodgeVector = new Vector2(4, 0);
     // Start is called before the first frame update
 
+   
+
 
     // Update is called once per frame
     protected override void Update()
     {
+        base.Update();
+        
         if (_dodgeRoutine != null) return;
         LaserDodge();
-        base.Update();
     }
 
     void LaserDodge()
@@ -34,14 +37,13 @@ public class EnemyShifty : EnemyBehaviour
         Collider2D hit =
             Physics2D.OverlapCircle(transform.position, _detectRadius, _laserLayer);
         if (hit)
-
         {
             hit.TryGetComponent(out LaserBehaviour laser);
             if (laser._human == true && !_canDodge)
             {
                 Debug.Log("start dodging");
                 //_dodgeRoutine = StartCoroutine(DodgeRoutine());
-                _canDodge = Random.value > 0.25f;
+                _canDodge = Random.value > 0.5f;
                 if (_canDodge)
                 {
                     _dodgeRight = Random.value > 0.5f;
@@ -49,8 +51,14 @@ public class EnemyShifty : EnemyBehaviour
                 }
             }
         }
+        
+        if(!hit && _dodgeCounter < 0 && _canDodge)
+        {
+            _canDodge = false;
+            _dodgeCounter = 0;
+        }
 
-        if (_dodgeCounter > 0)
+        if (_dodgeCounter > 0 && _canDodge)
         {
             if (_dodgeRight)
             {
@@ -64,8 +72,6 @@ public class EnemyShifty : EnemyBehaviour
 
             _dodgeCounter -= Time.deltaTime;
         }
-
-
     }
 
     IEnumerator DodgeRoutine()

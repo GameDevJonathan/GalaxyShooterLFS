@@ -100,7 +100,7 @@ public class SpawnManager : MonoBehaviour
         int randomPoint = Random.Range(0, _spawnPoints.Length);
         Debug.Log("Spawning Enemy: " + enemy.transform.name);
         Transform _clone = Instantiate(enemy, _spawnPoints[randomPoint].position, Quaternion.identity);
-        _clone.transform.name = "Enemy";
+        _clone.transform.name = enemy.transform.name;
         _clone.transform.parent = _enemyContainer.transform;
 
     }

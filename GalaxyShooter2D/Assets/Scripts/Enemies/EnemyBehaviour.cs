@@ -79,6 +79,10 @@ public class EnemyBehaviour : MonoBehaviour
             }
 
         }
+        else
+        {
+            _isShielded = false;
+        }
     }
 
     // Update is called once per frame

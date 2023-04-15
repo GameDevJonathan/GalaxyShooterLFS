@@ -178,8 +178,8 @@ public class PlayerBehaviour : MonoBehaviour
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
-        //_uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
-        //_spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
 
         if (_spawnManager == null)
         {
