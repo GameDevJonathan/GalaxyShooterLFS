@@ -5,19 +5,20 @@ using UnityEngine;
 public class EnemyShifty : EnemyBehaviour
 {
     [SerializeField]
-    private float _detectRadius = 3f;
+    private float _detectRadius = 3f; // size of the sphere
     [SerializeField]
-    private LayerMask _laserLayer;
+    private LayerMask _laserLayer; // layer mask to detect object
     [SerializeField]
-    private bool _canDodge = false;
+    private bool _canDodge = false; // flag to see if object can dodge
     [SerializeField]
-    private bool _dodgeRight = false;
+    private bool _dodgeRight = false; // flag for which direction to dodge
+    
+    [SerializeField] //floats for how fast to dodge, how long to dodge, and how time between dodges.
+    private float _dodgeSpeed = 5f, _dodgeTime = 1f, _dodgeCounter = 0f; 
     [SerializeField]
-    private float _dodgeSpeed = 5f, _dodgeTime = 1f, _dodgeCounter = 0f;
+    private Coroutine _dodgeRoutine; //coroutine to dodge
     [SerializeField]
-    private Coroutine _dodgeRoutine;
-    [SerializeField]
-    private Vector2 _dodgeVector = new Vector2(4, 0);
+    private Vector2 _dodgeVector = new Vector2(4, 0); // dodge vector
     // Start is called before the first frame update
 
    
@@ -28,7 +29,7 @@ public class EnemyShifty : EnemyBehaviour
     {
         base.Update();
         
-        if (_dodgeRoutine != null) return;
+        //if (_dodgeRoutine != null) return;
         LaserDodge();
     }
 
@@ -73,13 +74,7 @@ public class EnemyShifty : EnemyBehaviour
             _dodgeCounter -= Time.deltaTime;
         }
     }
-
-    IEnumerator DodgeRoutine()
-    {
-        yield return new WaitForSeconds(_dodgeTime);
-        _canDodge = false;
-        
-    }
+  
 
     //    if (Input.GetButtonDown("Fire2") && standing.activeSelf && abilities.canDash)
     //                {

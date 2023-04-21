@@ -11,26 +11,26 @@ public class EnemyBehaviour : MonoBehaviour
 
     [SerializeField]
     private bool _canRam = false;
-    
+
     [SerializeField]
     private float _ramSpeed = 1f;
 
     [SerializeField]
     private Animator _anim;
-    
+
     [SerializeField]
     private BoxCollider2D _boxCollider;
-   
-    
+
+
     [SerializeField]
     private GameObject _shieldVisualizer;
-    
+
     [SerializeField]
     protected bool _isShielded;
-    
+
     [SerializeField]
     private float _radius = 5f;
-    
+
     [SerializeField]
     protected LayerMask _playerMask;
 
@@ -50,24 +50,24 @@ public class EnemyBehaviour : MonoBehaviour
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
-        
+
         _player = GameObject.Find("Player")?.GetComponent<PlayerBehaviour>();
-        
+
         _spawnManager = GameObject.Find("SpawnManager")?.GetComponent<SpawnManager>();
-        
+
         _anim = GetComponent<Animator>();
-        
+
         _boxCollider = GetComponent<BoxCollider2D>();
 
         _canRam = Random.value > 0.25;
 
         _lootDrop = GetComponent<LootDrop>();
-        
-        
-        if(this.gameObject.name == "Enemy" || this.gameObject.name == "Enemy_Smart")
+
+
+        if (this.gameObject.name == "Enemy" || this.gameObject.name == "Enemy_Smart")
         {
             _isShielded = Random.value > 0.5;
-            
+
             switch (_isShielded)
             {
                 case true:
@@ -106,6 +106,7 @@ public class EnemyBehaviour : MonoBehaviour
         if (other.tag == "Player")
         {
             DeathSequence();
+            _shieldVisualizer?.SetActive(false);
             _player?.OnDamage();
             cam.ScreenShake();
         }
@@ -114,7 +115,7 @@ public class EnemyBehaviour : MonoBehaviour
         {
             other.TryGetComponent(out LaserBehaviour laser);
             if (!laser._human) return;
-            
+
             if (_isShielded)
             {
                 _isShielded = false;
@@ -147,27 +148,22 @@ public class EnemyBehaviour : MonoBehaviour
         _boxCollider.enabled = false;
         _spawnManager?.KillCount();
         _audioSource?.Play();
-        _anim?.Play("Explode");        
-        moveSpeed = 0f;        
+        _anim?.Play("Explode");
+        moveSpeed = 0f;
         StopAllCoroutines();
     }
 
     private void PlayerRam()
     {
+        #region Ram Code Block
         if (!_canRam) return;
 
-        Collider2D finder =  Physics2D.OverlapCircle(transform.position, _radius,_playerMask);
-        if (finder)
-        {
-            //Debug.Log($"{finder.transform.name}");
-            //Debug.Log($"{finder.transform.position}");
-            if (finder)
-            {
-               transform.position =  Vector2.MoveTowards(transform.position, finder.transform.position, _ramSpeed * Time.deltaTime);
-            }
-        }
+        Collider2D finder = Physics2D.OverlapCircle(transform.position, _radius, _playerMask);
 
-        
+
+        if (finder)
+            transform.position = Vector2.MoveTowards(transform.position, finder.transform.position, _ramSpeed * Time.deltaTime);
+        #endregion
     }
 
     protected virtual void OnDrawGizmos()

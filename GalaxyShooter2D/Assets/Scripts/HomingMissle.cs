@@ -21,11 +21,7 @@ public class HomingMissle : MonoBehaviour
         if (!_rb)
         {
             Debug.LogError("Rigid Body Not Found");
-        }
-        //else
-        //{
-        //    Debug.Log("Rigid Body Found");
-        //}
+        }        
     }
 
     void OnTriggerEnter2D(Collider2D other )
@@ -40,8 +36,7 @@ public class HomingMissle : MonoBehaviour
     {
         if (target)
         {
-            target = null;
-            _rb.angularVelocity = 0;
+            target = null;            
         }
     }
 
@@ -61,8 +56,6 @@ public class HomingMissle : MonoBehaviour
         }
         else
         {
-
-
             _rb.rotation = Mathf.Lerp(_rb.rotation, 0, _rotationCorrection * Time.deltaTime); 
         }
         _rb.velocity = transform.up * _missleSpeed * Time.deltaTime;

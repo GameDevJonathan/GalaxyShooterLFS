@@ -5,34 +5,34 @@ using UnityEngine;
 public class BossBehaviour : MonoBehaviour
 {
     [SerializeField]
-    private Transform _startPoint;
+    private Transform _startPoint; //Transfrom to move boss into scene
 
     [SerializeField]
-    private float _moveSpeed;
+    private float _moveSpeed; //How Fast the boss Moves
 
     [SerializeField]
-    private Transform[] _shotPoints;
+    private Transform[] _shotPoints; // Array of Transforms to fire lasers from
 
-    [SerializeField]
+    [SerializeField] // transforms to where the boss can move to
     private Transform _middlePoint, _rightPoint, _leftPoint, _movePoint;
 
-    [SerializeField]
+    [SerializeField] //flags for when the boss can be hit and when to wait till its next movement
     private bool _invincible = true, _wait;
 
 
     [Header("AI")]
 
-    [SerializeField]
+    [SerializeField] // time between next decision
     private float _decisionDuration;
 
-    [SerializeField]
+    [SerializeField] // states the boss can be in
     public enum BossState { Intro, Idle, Normal, MoveRight, MoveLeft, MoveMiddle }
 
     [System.Serializable]
-    public class DecisionWeight
+    public class DecisionWeight // class for making decisions
     {
-        public int weight;
-        public BossState state;
+        public int weight; // how much weight this decision has
+        public BossState state; // the state of the decision
         public DecisionWeight(int weight, BossState state)
         {
             this.weight = weight;
@@ -44,7 +44,7 @@ public class BossBehaviour : MonoBehaviour
 
 
 
-    [SerializeField]
+    [SerializeField] //setting the enum variable for us
     private BossState _actionState = BossState.Idle;
 
     // Start is called before the first frame update
@@ -60,7 +60,7 @@ public class BossBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        #region AI State Machine
         switch (_actionState)
         {
             case BossState.Idle:
@@ -73,6 +73,7 @@ public class BossBehaviour : MonoBehaviour
                     DecideWithWeight(0, 100, 0, 0);
                 }
                 break;
+
             case BossState.MoveRight:
                 MoveRight();
                 if (_wait == false)
@@ -86,8 +87,8 @@ public class BossBehaviour : MonoBehaviour
                         DecideWithWeight(0, 0, 70, 40);
                     }
                 }
-
                 break;
+
             case BossState.MoveLeft:
                 Debug.Log("Moving Left");
                 MoveLeft();
@@ -118,12 +119,14 @@ public class BossBehaviour : MonoBehaviour
                     }
                 }
                 break;
+
             case BossState.Intro:
                 IntroState();
                 break;
             default:
                 break;
         }
+        #endregion
 
 
 
