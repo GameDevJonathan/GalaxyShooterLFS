@@ -341,8 +341,6 @@ public class PlayerBehaviour : MonoBehaviour
 
     void DetectionSphere()
     {
-
-
         RaycastHit2D[] hit =
             Physics2D.CircleCastAll(gameObject.transform.position, _detectRadius, gameObject.transform.up, _detectRadius, _powerUpMask);
         foreach (RaycastHit2D collider in hit)
@@ -354,10 +352,7 @@ public class PlayerBehaviour : MonoBehaviour
                 powerUp.transform.position = Vector2.MoveTowards(powerUp.transform.position, transform.position, _pullSpeed * Time.deltaTime);
             }
         }
-
     }
-
-
 
 
     #region missile barrage feature
