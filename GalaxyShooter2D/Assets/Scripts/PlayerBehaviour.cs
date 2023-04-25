@@ -181,7 +181,7 @@ public class PlayerBehaviour : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
-        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
 
         if (_spawnManager == null)
         {

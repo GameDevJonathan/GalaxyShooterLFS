@@ -37,7 +37,7 @@ public class UIManager : MonoBehaviour
         NullChecks();
         _scoreText.text = $"Score: {0}";       
         _gameOverText.gameObject.SetActive(false);
-        _ammoText.text = $"Ammo: {20}/{20}";
+        _ammoText.text = $"{20}/{20}";
 
     }
 
@@ -92,7 +92,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateAmmo(int curAmmo, int maxAmmo) 
     {
-        _ammoText.text = $"Ammo: {curAmmo}/{maxAmmo}";
+        _ammoText.text = $"{curAmmo}/{maxAmmo}";
     }
 
     public void GameOverSequence(string text = "GameOver")
