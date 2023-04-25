@@ -285,7 +285,7 @@ MonoBehaviour:
   _ramSpeed: 0
   _anim: {fileID: 0}
   _boxCollider: {fileID: 0}
-  _shieldVisualizer: {fileID: 0}
+  _shieldVisualizer: {fileID: 351924179108842925, guid: 34eccd55076879f4986e6d24e13e34da, type: 3}
   _isShielded: 0
   _radius: 3
   _playerMask:

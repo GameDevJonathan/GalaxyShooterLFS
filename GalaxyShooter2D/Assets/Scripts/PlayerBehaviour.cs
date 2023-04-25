@@ -243,7 +243,7 @@ public class PlayerBehaviour : MonoBehaviour
         }
 
 
-        if (Input.GetKey(KeyCode.Space) && !_isBeamActive)
+        if (Input.GetKey(KeyCode.X) && !_isBeamActive)
         {
             if (_fireRate == null)
             {
@@ -257,7 +257,7 @@ public class PlayerBehaviour : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
-        if (Input.GetKeyDown(KeyCode.X) && _specialMeter == 100 && !_poweredDown)
+        if (Input.GetKeyDown(KeyCode.C) && _specialMeter == 100 && !_poweredDown)
         {
             _specialMeter = 0;
             _isBeamActive = true;
@@ -491,13 +491,13 @@ public class PlayerBehaviour : MonoBehaviour
         if (!_speedBoostActive)
         {
             #region code block
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            if (Input.GetKeyDown(KeyCode.Z))
             {
                 _boosting = true;
                 _speed *= _thrusterBoost;
             }
 
-            if (Input.GetKeyUp(KeyCode.LeftShift) || _thrusterAmount == 0)
+            if (Input.GetKeyUp(KeyCode.Z) || _thrusterAmount == 0)
             {
                 _boosting = false;
                 _speed = _speedDefault;

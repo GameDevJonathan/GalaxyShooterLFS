@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BossBehaviour : MonoBehaviour
 {
+    #region Starting Variable
     [Header("Starting Variables")]
     [SerializeField]
     private Transform _startPoint; //Transfrom to move boss into scene
@@ -17,31 +19,33 @@ public class BossBehaviour : MonoBehaviour
 
     [SerializeField] //flags for when the boss can be hit and when to wait till its next movement
     private bool _invincible = true, _wait;
+    #endregion
 
+    #region Laser Variables
     [Header("Boss Laser")]
     [SerializeField]
     private bool _startFiring;
     [SerializeField]
     private Transform[] _shotPoints; // Array of Transforms to fire lasers from
-    
+
     [SerializeField]
     private float _fireRate;
-    
+
     [SerializeField]
     private Coroutine _laserRoutine;
 
     [SerializeField]
     private LaserBehaviour _laserPrefab;
+    #endregion
 
-
-
+    #region AI
     [Header("AI")]
 
     [SerializeField] // time between next decision
     private float _decisionDuration;
 
     [SerializeField] // states the boss can be in
-    public enum BossState { Intro, Idle, Normal, MoveRight, MoveLeft, MoveMiddle }
+    public enum BossState { Intro, Idle, Normal, MoveRight, MoveLeft, MoveMiddle, Exploding, Dead, Test }
 
     [System.Serializable]
     public class DecisionWeight // class for making decisions
@@ -61,10 +65,41 @@ public class BossBehaviour : MonoBehaviour
 
     [SerializeField] //setting the enum variable for us
     private BossState _actionState = BossState.Idle;
+    #endregion
+
+    #region HitFlash
+    [Header("HitFlash")]
+    [SerializeField]
+    private Material _matWhite;
+    [SerializeField]
+    private Material _matDefault;
+    [SerializeField]
+    private SpriteRenderer _spriteRenderer;
+    #endregion
+
+    [Header("Dramatic Finish")]
+    [SerializeField]
+    private GameObject _explosionObj, _finalExplosion;
+
+    [Header("UI")]
+
+    [SerializeField]
+    private Image _hpFill;
+
+    [SerializeField]
+    private float _currentHp, _maxHp = 20;
+    private CameraBehaviour _mainCam;
 
     // Start is called before the first frame update
     void Start()
     {
+        _currentHp = _maxHp;
+        _hpFill.fillAmount = _currentHp/ _maxHp;
+        _mainCam = Camera.main.GetComponent<CameraBehaviour>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _matWhite = Resources.Load("WhiteFlash", typeof(Material)) as Material;
+        _matDefault = _spriteRenderer.material;
+
         weights = new List<DecisionWeight>();
         if (_startPoint)
         {
@@ -75,6 +110,7 @@ public class BossBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         #region AI State Machine
         switch (_actionState)
         {
@@ -138,6 +174,24 @@ public class BossBehaviour : MonoBehaviour
             case BossState.Intro:
                 IntroState();
                 break;
+            case BossState.Exploding:
+                if (_explosionObj) _explosionObj.SetActive(true);
+                StopAllCoroutines();
+                _startFiring = false;
+                break;
+            case BossState.Dead:
+
+                if (_finalExplosion)
+                {
+                    _mainCam.ScreenShake(1f,1f);
+                    GameObject FinalExplosion = Instantiate(_finalExplosion, transform.position, Quaternion.identity);
+                    FinalExplosion.transform.localScale = new Vector3(2.5f, 2.5f);
+                }
+                Destroy(this.gameObject);
+                break;
+
+            //case BossState.Test:
+            //    break;
             default:
                 break;
         }
@@ -149,6 +203,8 @@ public class BossBehaviour : MonoBehaviour
             _laserRoutine = StartCoroutine(LaserHell(_fireRate));
         }
     }
+
+    #region State Functionality 
 
     void IntroState() // intro state to move boss into scene
     {
@@ -169,12 +225,13 @@ public class BossBehaviour : MonoBehaviour
                     _leftPoint.SetParent(null); // see above
                     _middlePoint.SetParent(null); //see above
                     _movePoint.SetParent(null); // see above
+                    //_actionState = BossState.Test; //put state into idle
                     _actionState = BossState.Idle; //put state into idle
                     _startFiring = true; //start firing routine
                 }
             }
         }
-    }   
+    }
 
     void MoveRight() // move the boss right
     {
@@ -182,7 +239,7 @@ public class BossBehaviour : MonoBehaviour
         if (_rightPoint) // check to see if we have a transform
         {
             // check to see if the absolute value is greater then a small number
-            if (Mathf.Abs(transform.position.x - _rightPoint.transform.position.x) > Mathf.Epsilon) 
+            if (Mathf.Abs(transform.position.x - _rightPoint.transform.position.x) > Mathf.Epsilon)
             {
                 //check to see if our x is less then right point x
                 if (transform.position.x < _rightPoint.transform.position.x)
@@ -227,7 +284,7 @@ public class BossBehaviour : MonoBehaviour
             if (Mathf.Abs(transform.position.x - _middlePoint.transform.position.x) > Mathf.Epsilon)
             {
                 transform.position = Vector2.MoveTowards(transform.position, _middlePoint.transform.position, _moveSpeed * Time.deltaTime);
-               
+
             }
             else
             {
@@ -278,31 +335,14 @@ public class BossBehaviour : MonoBehaviour
     {
         _actionState = action;
         _wait = true;
-        #region unneccasry code
-        //if (action == BossState.Idle)
-        //{
-        //    NormalState();
-        //}
-        //else if (action == BossState.MoveLeft)
-        //{
-        //    MoveLeft();
-        //}
-        //else if (action == BossState.MoveRight)
-        //{
-        //    MoveRight();
-        //}
-        //else if (action == BossState.MoveMiddle)
-        //{
-        //    MoveMiddle();
-        //}
-        #endregion
+
     }
 
     IEnumerator LaserHell(float fireRate)
     {
         if (_shotPoints != null)
         {
-            foreach(Transform shotpoint in _shotPoints)
+            foreach (Transform shotpoint in _shotPoints)
             {
                 LaserBehaviour laser;
                 laser = Instantiate(_laserPrefab, shotpoint.position, Quaternion.identity);
@@ -312,5 +352,48 @@ public class BossBehaviour : MonoBehaviour
         }
         yield return new WaitForSeconds(fireRate);
         _laserRoutine = null;
+    }
+
+
+    private void ResetMaterial()
+    {
+        _spriteRenderer.material = _matDefault;
+    }
+
+    public void DeadState()
+    {
+        _actionState = BossState.Dead;
+    }
+    #endregion
+
+    private void UpdateUi()
+    {
+        
+        _hpFill.fillAmount = _currentHp/_maxHp;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Laser" && 
+            (_actionState!= BossState.Intro && _actionState != BossState.Exploding && _actionState != BossState.Dead))
+        {
+            other.TryGetComponent(out LaserBehaviour laser);
+            if (laser._human && _currentHp > 1)
+            {
+                _currentHp--;
+                UpdateUi();
+                Destroy(laser.gameObject);
+                _spriteRenderer.material = _matWhite;
+                Invoke("ResetMaterial", .03f);
+            }
+
+            if(laser._human && _currentHp == 1)
+            {
+                _currentHp--;
+                UpdateUi();
+                Destroy(laser.gameObject);
+                _actionState = BossState.Exploding;
+            }
+        }
     }
 }

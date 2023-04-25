@@ -12,7 +12,7 @@ public class ExplosionBehaviour : MonoBehaviour
     void Start()
     {
         _anim.GetComponent<Animator>();
-        StartCoroutine(ShowCurrentClipTime());
+        //StartCoroutine(ShowCurrentClipTime());
     }
 
     private void Update()

@@ -23,7 +23,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private int _enemiesKilled = 0; // used to keep track of how many enemies were killed in the wave
     [SerializeField]
-    private enum SpawnState { Spawning, Waiting, Counting, Complete }; // state machine for wave system
+    private enum SpawnState { Spawning, Waiting, Counting, Boss ,Complete }; // state machine for wave system
     [SerializeField]
     private SpawnState state = SpawnState.Counting; // default state
     [SerializeField]
@@ -33,6 +33,8 @@ public class SpawnManager : MonoBehaviour
     public Wave[] waves; // wave class
     [SerializeField]
     private Coroutine _enemyWaves; // when and how to spawn enemies
+    [SerializeField]
+    private GameObject _boss;
 
     // Start is called before the first frame update
     private void Start()
@@ -43,7 +45,12 @@ public class SpawnManager : MonoBehaviour
 
     private void Update()
     {
-        if (_waveIndex >= waves.Length) return;
+        //if (_waveIndex >= waves.Length)
+        //{
+        //    state = SpawnState.Boss;
+        //    _boss.SetActive(true);
+        //    return;
+        //}
 
         if (state == SpawnState.Waiting)
         {            
@@ -71,7 +78,7 @@ public class SpawnManager : MonoBehaviour
             _waveCountdown -= Time.deltaTime;
         }
     }
-
+    [SerializeField]
     private bool EnemiesAlive()
     {
         if (_enemiesKilled == waves[_waveIndex].enemy.Length)
@@ -113,10 +120,18 @@ public class SpawnManager : MonoBehaviour
 
     private void WaveCompleted()
     {
+        _waveIndex++;
+       
+        if (_waveIndex >= waves.Length)
+        {
+            state = SpawnState.Boss;
+            _boss.SetActive(true);
+            return;
+        }
+
         state = SpawnState.Counting;
         _waveCountdown = _timeBetweenWaves;
         _enemiesKilled = 0;
-        _waveIndex++;
     }
 
 

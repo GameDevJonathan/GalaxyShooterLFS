@@ -762,7 +762,7 @@ MonoBehaviour:
   _detectRadius: 5
   _powerUpMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   _pullSpeed: 1
 --- !u!1 &2748172071741421554
 GameObject:
