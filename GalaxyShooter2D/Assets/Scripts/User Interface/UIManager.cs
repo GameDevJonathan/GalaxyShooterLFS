@@ -95,8 +95,9 @@ public class UIManager : MonoBehaviour
         _ammoText.text = $"Ammo: {curAmmo}/{maxAmmo}";
     }
 
-    void GameOverSequence()
+    public void GameOverSequence(string text = "GameOver")
     {
+        _gameOverText.text = text;
         _gameManger?.GameOver();
         _gameOverText.gameObject.SetActive(true);
         _restartText.gameObject.SetActive(true);

@@ -89,6 +89,7 @@ public class BossBehaviour : MonoBehaviour
     [SerializeField]
     private float _currentHp, _maxHp = 20;
     private CameraBehaviour _mainCam;
+    private UIManager _uIManager;
 
     // Start is called before the first frame update
     void Start()
@@ -99,6 +100,7 @@ public class BossBehaviour : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _matWhite = Resources.Load("WhiteFlash", typeof(Material)) as Material;
         _matDefault = _spriteRenderer.material;
+        _uIManager = GameObject.Find("Canvas").GetComponent<UIManager>();
 
         weights = new List<DecisionWeight>();
         if (_startPoint)
@@ -188,6 +190,7 @@ public class BossBehaviour : MonoBehaviour
                     FinalExplosion.transform.localScale = new Vector3(2.5f, 2.5f);
                 }
                 Destroy(this.gameObject);
+                _uIManager.GameOverSequence("You Win");
                 break;
 
             //case BossState.Test:

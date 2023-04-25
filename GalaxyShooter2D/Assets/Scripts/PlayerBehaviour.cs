@@ -173,6 +173,7 @@ public class PlayerBehaviour : MonoBehaviour
     private LayerMask _powerUpMask;
     [SerializeField]
     private float _pullSpeed = 1f;
+    private GameManager _gameManager;
 
     // Start is called before the first frame update
     void Start()
@@ -180,6 +181,7 @@ public class PlayerBehaviour : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         if (_spawnManager == null)
         {
@@ -205,6 +207,8 @@ public class PlayerBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (_gameManager._isGameOver) return;
+
         Time.timeScale = _timeScale;
         _thrusterAmount = Mathf.Clamp(_thrusterAmount, 0, _maxThrusterAmount);
         _specialMeter = Mathf.Clamp(_specialMeter, 0, 100);
@@ -215,7 +219,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             _afterImageCounter -= Time.deltaTime;
         }
-        Debuging();
+        //Debuging();
 
         CalculateMovement();
 

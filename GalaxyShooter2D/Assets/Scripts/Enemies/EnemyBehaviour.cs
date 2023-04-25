@@ -46,12 +46,16 @@ public class EnemyBehaviour : MonoBehaviour
 
     private AudioSource _audioSource;
 
+    
+
 
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
 
         _player = GameObject.Find("Player")?.GetComponent<PlayerBehaviour>();
+
+        
 
         _spawnManager = GameObject.Find("SpawnManager")?.GetComponent<SpawnManager>();
 
