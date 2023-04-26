@@ -71,7 +71,8 @@ public class PlayerBehaviour : MonoBehaviour
     #region Hyper Beam
     [Header("Special Meter")]
     [SerializeField]
-    private float _specialMeter = 100f;
+    private float _specialMeter = 0;
+    private float _maxSpecialMeter = 100f;
 
     [Header("Hyper Beam")]
     [SerializeField]
@@ -196,12 +197,14 @@ public class PlayerBehaviour : MonoBehaviour
         {
             _ammo = _maxAmmo;
             _uiManager.UpdateAmmo(_ammo, _maxAmmo);
+            _uiManager.UpdateSpecialBar(_specialMeter);
         }
 
         if (!_shieldSprite)
         {
             Debug.LogError("Shield Sprite Not Found");
         }
+        
     }
 
     // Update is called once per frame
@@ -256,15 +259,16 @@ public class PlayerBehaviour : MonoBehaviour
 
         }
 
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
+        //if (Input.GetKeyDown(KeyCode.B))
+        //{
+        //    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //}
 
         if (Input.GetKeyDown(KeyCode.C) && _specialMeter == 100 && !_poweredDown)
         {
             _specialMeter = 0;
             _isBeamActive = true;
+            _uiManager.UpdateSpecialBar(_specialMeter);
 
             //LaserBeamDebug();
 
@@ -557,11 +561,12 @@ public class PlayerBehaviour : MonoBehaviour
     }
 
     //method to add 10 to the score
-    public void AddScore(int score, int powerAdd = 25)
+    public void AddScore(int score, float powerAdd = 10f)
     {
         _score += score;
         _specialMeter += powerAdd;
         _uiManager?.UpdateScore(_score);
+        _uiManager?.UpdateSpecialBar(_specialMeter/_maxSpecialMeter);
     }
     //communicate with the ui to update the score
 

@@ -718,7 +718,7 @@ MonoBehaviour:
   _ammo: 20
   _laserPrefab: {fileID: 7917737143948429990, guid: 2abc9b17cb330b44d970579cf74665be, type: 3}
   _fireSpeed: 0.35
-  _specialMeter: 100
+  _specialMeter: 0
   _isBeamActive: 0
   _hyperBeamSpawnPoint: {fileID: 2748172070324930572}
   _beamBoxDirections: {x: 3.15, y: 0.5}
@@ -763,7 +763,7 @@ MonoBehaviour:
   _powerUpMask:
     serializedVersion: 2
     m_Bits: 512
-  _pullSpeed: 1
+  _pullSpeed: 10
 --- !u!1 &2748172071741421554
 GameObject:
   m_ObjectHideFlags: 0
