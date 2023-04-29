@@ -697,14 +697,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 906e30cbd2ae04025a55035f5a34137d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
-  _speedDefault: 5
+  _speed: 10
+  _speedDefault: 10
   _boost: 2
   _thrusterBoost: 1.4
   _movement: {x: 0, y: 0, z: 0}
   _poweredDown: 0
-  _upperBound: 17
-  _lowerBound: -17
+  _upperBound: 5
+  _lowerBound: -7
   _leftBound: -17
   _rightBound: 17
   _spriteRenderer: {fileID: 2748172071728163175}
