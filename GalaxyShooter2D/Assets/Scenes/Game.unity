@@ -3176,6 +3176,14 @@ PrefabInstance:
       propertyPath: _uiManager
       value: 
       objectReference: {fileID: 204408488}
+    - target: {fileID: 2748172071728163169, guid: 2a343e06ad3410343b3830cb0d00eb27, type: 3}
+      propertyPath: _lowerBound
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2748172071728163169, guid: 2a343e06ad3410343b3830cb0d00eb27, type: 3}
+      propertyPath: _upperBound
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2748172071728163172, guid: 2a343e06ad3410343b3830cb0d00eb27, type: 3}
       propertyPath: m_RootOrder
       value: 0

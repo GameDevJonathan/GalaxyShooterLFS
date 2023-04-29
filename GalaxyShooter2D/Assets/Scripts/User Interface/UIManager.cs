@@ -12,13 +12,13 @@ public class UIManager : MonoBehaviour
 
     [SerializeField]
     private TMP_Text _ammoText;
-    
+
     [SerializeField]
     private Image _livesImage;
-    
+
     [SerializeField]
     private Sprite[] _livesSprite;
-    
+
     [SerializeField]
     private TMP_Text _gameOverText;
 
@@ -29,13 +29,13 @@ public class UIManager : MonoBehaviour
     private GameManager _gameManger;
 
     [SerializeField]
-    private Image _thrusterBarFill;
-    
+    private Image _thrusterBarFill, _specialBarFill;
+
     void Start()
     {
         _gameManger = GameObject.Find("Game_Manager").GetComponent<GameManager>();
         NullChecks();
-        _scoreText.text = $"Score: {0}";       
+        _scoreText.text = $"Score: {0}";
         _gameOverText.gameObject.SetActive(false);
         _ammoText.text = $"{20}/{20}";
 
@@ -79,7 +79,7 @@ public class UIManager : MonoBehaviour
         //give it a new one based on the current lives index
         _livesImage.sprite = _livesSprite[currentLives];
 
-        if(currentLives == 0)
+        if (currentLives == 0)
         {
             GameOverSequence();
         }
@@ -88,6 +88,11 @@ public class UIManager : MonoBehaviour
     public void UpdateThrusterBar(float bar)
     {
         _thrusterBarFill.fillAmount = bar;
+    }
+
+    public void UpdateSpecialBar(float bar)
+    {
+        _specialBarFill.fillAmount = bar;
     }
 
     public void UpdateAmmo(int curAmmo, int maxAmmo) 
