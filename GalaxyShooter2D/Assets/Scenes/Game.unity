@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &49306653
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1331,6 +1331,7 @@ GameObject:
   - component: {fileID: 520838184}
   - component: {fileID: 520838186}
   - component: {fileID: 520838185}
+  - component: {fileID: 520838187}
   m_Layer: 5
   m_Name: ShooterImage
   m_TagString: Untagged
@@ -1396,6 +1397,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 520838183}
   m_CullTransparentMesh: 1
+--- !u!114 &520838187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520838183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d8e220523fdd7f4d9b01c3abdd7f385, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponImage: {fileID: 520838185}
+  Player: {fileID: 1360167595}
+  mainWeaponSprite: {fileID: 21300000, guid: d9d88a3e2375bda43b209cd80fbd04f4, type: 3}
+  tripleShotSprite: {fileID: 21300000, guid: ca53a98d8f8d9a54583864e80c8ab93d, type: 3}
 --- !u!1 &536340201
 GameObject:
   m_ObjectHideFlags: 0
@@ -2327,7 +2344,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.047169805, g: 0.047169805, b: 0.047169805, a: 1}
+  m_Color: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
@@ -2589,6 +2606,11 @@ Transform:
   m_Father: {fileID: 1825367079}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1360167595 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2748172071728163168, guid: 2a343e06ad3410343b3830cb0d00eb27, type: 3}
+  m_PrefabInstance: {fileID: 2748172070950360770}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1362740970
 GameObject:
   m_ObjectHideFlags: 0
@@ -2749,7 +2771,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.047169805, g: 0.047169805, b: 0.047169805, a: 1}
+  m_Color: {r: 0.5568628, g: 0.5568628, b: 0.5568628, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
@@ -3168,7 +3190,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1944676869
 MonoBehaviour:
   m_ObjectHideFlags: 0

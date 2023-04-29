@@ -104,7 +104,7 @@ public class PlayerBehaviour : MonoBehaviour
     #region Flags and Prefabs
     [Header("Flags and Prefabs")]
     [SerializeField]
-    private bool _tripleShotActive = false;
+    public bool _tripleShotActive = false;
 
     [SerializeField]
     private GameObject _tripleShotPrefab;
@@ -113,13 +113,13 @@ public class PlayerBehaviour : MonoBehaviour
     private bool _speedBoostActive = false;
 
     [SerializeField]
-    private bool _shieldsActive = false;
+    public bool _shieldsActive = false;
 
     [SerializeField]
     private SpriteRenderer _shieldSprite;
 
     [SerializeField]
-    private int _shieldHp = 0;
+    public int _shieldHp = 0;
 
     [SerializeField]
     private GameObject _shieldVisualizer, _leftThruster, _rightThruster;
